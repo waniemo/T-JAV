@@ -1,0 +1,86 @@
+public abstract class Pokemon {
+    protected String name;
+    protected int hp;
+    protected int atk;
+    protected int def;
+    protected int speed;
+    protected int level = 1;
+    protected Class<? extends Type> type;
+    protected String stripe;
+
+    public Pokemon(String name, Class<? extends Type> type, int level){
+        this.name = name;
+        this.level = level;
+        this.type = type;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public int getHp(){
+        return hp;
+    }
+
+    public int getAtk(){
+        return atk;
+    }
+
+    public int getDef(){
+        return def;
+    }
+
+    public int getSpeed(){
+        return speed;
+    }
+
+    public int getLevel(){
+        return level;
+    }
+
+    public Class<? extends Type> getType(){
+        return type;
+    }
+
+    public String getStripe(){
+        return stripe;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setHp(int hp){
+        this.hp = hp;
+    }
+
+    public void setAtk(int atk){
+        this.atk = atk;
+    }
+
+    public void setDef(int def){
+        this.def = def;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public void setType(Class<? extends Type> type) {
+        this.type = type;
+    }
+
+    public void setStripe(String stripe) {
+        this.stripe = stripe;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void useItem(Item item){
+
+    }
+
+    public abstract void attack();
+}
