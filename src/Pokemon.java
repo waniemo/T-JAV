@@ -6,7 +6,7 @@ public abstract class Pokemon {
     protected int speed;
     protected int level = 1;
     protected Class<? extends Type> type;
-    protected String stripe;
+    protected String sprite;
 
     public Pokemon(String name, Class<? extends Type> type, int level){
         this.name = name;
@@ -42,8 +42,8 @@ public abstract class Pokemon {
         return type;
     }
 
-    public String getStripe(){
-        return stripe;
+    public String getSprite(){
+        return sprite;
     }
 
     public void setName(String name) {
@@ -70,8 +70,8 @@ public abstract class Pokemon {
         this.type = type;
     }
 
-    public void setStripe(String stripe) {
-        this.stripe = stripe;
+    public void setSprite(String stripe) {
+        this.sprite = stripe;
     }
 
     public void setLevel(int level) {
