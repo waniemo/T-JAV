@@ -10,37 +10,17 @@ public class Fee extends Type{
         switch(attack){
             case "Câlinerie":
                 System.out.println( player.getName()+" utilise Câlinerie !");
-                if(ennemi.getType() == this.strength){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
-                }
-                else if(ennemi.getType() == this.weakness){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 0.5))));
-                }
-                else{
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1))));
-                }
+                attackMultiplier(2.5,0.5,1, ennemi, player);
                 attacks.put("Câlinerie", attacks.get("Câlinerie") - 1);
                 break;
             case "Vent Féérique":
                 System.out.println(player.getName()+" utilise Vent Féérique !");
-                if(ennemi.getType() == this.strength){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 5.5))));
-                } else if (ennemi.getType() == this.weakness){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1.5))));
-                } else {
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 3))));
-                }
+                attackMultiplier(5.5,1.5,3, ennemi, player);
                 attacks.put("Vent Féérique", attacks.get("Vent Féérique") - 1);
                 break;
             case "Éclat Magique":
                 System.out.println(player.getName()+" utilise Éclat Magique !");
-                if (ennemi.getType() == this.strength){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 8.5))));
-                } else if (ennemi.getType() == this.weakness){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
-                } else {
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 6))));
-                }
+                attackMultiplier(8.5,1.5,6, ennemi, player);
                 attacks.put("Éclat Magique", attacks.get("Éclat Magique") - 1);
                 break;
         }

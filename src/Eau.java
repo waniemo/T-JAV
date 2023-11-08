@@ -12,37 +12,17 @@ public class Eau extends Type{
         switch(attack){
             case "Aqua-jet":
                 System.out.println(player.getName()+" utilise Aqua-jet !");
-                if(ennemi.getType() == this.strength){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
-                }
-                else if(ennemi.getType() == this.weakness){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 0.5))));
-                }
-                else{
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1))));
-                }
+                attackMultiplier(2.5,0.5,1, ennemi, player);
                 attacks.put("Aqua-jet", attacks.get("Aqua-jet") - 1);
                 break;
             case "Bulle d'O":
                 System.out.println(player.getName()+" utilise Bulle d'O !");
-                if(ennemi.getType() == this.strength){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 5.5))));
-                } else if (ennemi.getType() == this.weakness){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1.5))));
-                } else {
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 3))));
-                }
+                attackMultiplier(5.5,1.5,3, ennemi, player);
                 attacks.put("Bulle d'O", attacks.get("Bulle d'O") - 1);
                 break;
             case "Hydrocanon":
                 System.out.println(player.getName()+" utilise Hydrocanon !");
-                if (ennemi.getType() == this.strength){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 8.5))));
-                } else if (ennemi.getType() == this.weakness){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
-                } else {
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 6))));
-                }
+                attackMultiplier(8.5,1.5,6, ennemi, player);
                 attacks.put("Hydrocanon", attacks.get("Hydrocanon") - 1);
                 break;
         }

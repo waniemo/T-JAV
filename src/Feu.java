@@ -10,37 +10,17 @@ public class Feu extends Type{
         switch(attack){
             case "Tacle Feu":
                 System.out.println( player.getName()+" utilise Tacle Feu !");
-                if(ennemi.getType() == this.strength){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
-                }
-                else if(ennemi.getType() == this.weakness){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 0.5))));
-                }
-                else{
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1))));
-                }
+                attackMultiplier(2.5,0.5,1, ennemi, player);
                 attacks.put("Tacle Feu", attacks.get("Tacle Feu") - 1);
                 break;
             case "Rafale Feu":
                 System.out.println(player.getName()+" utilise Rafale Feu !");
-                if(ennemi.getType() == this.strength){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 5.5))));
-                } else if (ennemi.getType() == this.weakness){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1.5))));
-                } else {
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 3))));
-                }
+                attackMultiplier(5.5,1.5,3, ennemi, player);
                 attacks.put("Rafale Feu", attacks.get("Rafale Feu") - 1);
                 break;
             case "Feu d'Enfer":
                 System.out.println(player.getName()+" utilise Feu d'Enfer !");
-                if (ennemi.getType() == this.strength){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 8.5))));
-                } else if (ennemi.getType() == this.weakness){
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
-                } else {
-                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 6))));
-                }
+                attackMultiplier(8.5,1.5,6, ennemi, player);
                 attacks.put("Feu d'Enfer", attacks.get("Feu d'Enfer") - 1);
                 break;
         }

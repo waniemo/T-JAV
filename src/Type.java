@@ -29,21 +29,19 @@ public abstract class Type {
         return attacks;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setStrength(Class<? extends Type> strength) {
-        this.strength = strength;
-    }
-
-    public void setWeakness(Class<? extends Type> weakness) {
-        this.weakness = weakness;
-    }
-
-    public void setAttacks(HashMap<String, Integer> attacks) {
-        this.attacks = attacks;
-    }
-
     public abstract void attack(String attack, Pokemon ennemi, Pokemon player);
+
+    public void attackMultiplier(double highMultiplier, double lowMultiplier, double mediumMultiplier, Pokemon ennemi, Pokemon player){
+        if(ennemi.getType() == this.strength){
+            ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + highMultiplier))));
+            System.out.println("Cette attaque était très efficace !");
+        }
+        else if(ennemi.getType() == this.weakness){
+            ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + lowMultiplier))));
+            System.out.println("Cette attaque n'était pas très efficace...");
+        }
+        else{
+            ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + mediumMultiplier))));
+        }
+    }
 }
