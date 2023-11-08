@@ -1,3 +1,6 @@
+package Pokemon;
+import Type.*;
+
 public abstract class Pokemon {
     protected String name;
     protected int pv;

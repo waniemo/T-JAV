@@ -1,3 +1,7 @@
+package Type;
+
+import Pokemon.Pokemon;
+
 import java.util.*;
 
 

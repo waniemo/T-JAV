@@ -1,8 +1,10 @@
-import java.util.Arrays;
+package Type;
+
+import Pokemon.Pokemon;
 
 public class Eau extends Type{
     public Eau() {
-        super("Eau", Feu.class, Plante.class);
+        super("Type.Eau", Feu.class, Plante.class);
         attacks.put("Aqua-jet", 15);
         attacks.put("Bulle d'O", 10);
         attacks.put("Hydrocanon", 5);

@@ -1,6 +1,10 @@
+package Type;
+
+import Pokemon.Pokemon;
+
 public class Plante extends Type{
     public Plante() {
-        super("Plante", Electrik.class, Feu.class);
+        super("Type.Plante", Electrik.class, Feu.class);
         attacks.put("Tranch'Herbe", 15);
         attacks.put("Tempêteverte", 10);
         attacks.put("Phytomixeur", 5);
