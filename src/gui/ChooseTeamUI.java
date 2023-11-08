@@ -1,23 +1,28 @@
 
-// package swing;
+package gui;
+
+import Pokemon.*;
+
 import javax.swing.*;
-import org.w3c.dom.events.*;
 import java.awt.event.*;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.*;
 
 public class ChooseTeamUI extends JPanel {
     private final List<JLabel> teamLabels = new ArrayList<>();
-    String[] fileNames = {"blizzaroi.png", "bulbizar.png", "dialga.png", "rondoudou.png", "voltorb.png",
-    "blizzaroi.png", "bulbizar.png", "dialga.png", "rondoudou.png", "voltorb.png",
-    "blizzaroi.png", "bulbizar.png", "dialga.png", "rondoudou.png", "voltorb.png",
-    "blizzaroi.png", "bulbizar.png", "dialga.png", "rondoudou.png", "voltorb.png",
-}; // only for test
+    Pokemon[] pokemons = {
+            new Zekrom(), new Hericendre(), new Rondoudou(),
+            new Zekrom(), new Hericendre(), new Rondoudou(),
+            new Zekrom(), new Hericendre(), new Rondoudou(),
+            new Zekrom(), new Hericendre(), new Rondoudou(),
+            new Zekrom(), new Hericendre(), new Rondoudou(),
+            new Zekrom(), new Hericendre(), new Rondoudou(),
+            new Zekrom(), new Hericendre(), new Rondoudou(),
+            new Zekrom(), new Hericendre(), new Rondoudou()
+    };
 
-
-    public ChooseTeamUI() {
+    public ChooseTeamUI(JFrame frame) {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -36,7 +41,7 @@ public class ChooseTeamUI extends JPanel {
         }
 
         for (int i = 0; i < 20; i++) {
-            ImageIcon icon = new ImageIcon("../Assets/" + fileNames[i % fileNames.length]);
+            ImageIcon icon = new ImageIcon("../Assets/" + pokemons[i].getSpritePng());
             JLabel label = new JLabel(icon);
             label.addMouseListener(new MouseAdapter() {
                 @Override
@@ -52,7 +57,17 @@ public class ChooseTeamUI extends JPanel {
             selectGrid.add(label);
         }
 
+
         JButton button1 = new JButton("Continuer");
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                SelectXpUI selectXpUI = new SelectXpUI(frame);
+                frame.getContentPane().removeAll();
+                frame.getContentPane().add(selectXpUI, BorderLayout.CENTER);
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
         JButton button2 = new JButton("Quitter");
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
