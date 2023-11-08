@@ -1,5 +1,5 @@
 public class BoostSpeed extends Item{
-    public BoostSpeed(String name, String Type, String description) {
+    public BoostSpeed() {
         super("Boost Speed", "Boost", "Cet objet augmente la vitesse de 10 points.");
     }
     @Override

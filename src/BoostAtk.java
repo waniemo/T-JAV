@@ -1,5 +1,5 @@
 public class BoostAtk extends Item{
-    public BoostAtk(String name, String Type, String description) {
+    public BoostAtk(){
         super("Boost Atk", "Boost", "Cet objet augmente l'attaque de 10 points.");
     }
 

@@ -1,5 +1,5 @@
 public class BoostDef extends Item{
-    public BoostDef(String name, String Type, String description) {
+    public BoostDef() {
         super("Boost Def", "Boost", "Cet objet augmente la défense de 10 points.");
     }
     @Override
