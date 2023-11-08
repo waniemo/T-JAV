@@ -1,6 +1,6 @@
 public abstract class Pokemon {
     protected String name;
-    protected int hp;
+    protected int pv;
     protected int atk;
     protected int def;
     protected int speed;
@@ -18,8 +18,8 @@ public abstract class Pokemon {
         return name;
     }
 
-    public int getHp(){
-        return hp;
+    public int getPv(){
+        return pv;
     }
 
     public int getAtk(){
@@ -50,8 +50,8 @@ public abstract class Pokemon {
         this.name = name;
     }
 
-    public void setHp(int hp){
-        this.hp = hp;
+    public void setPv(int pv){
+        this.pv = pv;
     }
 
     public void setAtk(int atk){
@@ -76,10 +76,6 @@ public abstract class Pokemon {
 
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    public void useItem(Item item){
-
     }
 
     public abstract void attack();

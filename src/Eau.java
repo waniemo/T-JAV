@@ -13,35 +13,35 @@ public class Eau extends Type{
             case "Aqua-jet":
                 System.out.println(player.getName()+" utilise Aqua-jet !");
                 if(ennemi.getType() == this.strength){
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
                 }
                 else if(ennemi.getType() == this.weakness){
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 0.5))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 0.5))));
                 }
                 else{
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1))));
                 }
                 attacks.put("Aqua-jet", attacks.get("Aqua-jet") - 1);
                 break;
             case "Bulle d'O":
                 System.out.println(player.getName()+" utilise Bulle d'O !");
                 if(ennemi.getType() == this.strength){
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 5.5))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 5.5))));
                 } else if (ennemi.getType() == this.weakness){
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1.5))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1.5))));
                 } else {
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 3))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 3))));
                 }
                 attacks.put("Bulle d'O", attacks.get("Bulle d'O") - 1);
                 break;
             case "Hydrocanon":
                 System.out.println(player.getName()+" utilise Hydrocanon !");
                 if (ennemi.getType() == this.strength){
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 8.5))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 8.5))));
                 } else if (ennemi.getType() == this.weakness){
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
                 } else {
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 6))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 6))));
                 }
                 attacks.put("Hydrocanon", attacks.get("Hydrocanon") - 1);
                 break;

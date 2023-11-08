@@ -14,35 +14,35 @@ public class Electrik extends Type{
             case "Eclair":
                 System.out.println( player.getName()+" utilise Eclair !");
                 if(ennemi.getType() == this.strength){
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
                 }
                 else if(ennemi.getType() == this.weakness){
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 0.5))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 0.5))));
                 }
                 else{
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1))));
                 }
                 attacks.put("Eclair", attacks.get("Eclair") - 1);
                 break;
             case "Cage-Eclair":
                 System.out.println(player.getName()+" utilise Cage-Eclair !");
                 if(ennemi.getType() == this.strength){
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 5.5))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 5.5))));
                 } else if (ennemi.getType() == this.weakness){
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1.5))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 1.5))));
                 } else {
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 3))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 3))));
                 }
                 attacks.put("Cage-Eclair", attacks.get("Cage-Eclair") - 1);
                 break;
             case "Fatal-Foudre":
                 System.out.println(player.getName()+" utilise Fatal-Foudre !");
                 if (ennemi.getType() == this.strength){
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 8.5))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 8.5))));
                 } else if (ennemi.getType() == this.weakness){
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 2.5))));
                 } else {
-                    ennemi.setHp((int) (ennemi.getHp() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 6))));
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * player.getLevel() / 5.0 + 2.0) * (player.getAtk() / player.getDef()) / 50.0 + 6))));
                 }
                 attacks.put("Fatal-Foudre", attacks.get("Fatal-Foudre") - 1);
                 break;
