@@ -1,6 +1,9 @@
 import java.awt.*;
 import javax.swing.*;
 
+// import swing.ButtonPanel;
+// import swing.ImagePanel;
+
 public class App extends JFrame {
     public static void main(String[] args) {
         App app = new App();
@@ -13,7 +16,7 @@ public class App extends JFrame {
         setSize(1300, 800);
         setLocationRelativeTo(null);
 
-        ImagePanel imagePanel = new ImagePanel("./Assets/maxresdefault.jpg", 700, 400);
+        ImagePanel imagePanel = new ImagePanel("../Assets/maxresdefault.jpg", 700, 400);
         ButtonPanel buttonPanel = new ButtonPanel(this);
 
         Container contentPane = getContentPane();
