@@ -91,7 +91,14 @@ public abstract class Pokemon {
     }
 
     public void setLevel(int level) {
+        if(level > 100) {
+            level = 100;
+        }
         this.level = level;
+        setPv(this.getPv() + 2 * level);
+        setAtk(this.getAtk() + 2 * level);
+        setDef(this.getDef() + 2 * level);
+        setSpeed(this.getSpeed() + 2 * level);
     }
 
     public abstract void attack();
