@@ -10,10 +10,17 @@ public abstract class Pokemon {
     protected String spriteFront;
     protected String spriteBack;
 
-    public Pokemon(String name, Class<? extends Type> type, int level){
+    public Pokemon(String name, Class<? extends Type> type, int level, int pv, int atk, int def, int speed, String spritePng, String spriteFront, String spriteBack){
         this.name = name;
         this.level = level;
         this.type = type;
+        this.pv = pv;
+        this.atk = atk;
+        this.def = def;
+        this.speed = speed;
+        this.spritePng = spritePng;
+        this.spriteFront = spriteFront;
+        this.spriteBack = spriteBack;
     }
 
     public String getName(){
