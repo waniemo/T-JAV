@@ -1,5 +1,6 @@
-import java.util.Arrays;
-import java.util.HashMap;
+package Type;
+
+import Pokemon.Pokemon;
 
 public class Electrik extends Type{
     public Electrik() {

@@ -1,3 +1,8 @@
+package Team;
+
+import Item.*;
+import Pokemon.Pokemon;
+
 import java.util.HashMap;
 import java.util.List;
 

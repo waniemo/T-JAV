@@ -1,6 +1,10 @@
+package Type;
+
+import Pokemon.Pokemon;
+
 public class Fee extends Type{
     public Fee() {
-        super("Fee", Plante.class, Feu.class);
+        super("Type.Fee", Plante.class, Feu.class);
         attacks.put("Câlinerie", 15);
         attacks.put("Vent Féérique", 10);
         attacks.put("Éclat Magique", 5);
