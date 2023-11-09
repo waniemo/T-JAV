@@ -107,5 +107,16 @@ public abstract class Pokemon {
         setSpeed(this.getSpeed() + 2 * level);
     }
 
-    public abstract void attack();
+//    public void attack(String attack, Pokemon ennemi, Pokemon player){
+//        try {
+//            Type type = (Type) this.getType().newInstance();
+//            type.attack(attack, ennemi, player);
+//        } catch (InstantiationException | IllegalAccessException e) {
+//            e.printStackTrace();
+//        }
+//        player.getType().attack(attack, ennemi, player);
+//    }
+
+
+    public abstract void attack(String attack, Pokemon ennemi);
 }
