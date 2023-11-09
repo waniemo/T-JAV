@@ -6,7 +6,6 @@ import javax.swing.*;
 
 import Team.Team;
 
-
 public class BattleUI extends JPanel {
     public BattleUI(JFrame frame, Team playerTeam, Team enemyTeam) {
         setLayout(new GridBagLayout());
@@ -36,14 +35,21 @@ public class BattleUI extends JPanel {
             enemyTeamGrid.add(label);
         }
 
+        JLabel playerTitle = new JLabel("Ton équipe!");
         gbc.gridx = 0;
         gbc.gridy = 0;
-        add(playerTeamGrid, gbc);
-        gbc.gridx = 0;
+        add(playerTitle, gbc);
         gbc.gridy = 1;
-        add(enemyTeamGrid, gbc);
+        add(playerTeamGrid, gbc);
 
-        JButton backButton = new JButton("BACK");
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        add(enemyTeamGrid, gbc);
+        JLabel enemyTitle = new JLabel("Equipe ennemie!");
+        gbc.gridy = 3;
+        add(enemyTitle, gbc);
+
+        JButton backButton = new JButton("RETOUR");
         backButton.addActionListener(e -> {
             SelectXpUI selectXpUI = new SelectXpUI(frame, playerTeam, enemyTeam);
             frame.getContentPane().removeAll();

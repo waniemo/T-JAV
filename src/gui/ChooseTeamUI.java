@@ -27,12 +27,13 @@ public class ChooseTeamUI extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        JPanel teamGrid = new JPanel(new GridLayout(1, 6));
         Dimension teamGridSize = new Dimension(600, 100);
-        teamGrid.setPreferredSize(teamGridSize);
         JPanel selectGrid = new JPanel(new GridLayout(5, 4));
-        JPanel buttonPanel = new JPanel();
+        JPanel teamGrid = new JPanel(new GridLayout(1, 6));
+        teamGrid.setPreferredSize(teamGridSize);
+
         ImageIcon greyBall = new ImageIcon("../Assets/grey_flat_pokeball.png");
+        Team enemyTeam = TeamBuilder.buildEnemyTeam(pokemons);
 
         for (int i = 0; i < 6; i++) {
             JLabel label = new JLabel("");
@@ -41,57 +42,9 @@ public class ChooseTeamUI extends JPanel {
             teamGrid.add(label);
         }
 
-        for (int i = 0; i < 20; i++) {
-            ImageIcon icon = new ImageIcon("../Assets/" + pokemons[i].getSpritePng());
-            JLabel label = new JLabel(icon);
-            int index = i;
-            label.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    for (JLabel teamLabel : teamLabels) {
-                        if (teamLabel.getIcon() == greyBall) {
-                            teamLabel.setIcon(label.getIcon());
-                            team.add(pokemons[index]);
-                            System.out.println(team);
-                            break;
-                        }
-                    }
-                }
-            });
-            selectGrid.add(label);
-        }
+        TeamBuilder.addPokemonToGrid(selectGrid, pokemons, team, teamLabels, greyBall);
 
-        List<Integer> enemyTeamIndexes = new ArrayList<>();
-        List<Pokemon> enemyList = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            int index = (int) (Math.random() * 19);
-            while (enemyTeamIndexes.contains(index)) {
-                index = (int) (Math.random() * 19);
-            }
-            enemyTeamIndexes.add(index);
-            enemyList.add(pokemons[index]);
-        }
-        Team enemyTeam = new Team(enemyList);
-
-        JButton button1 = new JButton("Continuer");
-        button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Team playerTeam = new Team(team);
-                SelectXpUI selectXpUI = new SelectXpUI(frame, playerTeam, enemyTeam);
-                frame.getContentPane().removeAll();
-                frame.getContentPane().add(selectXpUI, BorderLayout.CENTER);
-                frame.revalidate();
-                frame.repaint();
-            }
-        });
-        JButton button2 = new JButton("Quitter");
-        button2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-        buttonPanel.add(button1);
-        buttonPanel.add(button2);
+        ButtonPanel2 buttonPanel = new ButtonPanel2(frame, team, enemyTeam);
 
         gbc.gridx = 0;
         gbc.gridy = 0;

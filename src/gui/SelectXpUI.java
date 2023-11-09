@@ -25,7 +25,7 @@ public class SelectXpUI extends JPanel {
         selector.add(new JLabel("Niveau de l'ennemi:"));
         selector.add(spinner2);
 
-        JButton playButton = new JButton("PLAY!");
+        JButton playButton = new JButton("JOUER!");
         playButton.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the button
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -37,7 +37,7 @@ public class SelectXpUI extends JPanel {
             }
         });
 
-        JButton backButton = new JButton("BACK");
+        JButton backButton = new JButton("RETOUR");
         backButton.addActionListener(e -> {
             ChooseTeamUI chooseTeamUI = new ChooseTeamUI(frame);
             frame.getContentPane().removeAll();
