@@ -54,7 +54,7 @@ public class Team {
         }
     }
 
-    public void setTeamLvl(int lvl){
+    public void setTeamLevel(int lvl){
         for(Pokemon pokemon : team){
             pokemon.setLevel(lvl);
         }
