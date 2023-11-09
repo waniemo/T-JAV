@@ -5,10 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ButtonPanel extends JPanel {
-    private JFrame frame;
 
     public ButtonPanel(JFrame frame) {
-        this.frame = frame;
         setLayout(new GridLayout(1, 4));
         JButton button1 = new JButton("JOUER ! ");
         JButton button2 = new JButton("EXIT");

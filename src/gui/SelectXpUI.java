@@ -29,6 +29,8 @@ public class SelectXpUI extends JPanel {
         playButton.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the button
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                playerTeam.setTeamLevel((int) spinner1.getValue());
+                enemyTeam.setTeamLevel((int) spinner2.getValue());
                 BattleUI battleUI = new BattleUI(frame, playerTeam, enemyTeam);
                 frame.getContentPane().removeAll();
                 frame.getContentPane().add(battleUI, BorderLayout.CENTER);
