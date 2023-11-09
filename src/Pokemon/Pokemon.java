@@ -3,10 +3,14 @@ import Type.*;
 
 public abstract class Pokemon {
     protected String name;
+    protected int basePv;
     protected int pv;
     protected int pvMax;
+    protected int baseAtk;
     protected int atk;
+    protected int baseDef;
     protected int def;
+    protected int baseSpeed;
     protected int speed;
     protected int level = 1;
     protected Class<? extends Type> type;
@@ -26,6 +30,10 @@ public abstract class Pokemon {
         this.spriteFront = spriteFront;
         this.spriteBack = spriteBack;
         this.pvMax = pv;
+        this.basePv = pv;
+        this.baseAtk = atk;
+        this.baseDef = def;
+        this.baseSpeed = speed;
     }
 
     public String getName(){
@@ -99,23 +107,23 @@ public abstract class Pokemon {
     public void setLevel(int level) {
         if(level > 100) {
             level = 100;
+        } else if(level != 1) {
+            this.level = level;
+            setPv(this.pvMax + 2 * this.level);
+            setAtk(this.baseAtk + 2 * this.level);
+            setDef(this.baseDef + 2 * this.level);
+            setSpeed(this.baseSpeed + 2 * this.level);
+            pvMax = pv;
+        } else if(level == 1){
+            this.level = level;
+            setPv(this.basePv);
+            setAtk(this.baseAtk);
+            setDef(this.baseDef);
+            setSpeed(this.baseSpeed);
+            pvMax = pv;
         }
-        this.level = level;
-        setPv(this.getPv() + 2 * level);
-        setAtk(this.getAtk() + 2 * level);
-        setDef(this.getDef() + 2 * level);
-        setSpeed(this.getSpeed() + 2 * level);
     }
 
-//    public void attack(String attack, Pokemon ennemi, Pokemon player){
-//        try {
-//            Type type = (Type) this.getType().newInstance();
-//            type.attack(attack, ennemi, player);
-//        } catch (InstantiationException | IllegalAccessException e) {
-//            e.printStackTrace();
-//        }
-//        player.getType().attack(attack, ennemi, player);
-//    }
 
 
     public abstract void attack(String attack, Pokemon ennemi);
