@@ -2,11 +2,13 @@ package gui;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+
+import Team.Team;
+
 import java.awt.event.*;
 
 public class SelectXpUI extends JPanel {
-    public SelectXpUI(JFrame frame) {
+    public SelectXpUI(JFrame frame, Team playerTeam, Team enemyTeam) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JPanel selector = new JPanel(new GridLayout(1, 2));
@@ -27,7 +29,7 @@ public class SelectXpUI extends JPanel {
         playButton.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the button
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                BattleUI battleUI = new BattleUI();
+                BattleUI battleUI = new BattleUI(frame, playerTeam, enemyTeam);
                 frame.getContentPane().removeAll();
                 frame.getContentPane().add(battleUI, BorderLayout.CENTER);
                 frame.revalidate();

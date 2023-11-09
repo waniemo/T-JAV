@@ -2,6 +2,7 @@
 package gui;
 
 import Pokemon.*;
+import Team.*;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -12,15 +13,15 @@ import java.awt.*;
 public class ChooseTeamUI extends JPanel {
     private final List<JLabel> teamLabels = new ArrayList<>();
     Pokemon[] pokemons = {
-            new Zekrom(), new Hericendre(), new Rondoudou(),
-            new Zekrom(), new Hericendre(), new Rondoudou(),
-            new Zekrom(), new Hericendre(), new Rondoudou(),
-            new Zekrom(), new Hericendre(), new Rondoudou(),
-            new Zekrom(), new Hericendre(), new Rondoudou(),
-            new Zekrom(), new Hericendre(), new Rondoudou(),
-            new Zekrom(), new Hericendre(), new Rondoudou(),
-            new Zekrom(), new Hericendre(), new Rondoudou()
+            new Blizzaroi(), new Bulbizarre(), new Dialga(),
+            new Doudouvet(), new Gardevoir(), new Hericendre(),
+            new Lugulabre(), new Magicarpe(), new Noadkoko(),
+            new Ponyta(), new Psykokwak(), new Raichu(),
+            new Reshiram(), new Rondoudou(), new Tiplouf(),
+            new Viridium(), new Voltali(), new Voltorbe(),
+            new Zekrom(), new Kirby()
     };
+    private List<Pokemon> team = new ArrayList<>();
 
     public ChooseTeamUI(JFrame frame) {
         setLayout(new GridBagLayout());
@@ -43,12 +44,15 @@ public class ChooseTeamUI extends JPanel {
         for (int i = 0; i < 20; i++) {
             ImageIcon icon = new ImageIcon("../Assets/" + pokemons[i].getSpritePng());
             JLabel label = new JLabel(icon);
+            int index = i;
             label.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     for (JLabel teamLabel : teamLabels) {
                         if (teamLabel.getIcon() == greyBall) {
                             teamLabel.setIcon(label.getIcon());
+                            team.add(pokemons[index]);
+                            System.out.println(team);
                             break;
                         }
                     }
@@ -57,11 +61,22 @@ public class ChooseTeamUI extends JPanel {
             selectGrid.add(label);
         }
 
+        Team enemyTeam = new Team(new ArrayList<Pokemon>());
+        List<Integer> enemyTeamIndexes = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            int index = (int) (Math.random() * 20);
+            while (enemyTeamIndexes.contains(index)) {
+                index = (int) (Math.random() * 20);
+            }
+            enemyTeamIndexes.add(index);
+            enemyTeam.addPokemon(pokemons[index]);
+        }
 
         JButton button1 = new JButton("Continuer");
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                SelectXpUI selectXpUI = new SelectXpUI(frame);
+                Team playerTeam = new Team(team);
+                SelectXpUI selectXpUI = new SelectXpUI(frame, playerTeam, enemyTeam);
                 frame.getContentPane().removeAll();
                 frame.getContentPane().add(selectXpUI, BorderLayout.CENTER);
                 frame.revalidate();
