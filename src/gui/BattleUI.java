@@ -14,11 +14,6 @@ public class BattleUI extends JPanel {
         JPanel playerTeamGrid = new JPanel(new GridLayout(1, 6));
         JPanel enemyTeamGrid = new JPanel(new GridLayout(1, 6));
 
-        if (playerTeam.getTeam().size() < 6 || enemyTeam.getTeam().size() < 6) {
-            // Handle the error, e.g., show an error message and return
-            System.err.println("Not enough Pokemons in the teams");
-            return;
-        }
         for (int i = 0; i < 6; i++) {
             JLabel label = new JLabel("");
             ImageIcon icon = new ImageIcon("../Assets/" + playerTeam.getTeam().get(i).getSpritePng());
@@ -35,7 +30,10 @@ public class BattleUI extends JPanel {
             enemyTeamGrid.add(label);
         }
 
-        JLabel playerTitle = new JLabel("Ton équipe!");
+
+        System.out.println(playerTeam.getTeam().get(0).getAtk());
+
+        JLabel playerTitle = new JLabel("Ton équipe! ( lvl" + playerTeam.getLevel() + ")");
         gbc.gridx = 0;
         gbc.gridy = 0;
         add(playerTitle, gbc);
@@ -45,7 +43,7 @@ public class BattleUI extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 2;
         add(enemyTeamGrid, gbc);
-        JLabel enemyTitle = new JLabel("Equipe ennemie!");
+        JLabel enemyTitle = new JLabel("Equipe ennemie! ( lvl" + enemyTeam.getLevel() + ")");
         gbc.gridy = 3;
         add(enemyTitle, gbc);
 

@@ -36,7 +36,6 @@ public class TeamBuilder {
                         if (teamLabel.getIcon() == greyBall) {
                             teamLabel.setIcon(label.getIcon());
                             team.add(pokemons[index]);
-                            System.out.println(team);
                             break;
                         }
                     }
