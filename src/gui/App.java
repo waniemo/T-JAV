@@ -3,8 +3,6 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 
-// import swing.ButtonPanel;
-// import swing.ImagePanel;
 
 public class App extends JFrame {
 
@@ -17,7 +15,7 @@ public class App extends JFrame {
 
         ImagePanel imagePanel = new ImagePanel("../Assets/maxresdefault.jpg", 700, 400);
         ButtonPanel buttonPanel = new ButtonPanel(this);
-
+        buttonPanel.setPreferredSize(new Dimension(buttonPanel.getPreferredSize().width, 100));
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
         contentPane.add(imagePanel, BorderLayout.CENTER);
