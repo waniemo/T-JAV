@@ -1,4 +1,4 @@
-// package swing;
+package gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ public class ButtonPanel extends JPanel {
         setLayout(new GridLayout(1, 4));
         JButton button1 = new JButton("PLAY ! ");
         JButton button2 = new JButton("EXIT");
-        ChooseTeamUI chooseTeamUI = new ChooseTeamUI();
+        ChooseTeamUI chooseTeamUI = new ChooseTeamUI(frame);
 
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

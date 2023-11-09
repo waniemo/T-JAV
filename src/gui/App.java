@@ -1,3 +1,5 @@
+package gui;
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -5,10 +7,7 @@ import javax.swing.*;
 // import swing.ImagePanel;
 
 public class App extends JFrame {
-    public static void main(String[] args) {
-        App app = new App();
-        app.setVisible(true);
-    }
+
 
     public App() {
         setTitle("Street Pokemon Fighter 2 Turbo Championship Edition EX + Alpha X");
