@@ -16,6 +16,10 @@ public class ButtonPanel2 extends JPanel {
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Team playerTeam = new Team(team);
+                if (playerTeam.getTeam().size() < 6 || enemyTeam.getTeam().size() < 6) {
+                    System.err.println("Not enough Pokemons in the teams");
+                    return;
+                }
                 SelectXpUI selectXpUI = new SelectXpUI(frame, playerTeam, enemyTeam);
                 frame.getContentPane().removeAll();
                 frame.getContentPane().add(selectXpUI, BorderLayout.CENTER);
