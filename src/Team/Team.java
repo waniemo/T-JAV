@@ -14,14 +14,18 @@ public class Team {
     private HashMap<Class<? extends Item>, Integer> items = new HashMap<>();
 
     public Team(List<Pokemon> team){
-        this.team = team;
-        this.activePokemon = team.get(0);
-        items.put(BoostAtk.class, 5);
-        items.put(BoostDef.class, 5);
-        items.put(BoostSpeed.class, 5);
-        items.put(Potion.class, 5);
-        items.put(SuperPotion.class, 5);
-        items.put(HyperPotion.class, 5);
+        if(team.size() == 0){
+            System.out.println("Vous ne pouvez pas avoir une équipe vide !");
+        } else{
+            this.team = team;
+            this.activePokemon = team.get(0);
+            items.put(BoostAtk.class, 5);
+            items.put(BoostDef.class, 5);
+            items.put(BoostSpeed.class, 5);
+            items.put(Potion.class, 5);
+            items.put(SuperPotion.class, 5);
+            items.put(HyperPotion.class, 5);
+        }
     }
 
     public List<Pokemon> getTeam(){
@@ -54,6 +58,10 @@ public class Team {
         for(Pokemon pokemon : team){
             pokemon.setLevel(lvl);
         }
+    }
+
+    public int getLevel(){
+        return team.get(0).getLevel();
     }
 
     public void addPokemon(Pokemon pokemon){

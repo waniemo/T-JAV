@@ -14,17 +14,17 @@ public class Electrik extends Type{
         switch(attack){
             case "Eclair":
                 System.out.println( player.getName()+" utilise Eclair !");
-                attackMultiplier(2.5,0.5,1, ennemi, player);
+                attackMultiplier(5.5,1.5,3, ennemi, player);
                 attacks.put("Eclair", attacks.get("Eclair") - 1);
                 break;
             case "Cage-Eclair":
                 System.out.println(player.getName()+" utilise Cage-Eclair !");
-                attackMultiplier(5.5,1.5,3, ennemi, player);
+                attackMultiplier(10,3,6, ennemi, player);
                 attacks.put("Cage-Eclair", attacks.get("Cage-Eclair") - 1);
                 break;
             case "Fatal-Foudre":
                 System.out.println(player.getName()+" utilise Fatal-Foudre !");
-                attackMultiplier(8.5,1.5,6, ennemi, player);
+                attackMultiplier(20.5,6,8, ennemi, player);
                 attacks.put("Fatal-Foudre", attacks.get("Fatal-Foudre") - 1);
                 break;
         }
