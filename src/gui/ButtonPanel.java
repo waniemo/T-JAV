@@ -10,7 +10,7 @@ public class ButtonPanel extends JPanel {
     public ButtonPanel(JFrame frame) {
         this.frame = frame;
         setLayout(new GridLayout(1, 4));
-        JButton button1 = new JButton("PLAY ! ");
+        JButton button1 = new JButton("JOUER ! ");
         JButton button2 = new JButton("EXIT");
         ChooseTeamUI chooseTeamUI = new ChooseTeamUI(frame);
 
