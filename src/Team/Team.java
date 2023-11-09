@@ -60,6 +60,10 @@ public class Team {
         }
     }
 
+    public int getLevel(){
+        return team.get(0).getLevel();
+    }
+
     public void addPokemon(Pokemon pokemon){
         team.add(pokemon);
     }
