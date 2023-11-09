@@ -2,14 +2,14 @@ package Team;
 
 import Item.*;
 import Pokemon.Pokemon;
-import Type.Type;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Team {
     private List<Pokemon> team;
-    private List<Pokemon> deadPokemons;
+    private ArrayList<Pokemon> deadPokemons = new ArrayList<>();
     private Pokemon activePokemon;
     private HashMap<Class<? extends Item>, Integer> items = new HashMap<>();
 
@@ -36,16 +36,23 @@ public class Team {
         return activePokemon;
     }
 
-//    public HashMap<Item, Integer> getItems() {
-//        return items;
-//    }
+    public HashMap<Class<? extends Item>, Integer> getItems() {
+        return items;
+    }
 
     public void setActivePokemon(Pokemon newActivePokemon){
+        Pokemon oldActivePokemon = this.activePokemon;
         if(!deadPokemons.contains(newActivePokemon)){
             this.activePokemon = newActivePokemon;
-            System.out.println(activePokemon.getName()+" reviens ! "+newActivePokemon.getName()+" GO !");
+            System.out.println(oldActivePokemon.getName()+" reviens ! "+newActivePokemon.getName()+" GO !");
         } else {
             System.out.println("Vous ne pouvez pas selectioner un pokémon KO !");
+        }
+    }
+
+    public void setTeamLvl(int lvl){
+        for(Pokemon pokemon : team){
+            pokemon.setLevel(lvl);
         }
     }
 
