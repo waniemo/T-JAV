@@ -18,6 +18,8 @@ public class SelectXpUI extends JPanel {
 
         CustomSpinner spinner1 = new CustomSpinner(1, 100, 1);
         CustomSpinner spinner2 = new CustomSpinner(1, 100, 1);
+        JButton playButton = new JButton("JOUER!");
+        JButton backButton = new JButton("RETOUR");
 
         selector.add(new JLabel("Niveau de votre équipe:"));
         selector.add(spinner1);
@@ -25,8 +27,8 @@ public class SelectXpUI extends JPanel {
         selector.add(new JLabel("Niveau de l'ennemi:"));
         selector.add(spinner2);
 
-        JButton playButton = new JButton("JOUER!");
-        playButton.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the button
+        playButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 playerTeam.setTeamLevel((int) spinner1.getValue());
@@ -39,7 +41,6 @@ public class SelectXpUI extends JPanel {
             }
         });
 
-        JButton backButton = new JButton("RETOUR");
         backButton.addActionListener(e -> {
             ChooseTeamUI chooseTeamUI = new ChooseTeamUI(frame);
             frame.getContentPane().removeAll();
