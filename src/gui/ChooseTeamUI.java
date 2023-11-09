@@ -13,13 +13,11 @@ import java.awt.*;
 public class ChooseTeamUI extends JPanel {
     private final List<JLabel> teamLabels = new ArrayList<>();
     Pokemon[] pokemons = {
-            new Blizzaroi(), new Bulbizarre(), new Dialga(),
-            new Doudouvet(), new Gardevoir(), new Hericendre(),
-            new Lugulabre(), new Magicarpe(), new Noadkoko(),
-            new Ponyta(), new Psykokwak(), new Raichu(),
-            new Reshiram(), new Rondoudou(), new Tiplouf(),
-            new Viridium(), new Voltali(), new Voltorbe(),
-            new Zekrom(), new Kirby()
+            new Hericendre(), new Ponyta(), new Reshiram(), new Lugulabre(), new HoOh(), new Simiabraz(),
+            new Voltorbe(), new Zekrom(), new Raichu(), new Voltali(), new Pachirisu(), new Electhor(),
+            new Blizzaroi(), new Bulbizarre(), new Noadkoko(), new Viridium(), new Roserade(), new Haydam(),
+            new Musteflott(), new Dialga(), new Tiplouf(), new Magicarpe(), new Psykokwak(), new Moustillon(),
+            new Rondoudou(), new Doudouvet(), new Gardevoir(), new Azurill(), new Togepi(), new Kirby(),
     };
     private List<Pokemon> team = new ArrayList<>();
 
@@ -28,7 +26,7 @@ public class ChooseTeamUI extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
 
         Dimension teamGridSize = new Dimension(600, 100);
-        JPanel selectGrid = new JPanel(new GridLayout(5, 4));
+        JPanel selectGrid = new JPanel(new GridLayout(5, 6));
         JPanel teamGrid = new JPanel(new GridLayout(1, 6));
         teamGrid.setPreferredSize(teamGridSize);
 

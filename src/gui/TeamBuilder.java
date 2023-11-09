@@ -14,9 +14,9 @@ public class TeamBuilder {
         List<Integer> enemyTeamIndexes = new ArrayList<>();
         List<Pokemon> enemyList = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            int index = (int) (Math.random() * 18);
+            int index = (int) (Math.random() * 28);
             while (enemyTeamIndexes.contains(index)) {
-                index = (int) (Math.random() * 18);
+                index = (int) (Math.random() * 28);
             }
             enemyTeamIndexes.add(index);
             enemyList.add(pokemons[index]);
@@ -25,7 +25,7 @@ public class TeamBuilder {
     }
 
     public static void addPokemonToGrid(JPanel selectGrid, Pokemon[] pokemons, List<Pokemon> team, List<JLabel> teamLabels, ImageIcon greyBall) {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 30; i++) {
             ImageIcon icon = new ImageIcon("../Assets/" + pokemons[i].getSpritePng());
             JLabel label = new JLabel(icon);
             int index = i;
