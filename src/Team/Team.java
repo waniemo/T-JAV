@@ -2,6 +2,7 @@ package Team;
 
 import Item.*;
 import Pokemon.Pokemon;
+import Type.Type;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,17 +11,17 @@ public class Team {
     private List<Pokemon> team;
     private List<Pokemon> deadPokemons;
     private Pokemon activePokemon;
-    private HashMap<Item, Integer> items = new HashMap<>();
+    private HashMap<Class<? extends Item>, Integer> items = new HashMap<>();
 
     public Team(List<Pokemon> team){
         this.team = team;
         this.activePokemon = team.get(0);
-        items.put(new BoostAtk(), 5);
-        items.put(new BoostDef(), 5);
-        items.put(new BoostSpeed(), 5);
-        items.put(new Potion(), 5);
-        items.put(new SuperPotion(), 5);
-        items.put(new HyperPotion(), 5);
+        items.put(BoostAtk.class, 5);
+        items.put(BoostDef.class, 5);
+        items.put(BoostSpeed.class, 5);
+        items.put(Potion.class, 5);
+        items.put(SuperPotion.class, 5);
+        items.put(HyperPotion.class, 5);
     }
 
     public List<Pokemon> getTeam(){
@@ -34,6 +35,10 @@ public class Team {
     public Pokemon getActivePokemon(){
         return activePokemon;
     }
+
+//    public HashMap<Item, Integer> getItems() {
+//        return items;
+//    }
 
     public void setActivePokemon(Pokemon newActivePokemon){
         if(!deadPokemons.contains(newActivePokemon)){
@@ -61,8 +66,13 @@ public class Team {
     }
 
     public void useItems(Item itemToUse, Pokemon pokemon){
+        if(items.get(itemToUse.getClass()) > 0){
+            itemToUse.use(pokemon);
+            items.put(itemToUse.getClass(), items.get(itemToUse.getClass()) - 1);
+        } else {
+            System.out.println("Vous n'avez plus de "+itemToUse.getName());
+        }
 
     }
-
 
 }

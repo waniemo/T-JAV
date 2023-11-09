@@ -9,7 +9,12 @@ public class HyperPotion extends Item{
 
     @Override
     public void use(Pokemon pokemon) {
-        pokemon.setPv(pokemon.getPv() + 120);
-        System.out.println(pokemon.getName() + " a été soigné de 120PV");
+        if(pokemon.getPv()+120 > pokemon.getPvMax()){
+            pokemon.setPv(pokemon.getPvMax());
+            System.out.println(pokemon.getClass().getName()+" a été soigné");
+        } else{
+            pokemon.setPv(pokemon.getPv() + 120);
+            System.out.println(pokemon.getName() + " a été soigné de 120PV");
+        }
     }
 }
