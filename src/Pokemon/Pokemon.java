@@ -4,6 +4,7 @@ import Type.*;
 public abstract class Pokemon {
     protected String name;
     protected int pv;
+    protected int pvMax;
     protected int atk;
     protected int def;
     protected int speed;
@@ -24,6 +25,7 @@ public abstract class Pokemon {
         this.spritePng = spritePng;
         this.spriteFront = spriteFront;
         this.spriteBack = spriteBack;
+        this.pvMax = pv;
     }
 
     public String getName(){
@@ -32,6 +34,10 @@ public abstract class Pokemon {
 
     public int getPv(){
         return pv;
+    }
+
+    public int getPvMax() {
+        return pvMax;
     }
 
     public int getAtk(){

@@ -9,7 +9,12 @@ public class Potion extends Item{
 
     @Override
     public void use(Pokemon pokemon) {
-        pokemon.setPv(pokemon.getPv() + 20);
-        System.out.println(pokemon.getName() + " a été soigné de 20PV");
+        if(pokemon.getPv()+20 > pokemon.getPvMax()){
+            pokemon.setPv(pokemon.getPvMax());
+            System.out.println(pokemon.getClass().getName()+" a été soigné");
+        } else{
+            pokemon.setPv(pokemon.getPv() + 20);
+            System.out.println(pokemon.getName() + " a été soigné de 20PV");
+        }
     }
 }

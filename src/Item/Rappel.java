@@ -9,7 +9,12 @@ public class Rappel extends Item{
 
     @Override
     public void use(Pokemon pokemon) {
-        pokemon.setPv(10);
-        System.out.println(pokemon.getName() + " a été réanimé et à recupéré 10PV");
+        if(pokemon.getPv() > 0){
+            System.out.println("Ce pokemon n'est pas KO !");
+        } else{
+            pokemon.setPv(10);
+            System.out.println(pokemon.getName() + " a été réanimé et à recupéré 10PV");
+        }
+
     }
 }
