@@ -37,9 +37,19 @@ public class SelectXpUI extends JPanel {
             }
         });
 
+        JButton backButton = new JButton("BACK");
+        backButton.addActionListener(e -> {
+            ChooseTeamUI chooseTeamUI = new ChooseTeamUI(frame);
+            frame.getContentPane().removeAll();
+            frame.getContentPane().add(chooseTeamUI, BorderLayout.CENTER);
+            frame.revalidate();
+            frame.repaint();
+        });
+
         add(Box.createVerticalGlue());
         add(selector);
         add(Box.createVerticalGlue());
         add(playButton);
+        add(backButton);
     }
 }

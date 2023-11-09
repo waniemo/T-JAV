@@ -61,16 +61,17 @@ public class ChooseTeamUI extends JPanel {
             selectGrid.add(label);
         }
 
-        Team enemyTeam = new Team(new ArrayList<Pokemon>());
         List<Integer> enemyTeamIndexes = new ArrayList<>();
+        List<Pokemon> enemyList = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            int index = (int) (Math.random() * 20);
+            int index = (int) (Math.random() * 19);
             while (enemyTeamIndexes.contains(index)) {
-                index = (int) (Math.random() * 20);
+                index = (int) (Math.random() * 19);
             }
             enemyTeamIndexes.add(index);
-            enemyTeam.addPokemon(pokemons[index]);
+            enemyList.add(pokemons[index]);
         }
+        Team enemyTeam = new Team(enemyList);
 
         JButton button1 = new JButton("Continuer");
         button1.addActionListener(new ActionListener() {
