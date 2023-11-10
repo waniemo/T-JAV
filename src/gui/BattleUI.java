@@ -1,49 +1,30 @@
 package gui;
 
 import java.awt.*;
-
 import javax.swing.*;
-
 import Team.*;
 
 public class BattleUI extends JPanel {
+    private SummaryPanel summaryPanel;
+    private ArenaPanel arenaPanel;
+
     public BattleUI(JFrame frame, Team playerTeam, Team enemyTeam) {
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
+        setLayout(new BorderLayout());
 
-        TeamGrid playerTeamGrid = new TeamGrid(playerTeam, Color.BLUE);
-        TeamGrid enemyTeamGrid = new TeamGrid(enemyTeam, Color.RED);
-        JButton backButton = new JButton("RETOUR");
+        arenaPanel = new ArenaPanel(frame, playerTeam, enemyTeam);
+        summaryPanel = new SummaryPanel(frame, playerTeam, enemyTeam);
+        add(summaryPanel, BorderLayout.CENTER);
+
         JButton playButton = new JButton("C'EST PARTI!");
+        playButton.addActionListener(e -> {
+            remove(summaryPanel);
 
-        JLabel playerTitle = new JLabel("Ton équipe! ( lvl" + playerTeam.getLevel() + ")");
-        JLabel enemyTitle = new JLabel("Equipe ennemie! ( lvl" + enemyTeam.getLevel() + ")");
+            add(arenaPanel, BorderLayout.CENTER);
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        add(playerTitle, gbc);
-        gbc.gridy = 1;
-        add(playerTeamGrid, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        add(enemyTeamGrid, gbc);
-        gbc.gridy = 3;
-        add(enemyTitle, gbc);
-
-        backButton.addActionListener(e -> {
-            SelectXpUI selectXpUI = new SelectXpUI(frame, playerTeam, enemyTeam);
-            frame.getContentPane().removeAll();
-            frame.getContentPane().add(selectXpUI, BorderLayout.CENTER);
-            frame.revalidate();
-            frame.repaint();
+            revalidate();
+            repaint();
         });
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        add(playButton, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        add(backButton, gbc);
 
+        summaryPanel.add(playButton, summaryPanel.getGbc());
     }
 }
