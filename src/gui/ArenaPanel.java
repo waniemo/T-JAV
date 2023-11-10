@@ -2,71 +2,58 @@ package gui;
 
 import Team.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class ArenaPanel extends JPanel {
+    private Image backgroundImage;
     public ArenaPanel(JFrame frame, Team playerTeam, Team enemyTeam) {
+        try {
+            backgroundImage = ImageIO.read(new File("../Assets/battle_bg.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        JPanel playerTeamPanel = new JPanel();
-        playerTeamPanel.setBackground(Color.BLUE);
-        JPanel enemyTeamPanel = new JPanel();
-        enemyTeamPanel.setBackground(Color.RED);
-        playerTeam.setActivePokemon(playerTeam.getTeam().get(0));
-        enemyTeam.setActivePokemon(enemyTeam.getTeam().get(0));
+        GridBagConstraints gbcLeft = LayoutHelper.createGridBagConstraints(0, 0, 0.5, 1.0);
+        GridBagConstraints gbcRight = LayoutHelper.createGridBagConstraints(1, 0, 0.5, 1.0);
 
-        // BufferedImage playerDimg = null;
-        // BufferedImage enemyDimg = null;
-        // try {
-        //     playerDimg = ImageIO
-        //             .read(new File("../Assets/" + playerTeam.getActivePokemon().getSpriteBack()));
-        //     enemyDimg = ImageIO
-        //             .read(new File("../Assets/" + enemyTeam.getActivePokemon().getSpriteFront()));
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
-        // Image playerPokemonSprite = playerDimg.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-        // Image enemyPokemonSprite = enemyDimg.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-        // ImageIcon playerPokemonSpriteIcon = new ImageIcon(playerPokemonSprite);
-        // ImageIcon enemyPokemonSpriteIcon = new ImageIcon(enemyPokemonSprite);
+        JPanel playerTeamPanel = PanelHelper.createTeamPanel(playerTeam);
+        JPanel enemyTeamPanel = PanelHelper.createTeamPanel(enemyTeam);
 
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
-        add(playerTeamPanel, gbc);
+        // Top left panel
+        add(playerTeamPanel, gbcLeft);
 
         // Bottom right panel
-        gbc.gridx = 2;
-        gbc.gridy = 2;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        add(enemyTeamPanel, gbc);
+        gbcRight.gridx = 1;
+        gbcRight.gridy = 3;
+        gbcRight.weightx = 0.5;
+        add(enemyTeamPanel, gbcRight);
 
         // Bottom left panel with 3 buttons
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        JPanel buttonPanel = new JPanel(new GridBagLayout());
-        GridBagConstraints buttonGbc = new GridBagConstraints();
-        for (int i = 0; i < 3; i++) {
-            buttonGbc.gridy = i;
-            buttonPanel.add(new JButton("Button " + (i + 1)), buttonGbc);
-        }
-        add(buttonPanel, gbc);
+        gbcLeft.gridx = 0;
+        gbcLeft.gridy = 3;
+        JPanel buttonPanel = PanelHelper.createButtonPanel();
+        add(buttonPanel, gbcLeft);
 
-        // Center left ImageIcon
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        add(new JLabel(new ImageIcon("../Assets/" + playerTeam.getActivePokemon().getSpriteBack())), gbc);
+        // Player Pokemon
+        gbcRight.weighty = 3.5;
+        gbcLeft.gridx = 0;
+        gbcLeft.gridy = 2;
+        add(IconHelper.createTeamIcon(playerTeam, true), gbcLeft);
 
-        // Center right ImageIcon
-        gbc.gridx = 2;
-        gbc.gridy = 1;
-        add(new JLabel(new ImageIcon("../Assets/" + enemyTeam.getActivePokemon().getSpriteFront())), gbc);
+        // Enemy pokemon
+        gbcRight.weighty = 1;
+        gbcRight.gridx = 1;
+        gbcRight.gridy = 1;
+        add(IconHelper.createTeamIcon(enemyTeam, false), gbcRight);
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Image scaledBackground = backgroundImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+        g.drawImage(scaledBackground, 0, 0, this);
     }
 }
