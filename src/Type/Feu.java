@@ -10,38 +10,33 @@ public class Feu extends Type{
         attacks.put("Feu d'Enfer", 5);
     }
     @Override
-    public void attack(String attack, Pokemon ennemi, Pokemon player) {
+    public String attack(String attack, Pokemon ennemi, Pokemon player) {
         switch(attack){
             case "Tacle Feu":
                 if(attacks.get("Tacle Feu") == 0){
-                    System.out.println("Vous n'avez pas assez de PP pour utiliser Tacle Feu !");
-                    break;
+                    return "Vous n'avez pas assez de PP pour utiliser Tacle Feu !";
                 } else{
-                    System.out.println(player.getName()+" utilise Tacle Feu !");
                     attackMultiplier(5.5,1.5,3, ennemi, player);
                     attacks.put("Tacle Feu", attacks.get("Tacle Feu") - 1);
-                    break;
+                    return player.getName()+" utilise Tacle Feu !";
                 }
             case "Rafale Feu":
                 if(attacks.get("Rafale Feu") == 0){
-                    System.out.println("Vous n'avez pas assez de PP pour utiliser Rafale Feu !");
-                    break;
+                    return "Vous n'avez pas assez de PP pour utiliser Rafale Feu !";
                 } else{
-                    System.out.println(player.getName()+" utilise Rafale Feu !");
                     attackMultiplier(10,3,6, ennemi, player);
                     attacks.put("Rafale Feu", attacks.get("Rafale Feu") - 1);
-                    break;
+                    return player.getName()+" utilise Rafale Feu !";
                 }
             case "Feu d'Enfer":
                 if(attacks.get("Feu d'Enfer") == 0){
-                    System.out.println("Vous n'avez pas assez de PP pour utiliser Feu d'Enfer !");
-                    break;
+                    return "Vous n'avez pas assez de PP pour utiliser Feu d'Enfer !";
                 } else{
-                    System.out.println(player.getName()+" utilise Feu d'Enfer !");
                     attackMultiplier(20.5,6,8, ennemi, player);
                     attacks.put("Feu d'Enfer", attacks.get("Feu d'Enfer") - 1);
-                    break;
+                    return player.getName()+" utilise Feu d'Enfer !";
                 }
         }
+        return "";
     }
 }
