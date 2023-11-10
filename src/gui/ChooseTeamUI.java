@@ -5,23 +5,21 @@ import Pokemon.*;
 import Team.*;
 
 import javax.swing.*;
-import java.awt.event.*;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.awt.*;
 
 public class ChooseTeamUI extends JPanel {
     private final List<JLabel> teamLabels = new ArrayList<>();
-    Pokemon[] pokemons = {
-            new Hericendre(), new Ponyta(), new Reshiram(), new Lugulabre(), new HoOh(), new Simiabraz(),
-            new Voltorbe(), new Zekrom(), new Raichu(), new Voltali(), new Pachirisu(), new Electhor(),
-            new Blizzaroi(), new Bulbizarre(), new Noadkoko(), new Viridium(), new Roserade(), new Haydam(),
-            new Musteflott(), new Dialga(), new Tiplouf(), new Magicarpe(), new Psykokwak(), new Moustillon(),
-            new Rondoudou(), new Doudouvet(), new Gardevoir(), new Azurill(), new Togepi(), new Kirby(),
-    };
+    private Pokemon[] pokemons = null;
     private List<Pokemon> team = new ArrayList<>();
+    App app;
 
-    public ChooseTeamUI(JFrame frame) {
+    public ChooseTeamUI(App frame) {
+        app = frame;
+        pokemons = frame.getPokemons();
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -32,10 +30,11 @@ public class ChooseTeamUI extends JPanel {
         teamGrid.setPreferredSize(teamGridSize);
 
         ImageIcon greyBall = new ImageIcon("../Assets/grey_flat_pokeball.png");
-        String[] types = {"../Assets/feu.png", "../Assets/electrik.png", "../Assets/plante.png", "../Assets/eau.png", "../Assets/fee.png"};
+        String[] types = { "../Assets/feu.png", "../Assets/electrik.png", "../Assets/plante.png", "../Assets/eau.png",
+                "../Assets/fee.png" };
         Team enemyTeam = TeamBuilder.buildEnemyTeam(pokemons);
 
-        for (int i=0; i<5; i++) {
+        for (int i = 0; i < 5; i++) {
             ImageIcon icon = new ImageIcon(types[i]);
             JLabel label = new JLabel(icon);
             label.setPreferredSize(new Dimension(100, 100));

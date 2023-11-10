@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class ButtonPanel2 extends JPanel {
-    public ButtonPanel2(JFrame frame, List<Pokemon> team, Team enemyTeam) {
+    public ButtonPanel2(App frame, List<Pokemon> team, Team enemyTeam) {
         JButton button1 = new JButton("Continuer");
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
