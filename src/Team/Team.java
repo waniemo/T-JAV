@@ -44,13 +44,13 @@ public class Team {
         return items;
     }
 
-    public void setActivePokemon(Pokemon newActivePokemon){
+    public String setActivePokemon(Pokemon newActivePokemon){
         Pokemon oldActivePokemon = this.activePokemon;
         if(!deadPokemons.contains(newActivePokemon)){
             this.activePokemon = newActivePokemon;
-            System.out.println(oldActivePokemon.getName()+" reviens ! "+newActivePokemon.getName()+" GO !");
+            return oldActivePokemon.getName()+" reviens ! "+newActivePokemon.getName()+ "GO !";
         } else {
-            System.out.println("Vous ne pouvez pas selectioner un pokémon KO !");
+            return "Vous ne pouvez pas selectioner un pokémon KO !";
         }
     }
 
@@ -80,12 +80,13 @@ public class Team {
         deadPokemons.remove(pokemon);
     }
 
-    public void useItems(Item itemToUse, Pokemon pokemon){
+    public String useItems(Item itemToUse, Pokemon pokemon){
         if(items.get(itemToUse.getClass()) > 0){
             itemToUse.use(pokemon);
             items.put(itemToUse.getClass(), items.get(itemToUse.getClass()) - 1);
+            return "Vous avez utilisé "+itemToUse.getName();
         } else {
-            System.out.println("Vous n'avez plus de "+itemToUse.getName());
+            return "Vous n'avez plus de "+itemToUse.getName();
         }
 
     }

@@ -10,38 +10,33 @@ public class Eau extends Type{
         attacks.put("Hydrocanon", 5);
     }
     @Override
-    public void attack(String attack, Pokemon ennemi, Pokemon player) {
+    public String attack(String attack, Pokemon ennemi, Pokemon player) {
         switch(attack){
             case "Aqua-jet":
                 if(attacks.get("Aqua-jet") == 0){
-                    System.out.println("Vous n'avez pas assez de PP pour utiliser Aqua-jet !");
-                    break;
+                    return "Vous n'avez pas assez de PP pour utiliser Aqua-jet !";
                 } else{
-                    System.out.println(player.getName()+" utilise Aqua-jet !");
                     attackMultiplier(5.5,1.5,3, ennemi, player);
                     attacks.put("Aqua-jet", attacks.get("Aqua-jet") - 1);
-                    break;
+                    return player.getName()+" utilise Aqua-jet !";
                 }
             case "Bulle d'O":
                 if(attacks.get("Bulle d'O") == 0){
-                    System.out.println("Vous n'avez pas assez de PP pour utiliser Bulle d'O !");
-                    break;
+                    return "Vous n'avez pas assez de PP pour utiliser Bulle d'O !";
                 } else{
-                    System.out.println(player.getName()+" utilise Bulle d'O !");
                     attackMultiplier(10,3,6, ennemi, player);
                     attacks.put("Bulle d'O", attacks.get("Bulle d'O") - 1);
-                    break;
+                    return player.getName()+" utilise Bulle d'O !";
                 }
             case "Hydrocanon":
                 if(attacks.get("Hydrocanon") == 0){
-                    System.out.println("Vous n'avez pas assez de PP pour utiliser Hydrocanon !");
-                    break;
+                    return "Vous n'avez pas assez de PP pour utiliser Hydrocanon !";
                 } else{
-                    System.out.println(player.getName()+" utilise Hydrocanon !");
                     attackMultiplier(20.5,6,8, ennemi, player);
                     attacks.put("Hydrocanon", attacks.get("Hydrocanon") - 1);
-                    break;
+                    return player.getName()+" utilise Hydrocanon !";
                 }
         }
+        return "";
     }
 }
