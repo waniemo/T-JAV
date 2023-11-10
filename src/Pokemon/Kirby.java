@@ -10,6 +10,5 @@ public class Kirby extends Pokemon{
     @Override
     public void attack(String attack, Pokemon ennemi) {
         fee.attack(attack, ennemi, this);
-        System.out.println(fee.getAttacks());
     }
 }

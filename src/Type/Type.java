@@ -33,7 +33,7 @@ public abstract class Type {
         return attacks;
     }
 
-    public abstract void attack(String attack, Pokemon ennemi, Pokemon player);
+    public abstract String attack(String attack, Pokemon ennemi, Pokemon player);
 
     public void attackMultiplier(double highMultiplier, double lowMultiplier, double mediumMultiplier, Pokemon ennemi, Pokemon player){
         if(ennemi.getType() == this.strength){

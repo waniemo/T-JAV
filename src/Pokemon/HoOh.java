@@ -9,6 +9,5 @@ public class HoOh extends Pokemon{
     @Override
     public void attack(String attack, Pokemon ennemi) {
         feu.attack(attack, ennemi, this);
-        System.out.println(feu.getAttacks());
     }
 }
