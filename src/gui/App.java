@@ -1,16 +1,13 @@
 package gui;
 
 import java.awt.*;
-import java.util.Arrays;
 import java.awt.event.*;
 import javax.swing.*;
 
 import Pokemon.*;
 
-
 public class App extends JFrame {
     private StringBuilder typedText = new StringBuilder();
-    private Pokemon[] pokemons;
     private boolean isKirby = false;
 
     public App() {
@@ -22,10 +19,16 @@ public class App extends JFrame {
         Action keyAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                typedText.append(e.getActionCommand());
-                if (typedText.toString().equals("kirby")) {
+                if (e.getActionCommand().equals("k")) {
+                    typedText = new StringBuilder();
+                    typedText.append("k");
+                } else {
+                    typedText.append(e.getActionCommand());
+                }
+
+                if (typedText.toString().equals("kirby") && !isKirby) {
                     isKirby = true;
-                    System.out.println("CHEATCODDE ACTIVATED: Kirby added to the game !");
+                    System.out.println("CHEATCODE ACTIVATED: Kirby added to the game !");
                 }
             }
         };
