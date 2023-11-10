@@ -8,7 +8,7 @@ import Team.Team;
 import java.awt.event.*;
 
 public class SelectXpUI extends JPanel {
-    public SelectXpUI(JFrame frame, Team playerTeam, Team enemyTeam) {
+    public SelectXpUI(App frame, Team playerTeam, Team enemyTeam) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JPanel selector = new JPanel(new GridLayout(1, 2));

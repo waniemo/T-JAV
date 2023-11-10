@@ -10,7 +10,8 @@ import java.io.IOException;
 
 public class ArenaPanel extends JPanel {
     private Image backgroundImage;
-    public ArenaPanel(JFrame frame, Team playerTeam, Team enemyTeam) {
+
+    public ArenaPanel(App frame, Team playerTeam, Team enemyTeam) {
         try {
             backgroundImage = ImageIO.read(new File("../Assets/battle_bg.png"));
         } catch (IOException e) {
@@ -45,11 +46,13 @@ public class ArenaPanel extends JPanel {
         add(IconHelper.createTeamIcon(playerTeam, true), gbcLeft);
 
         // Enemy pokemon
-        gbcRight.weighty = 1;
+        gbcRight.weighty = 3;
+        gbcRight.insets = new Insets(80, 0, 0, 0); // Add 20 pixels of padding on top
         gbcRight.gridx = 1;
         gbcRight.gridy = 1;
         add(IconHelper.createTeamIcon(enemyTeam, false), gbcRight);
     }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

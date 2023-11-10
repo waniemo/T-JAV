@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class SummaryPanel extends JPanel {
     GridBagConstraints gbc = new GridBagConstraints();
-    public SummaryPanel(JFrame frame, Team playerTeam, Team enemyTeam) {
+    public SummaryPanel(App frame, Team playerTeam, Team enemyTeam) {
         setLayout(new GridBagLayout());
 
         TeamGrid playerTeamGrid = new TeamGrid(playerTeam, Color.BLUE);

@@ -25,7 +25,7 @@ public class TeamBuilder {
     }
 
     public static void addPokemonToGrid(JPanel selectGrid, Pokemon[] pokemons, List<Pokemon> team, List<JLabel> teamLabels, ImageIcon greyBall) {
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < pokemons.length; i++) {
             ImageIcon icon = new ImageIcon("../Assets/" + pokemons[i].getSpritePng());
             JLabel label = new JLabel(icon);
             int index = i;

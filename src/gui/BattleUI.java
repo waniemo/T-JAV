@@ -8,7 +8,7 @@ public class BattleUI extends JPanel {
     private SummaryPanel summaryPanel;
     private ArenaPanel arenaPanel;
 
-    public BattleUI(JFrame frame, Team playerTeam, Team enemyTeam) {
+    public BattleUI(App frame, Team playerTeam, Team enemyTeam) {
         setLayout(new BorderLayout());
 
         arenaPanel = new ArenaPanel(frame, playerTeam, enemyTeam);
