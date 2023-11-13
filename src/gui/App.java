@@ -47,6 +47,13 @@ public class App extends JFrame {
     }
 
     public Pokemon[] getPokemons() {
-        return isKirby ? PokemonList.getPokemonsWithKirby() : PokemonList.getPokemons();
+        boolean containsKirby = false;
+        for (Pokemon pokemon : PokemonList.getPokemons()) {
+            if (pokemon.getName().equals("Kirby")) {
+                containsKirby = true;
+                break;
+            }
+        }
+        return isKirby && !containsKirby ? PokemonList.getPokemonsWithKirby() : PokemonList.getPokemons();
     }
 }
