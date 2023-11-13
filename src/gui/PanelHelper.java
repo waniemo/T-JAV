@@ -27,7 +27,7 @@ public class PanelHelper {
         return panel;
     }
 
-    public static JPanel createButtonPanel(App frame, Team playerTeam, Team enemyTeam) {
+    public static JPanel createButtonPanel(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam) {
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         GridBagConstraints buttonGbc = new GridBagConstraints();
         String[] buttonNames = { "attack", "bag", "change" };
@@ -52,7 +52,7 @@ public class PanelHelper {
                 case 1:
                     button.addActionListener(e -> {
                         // action for "bag" button
-                        frame.setContentPane(new Bag(frame, playerTeam, enemyTeam));
+                        frame.setContentPane(new Bag(frame, arena, playerTeam, enemyTeam));
                         frame.revalidate();
 
                     });

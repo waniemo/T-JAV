@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class ButtonPanel2 extends JPanel {
-    private static JButton button1 = new JButton("Continuer");
+    private static JButton button1 = new JButton("CONTINUER");
     public ButtonPanel2(App frame, List<Pokemon> team, Team enemyTeam) {
         button1.setEnabled(false);
 
