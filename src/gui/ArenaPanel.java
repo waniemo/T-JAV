@@ -10,6 +10,8 @@ import java.io.IOException;
 
 public class ArenaPanel extends JPanel {
     private Image backgroundImage;
+    private PvBar playerPvBar;
+    private PvBar enemyPvBar;
 
     public ArenaPanel(App frame, Team playerTeam, Team enemyTeam) {
         try {
@@ -23,6 +25,17 @@ public class ArenaPanel extends JPanel {
 
         JPanel playerTeamPanel = PanelHelper.createTeamPanel(frame, playerTeam);
         JPanel enemyTeamPanel = PanelHelper.createTeamPanel(frame, enemyTeam);
+
+        for (Component component : playerTeamPanel.getComponents()) {
+            if (component instanceof PvBar) {
+                playerPvBar = (PvBar) component;
+            }
+        }
+        for (Component component : enemyTeamPanel.getComponents()) {
+            if (component instanceof PvBar) {
+                enemyPvBar = (PvBar) component;
+            }
+        }
 
         // Top left panel
         gbcLeft.insets = new Insets(30, 0, 0, 0);
@@ -38,7 +51,7 @@ public class ArenaPanel extends JPanel {
         // Bottom left panel with 3 buttons
         gbcLeft.gridx = 0;
         gbcLeft.gridy = 5;
-        JPanel buttonPanel = PanelHelper.createButtonPanel(frame, playerTeam, enemyTeam);
+        JPanel buttonPanel = PanelHelper.createButtonPanel(frame, this, playerTeam, enemyTeam);
         add(buttonPanel, gbcLeft);
 
         // Player Pokemon
@@ -60,5 +73,13 @@ public class ArenaPanel extends JPanel {
         super.paintComponent(g);
         Image scaledBackground = backgroundImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
         g.drawImage(scaledBackground, 0, 0, this);
+    }
+
+    public PvBar getPlayerPvBar() {
+        return playerPvBar;
+    }
+
+    public PvBar getEnemyPvBar() {
+        return enemyPvBar;
     }
 }

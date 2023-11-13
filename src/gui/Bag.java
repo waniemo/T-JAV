@@ -4,6 +4,9 @@ import javax.imageio.ImageIO;
 import java.io.File;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -17,8 +20,11 @@ import Item.*;
 public class Bag extends JPanel {
     private Image backgroundImage;
     private JList<String> itemsString = null;
+    private ImageIcon itemImage = null;
+    private JLabel itemLabel = new JLabel();
+    private JLabel itemDescription = new JLabel("");
 
-    public Bag(App frame, Team playerTeam, Team enemyTeam) {
+    public Bag(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam) {
         try {
             backgroundImage = ImageIO.read(new File("../Assets/bag.png"));
         } catch (IOException e) {
@@ -27,24 +33,37 @@ public class Bag extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        gbc.gridx = 0;
+        gbc.gridx = 3;
         gbc.gridy = 0;
+        gbc.gridwidth = 5;
         gbc.weightx = 1;
         gbc.weighty = 1;
-        gbc.insets = new Insets(0, 250, 220, 0);
+        gbc.insets = new Insets(0, 0, 0, 0);
 
         List<Class<? extends Item>> teamItems = new ArrayList<>(playerTeam.getItems().keySet());
-        // itemsString = BagHelper.makeList(playerTeam);
-
-        // DefaultListModel<String> model = new DefaultListModel<>();
-
-        // // String[] listData = itemsString.toArray(new String[0]);
-        // for (Class<? extends Item> itemClass : teamItems) {
-        //     model.addElement(itemClass.getSimpleName());
-        // }
-
         itemsString = BagHelper.makeList(playerTeam);
 
+
+        itemsString.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int itemIndex = itemsString.getSelectedIndex();
+                    Item item = null;
+                    try {
+                        item = teamItems.get(itemIndex).getDeclaredConstructor().newInstance();
+                    } catch (Exception noItem) {
+                    }
+                    if (item != null) {
+                        System.out.println(item.getDescription());
+                        // Update itemImage based on the item name
+                        itemDescription.setText(item.getDescription());
+                        itemImage = new ImageIcon("../Assets/" + item.getSprite());
+                        itemLabel.setIcon(itemImage);
+                    }
+                }
+            }
+        });
 
         JButton useButton = new JButton("UTILISER");
         useButton.addActionListener(new ActionListener() {
@@ -57,8 +76,7 @@ public class Bag extends JPanel {
                     Item item = null;
                     try {
                         item = teamItems.get(itemIndex).getDeclaredConstructor().newInstance();
-                    }
-                    catch (Exception noItem) {
+                    } catch (Exception noItem) {
                         System.err.println("No such Item.");
                     }
                     System.out.println(item.getName());
@@ -71,8 +89,12 @@ public class Bag extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Take the user back to the previous UI
-                // ...
+                arena.getPlayerPvBar().updateBar();
+                frame.setLayout(new BorderLayout());
+                frame.getContentPane().removeAll();
+                frame.getContentPane().add(arena, BorderLayout.CENTER);
+                frame.revalidate();
+                frame.repaint();
             }
         });
 
@@ -95,12 +117,20 @@ public class Bag extends JPanel {
                 itemsString.setFixedCellHeight(newCellHeight);
             }
         });
+        itemDescription.setFont(getFont().deriveFont(40f));
         itemsString.setOpaque(false);
         add(itemsString, gbc);
         gbc.insets = new Insets(0, 0, 0, 0);
         gbc.gridy = 1;
-        add(useButton, gbc);
+        gbc.gridx = 0;
+        add(itemLabel, gbc);
+        gbc.gridx = 2;
         gbc.gridy = 2;
+        add(itemDescription, gbc);
+        gbc.gridx = 4;
+        gbc.gridy = 3;
+        add(useButton, gbc);
+        gbc.gridy = 4;
         add(backButton, gbc);
     }
 
