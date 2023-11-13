@@ -4,7 +4,7 @@ import Pokemon.Pokemon;
 
 public class BoostSpeed extends Item{
     public BoostSpeed() {
-        super("Boost Speed", "Boost", "Cet objet augmente la vitesse de 10 points.");
+        super("Boost Speed", "Boost", "Cet objet augmente la vitesse de 10 points.", "boost_speed.png");
     }
     @Override
     public void use(Pokemon pokemon) {

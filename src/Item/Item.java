@@ -6,11 +6,13 @@ public abstract class Item {
     protected String name;
     protected String type;
     protected String description;
+    protected String sprite;
 
-    public Item(String name, String Type, String description){
+    public Item(String name, String Type, String description, String sprite) {
         this.name = name;
         this.type = Type;
         this.description = description;
+        this.sprite = sprite;
     }
 
     public abstract void use(Pokemon pokemon);
