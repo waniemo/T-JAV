@@ -27,7 +27,7 @@ public class ButtonPanel2 extends JPanel {
                 frame.repaint();
             }
         });
-        JButton button2 = new JButton("Quitter");
+        JButton button2 = new JButton("QUITTER");
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
