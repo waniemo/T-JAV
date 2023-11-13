@@ -4,7 +4,6 @@ import Attaques.ComboGriffes;
 import Attaques.EclatMagique;
 import Attaques.VentFeerique;
 import Type.Fee;
-import Type.Type;
 
 import java.util.Arrays;
 
