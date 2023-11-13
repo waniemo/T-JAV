@@ -4,7 +4,7 @@ import Pokemon.Pokemon;
 
 public class Rappel extends Item{
     public Rappel() {
-        super("Item.Rappel", "Soin", "Cet objet réanimer un pokemon KO avec 10PV");
+        super("Rappel", "Soin", "Cet objet réanimer un pokemon KO avec 10PV", "rappel.png");
     }
 
     @Override

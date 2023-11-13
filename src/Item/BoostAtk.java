@@ -4,7 +4,7 @@ import Pokemon.Pokemon;
 
 public class BoostAtk extends Item{
     public BoostAtk(){
-        super("Boost Atk", "Boost", "Cet objet augmente l'attaque de 10 points.");
+        super("Boost Atk", "Boost", "Cet objet augmente l'attaque de 10 points.", "boost_atk.png");
     }
 
     @Override
