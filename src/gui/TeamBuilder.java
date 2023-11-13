@@ -39,6 +39,9 @@ public class TeamBuilder {
                             break;
                         }
                     }
+                    if(team.size() == 6){
+                        ButtonPanel2.activateButton();
+                    }
                 }
             });
             selectGrid.add(label);

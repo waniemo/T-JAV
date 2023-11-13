@@ -11,8 +11,10 @@ import java.util.List;
 
 
 public class ButtonPanel2 extends JPanel {
+    private static JButton button1 = new JButton("Continuer");
     public ButtonPanel2(App frame, List<Pokemon> team, Team enemyTeam) {
-        JButton button1 = new JButton("Continuer");
+        button1.setEnabled(false);
+
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Team playerTeam = new Team(team);
@@ -35,5 +37,9 @@ public class ButtonPanel2 extends JPanel {
         });
         add(button1);
         add(button2);
+    }
+
+    public static void activateButton(){
+        button1.setEnabled(true);
     }
 }
