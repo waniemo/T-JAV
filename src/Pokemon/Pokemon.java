@@ -1,5 +1,9 @@
 package Pokemon;
 import Type.*;
+import Attaques.*;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 public abstract class Pokemon {
     protected String name;
@@ -13,12 +17,15 @@ public abstract class Pokemon {
     protected int baseSpeed;
     protected int speed;
     protected int level = 1;
+
+    protected List<Attaque> attaques;
+
     protected Class<? extends Type> type;
     protected String spritePng;
     protected String spriteFront;
     protected String spriteBack;
 
-    public Pokemon(String name, Class<? extends Type> type, int level, int pv, int atk, int def, int speed, String spritePng, String spriteFront, String spriteBack){
+    public Pokemon(String name, Class<? extends Type> type, int level, int pv, int atk, int def, int speed, String spritePng, String spriteFront, String spriteBack, List<Attaque> attaques){
         this.name = name;
         this.level = level;
         this.type = type;
@@ -34,6 +41,7 @@ public abstract class Pokemon {
         this.baseAtk = atk;
         this.baseDef = def;
         this.baseSpeed = speed;
+        this.attaques = attaques;
     }
 
     public String getName(){
@@ -80,6 +88,10 @@ public abstract class Pokemon {
         return spritePng;
     }
 
+    public List<Attaque> getAttaques() {
+        return attaques;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -124,7 +136,85 @@ public abstract class Pokemon {
         }
     }
 
-
-
-    public abstract void attack(String attack, Pokemon ennemi);
+    public void attaqueNormale(Pokemon ennemi){
+        if(attaques.get(0).getPp() <= 0){
+            System.out.println("Vous n'avez pas assez de PP pour utiliser cette attaque !");
+        } else{
+            ennemi.setPv((int) (ennemi.getPv() - (((2.0 * this.getLevel() / 5.0 + 2.0) * (this.getAtk() / this.getDef()) / 50.0 + 5))));
+            System.out.println(this.name+" utilise "+attaques.get(0).getName()+" !");
+            attaques.get(0).setPp(attaques.get(0).getPp() - 1);
+        }
+    }
+    public void attaqueType1(Pokemon ennemi) throws NoSuchMethodException {
+        if(attaques.get(1).getPp()<= 0){
+            System.out.println("Vous n'avez pas assez de PP pour utiliser cette attaque !");
+        } else {
+            System.out.println(this.name+" utilise "+attaques.get(1).getName()+" !");
+            try {
+                if(ennemi.getType() == this.type.getDeclaredConstructor().newInstance().getStrength()){
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * this.getLevel() / 5.0 + 2.0) * (this.getAtk() / this.getDef()) / 50.0 + 5.5))));
+                    System.out.println("Cette attaque était très efficace !");
+                    attaques.get(1).setPp(attaques.get(1).getPp() - 1);
+                } else if(ennemi.getType() == this.type.getConstructor().newInstance().getWeakness()){
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * this.getLevel() / 5.0 + 2.0) * (this.getAtk() / this.getDef()) / 50.0 + 1.5))));
+                    System.out.println("Cette attaque n'était pas très efficace...");
+                    attaques.get(1).setPp(attaques.get(1).getPp() - 1);
+                }
+                else{
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * this.getLevel() / 5.0 + 2.0) * (this.getAtk() / this.getDef()) / 50.0 + 3))));
+                    attaques.get(1).setPp(attaques.get(1).getPp() - 1);
+                }
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    };
+    public void attaqueType2(Pokemon ennemi) throws NoSuchMethodException {
+        if(attaques.get(2).getPp()<= 0){
+            System.out.println("Vous n'avez pas assez de PP pour utiliser cette attaque !");
+        } else {
+            System.out.println(this.name+" utilise "+attaques.get(2).getName()+" !");
+            try {
+                if(ennemi.getType() == this.type.getDeclaredConstructor().newInstance().getStrength()){
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * this.getLevel() / 5.0 + 2.0) * (this.getAtk() / this.getDef()) / 50.0 + 5.5))));
+                    System.out.println("Cette attaque était très efficace !");
+                    attaques.get(2).setPp(attaques.get(2).getPp() - 1);
+                } else if(ennemi.getType() == this.type.getConstructor().newInstance().getWeakness()){
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * this.getLevel() / 5.0 + 2.0) * (this.getAtk() / this.getDef()) / 50.0 + 1.5))));
+                    System.out.println("Cette attaque n'était pas très efficace...");
+                    attaques.get(1).setPp(attaques.get(2).getPp() - 1);
+                }
+                else{
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * this.getLevel() / 5.0 + 2.0) * (this.getAtk() / this.getDef()) / 50.0 + 3))));
+                    attaques.get(1).setPp(attaques.get(2).getPp() - 1);
+                }
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    };
+    public void attaqueType3(Pokemon ennemi) throws NoSuchMethodException {
+        if(attaques.get(3).getPp()<= 0){
+            System.out.println("Vous n'avez pas assez de PP pour utiliser cette attaque !");
+        } else {
+            System.out.println(this.name+" utilise "+attaques.get(3).getName()+" !");
+            try {
+                if(ennemi.getType() == this.type.getDeclaredConstructor().newInstance().getStrength()){
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * this.getLevel() / 5.0 + 2.0) * (this.getAtk() / this.getDef()) / 50.0 + 5.5))));
+                    System.out.println("Cette attaque était très efficace !");
+                    attaques.get(2).setPp(attaques.get(3).getPp() - 1);
+                } else if(ennemi.getType() == this.type.getConstructor().newInstance().getWeakness()){
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * this.getLevel() / 5.0 + 2.0) * (this.getAtk() / this.getDef()) / 50.0 + 1.5))));
+                    System.out.println("Cette attaque n'était pas très efficace...");
+                    attaques.get(1).setPp(attaques.get(3).getPp() - 1);
+                }
+                else{
+                    ennemi.setPv((int) (ennemi.getPv() - (((2.0 * this.getLevel() / 5.0 + 2.0) * (this.getAtk() / this.getDef()) / 50.0 + 3))));
+                    attaques.get(1).setPp(attaques.get(3).getPp() - 1);
+                }
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }

@@ -4,7 +4,7 @@ import Pokemon.Pokemon;
 
 public class HyperPotion extends Item{
     public HyperPotion() {
-        super("Hyper Item.Potion", "Soin", "Cette potion permet de soigner un pokemon de 120PV");
+        super("Hyper Potion", "Soin", "Cette potion permet de soigner un pokemon de 120PV");
     }
 
     @Override
