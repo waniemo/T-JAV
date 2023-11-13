@@ -28,4 +28,8 @@ public abstract class Item {
     public String getDescription() {
         return description;
     }
+
+    public String getSprite() {
+        return sprite;
+    }
 }
