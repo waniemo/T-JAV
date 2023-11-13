@@ -9,7 +9,7 @@ public class ButtonPanel extends JPanel {
     public ButtonPanel(App frame) {
         setLayout(new GridLayout(1, 4));
         JButton button1 = new JButton("JOUER ! ");
-        JButton button2 = new JButton("EXIT");
+        JButton button2 = new JButton("QUITTER");
 
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
