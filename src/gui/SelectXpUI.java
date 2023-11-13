@@ -11,8 +11,8 @@ public class SelectXpUI extends JPanel {
     public SelectXpUI(App frame, Team playerTeam, Team enemyTeam) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        JPanel selector = new JPanel(new GridLayout(1, 2));
-        Dimension selectorSize = new Dimension(1000, 50);
+        JPanel selector = new JPanel(new GridLayout(2, 1));
+        Dimension selectorSize = new Dimension(1000, 150);
         selector.setPreferredSize(selectorSize);
         selector.setMaximumSize(selectorSize);
 
@@ -21,10 +21,14 @@ public class SelectXpUI extends JPanel {
         JButton playButton = new JButton("JOUER!");
         JButton backButton = new JButton("RETOUR");
 
-        selector.add(new JLabel("Niveau de votre équipe:"));
+        JLabel labelPlayer = new JLabel("Niveau de votre équipe:");
+        labelPlayer.setFont(getFont().deriveFont(40f));
+        selector.add(labelPlayer);
         selector.add(spinner1);
         selector.add(Box.createHorizontalGlue());
-        selector.add(new JLabel("Niveau de l'ennemi:"));
+        JLabel labelEnemy = new JLabel("Niveau de l'ennemi:");
+        labelEnemy.setFont(getFont().deriveFont(40f));
+        selector.add(labelEnemy);
         selector.add(spinner2);
 
         playButton.setAlignmentX(Component.CENTER_ALIGNMENT);

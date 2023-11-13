@@ -21,8 +21,8 @@ public class ArenaPanel extends JPanel {
         GridBagConstraints gbcLeft = LayoutHelper.createGridBagConstraints(0, 1, 0.5, 1.0);
         GridBagConstraints gbcRight = LayoutHelper.createGridBagConstraints(1, 0, 0.5, 1.0);
 
-        JPanel playerTeamPanel = PanelHelper.createTeamPanel(playerTeam);
-        JPanel enemyTeamPanel = PanelHelper.createTeamPanel(enemyTeam);
+        JPanel playerTeamPanel = PanelHelper.createTeamPanel(frame, playerTeam);
+        JPanel enemyTeamPanel = PanelHelper.createTeamPanel(frame, enemyTeam);
 
         // Top left panel
         gbcLeft.insets = new Insets(30, 0, 0, 0);

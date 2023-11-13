@@ -29,7 +29,7 @@ public class CustomSpinner extends JSpinner {
             }
         });
 
-        setFont(new Font("Serif", Font.PLAIN, 20));
+        setFont(getFont().deriveFont(40f));
         setBorder(new EmptyBorder(5, 5, 5, 5));
     }
 }
