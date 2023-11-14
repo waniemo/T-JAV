@@ -23,6 +23,13 @@ public class ArenaPanel extends JPanel {
         GridBagConstraints gbcLeft = LayoutHelper.createGridBagConstraints(0, 1, 0.5, 1.0);
         GridBagConstraints gbcRight = LayoutHelper.createGridBagConstraints(1, 0, 0.5, 1.0);
 
+        ImageIcon textBox = new ImageIcon("../Assets/text_box.png");
+        JLabel textBoxLabel = new JLabel(textBox);
+        Image textBoxImage = textBox.getImage();
+        Image scaledTextBox = textBoxImage.getScaledInstance(610, 96, Image.SCALE_SMOOTH);
+        textBox.setImage(scaledTextBox);
+        textBoxLabel.setIcon(textBox);
+
         JPanel playerTeamPanel = PanelHelper.createTeamPanel(frame, playerTeam);
         JPanel enemyTeamPanel = PanelHelper.createTeamPanel(frame, enemyTeam);
 
@@ -44,9 +51,16 @@ public class ArenaPanel extends JPanel {
         // Bottom right panel
         gbcRight.gridx = 1;
         gbcRight.gridy = 4;
-        gbcRight.weightx = 0.5;
-        gbcRight.weighty = 0.1;
+        gbcRight.weightx = 0;
+        gbcRight.weighty = 0;
         add(playerTeamPanel, gbcRight);
+
+        //Text box
+        gbcRight.gridx = 1;
+        gbcRight.gridy = 5;
+        gbcRight.weighty = 0;
+        gbcRight.weightx = 0;
+        add(textBoxLabel, gbcRight);
 
         // Bottom left panel with 3 buttons
         gbcLeft.gridx = 0;
