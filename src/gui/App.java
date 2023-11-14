@@ -15,6 +15,7 @@ public class App extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1300, 800);
         setLocationRelativeTo(null);
+        setResizable(false);
 
         Action keyAction = new AbstractAction() {
             @Override
