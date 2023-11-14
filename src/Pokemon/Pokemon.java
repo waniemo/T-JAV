@@ -88,7 +88,7 @@ public abstract class Pokemon {
         return spritePng;
     }
 
-    public String getKOpng() {
+    public String getKoPng() {
         return spritePng.split("\\.")[0]+"_ko.png";
     }
 
