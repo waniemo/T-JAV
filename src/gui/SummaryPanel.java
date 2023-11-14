@@ -9,17 +9,9 @@ public class SummaryPanel extends JPanel {
     public SummaryPanel(App frame, Team playerTeam, Team enemyTeam) {
         setLayout(new GridBagLayout());
 
-        TeamGrid playerTeamGrid = new TeamGrid(playerTeam, Color.BLUE);
-        TeamGrid enemyTeamGrid = new TeamGrid(enemyTeam, Color.RED);
+        TeamGrid playerTeamGrid = new TeamGrid(frame, playerTeam, Color.BLUE);
+        TeamGrid enemyTeamGrid = new TeamGrid(frame, enemyTeam, Color.RED);
         JButton backButton = new JButton("RETOUR");
-        backButton.addActionListener(e -> {
-            SelectXpUI selectXpUI = new SelectXpUI(frame, playerTeam, enemyTeam);
-            frame.getContentPane().removeAll();
-            frame.getContentPane().add(selectXpUI, BorderLayout.CENTER);
-            frame.revalidate();
-            frame.repaint();
-        });
-
         JLabel playerTitle = new JLabel("Ton équipe! ( lvl" + playerTeam.getLevel() + ")");
         JLabel enemyTitle = new JLabel("Equipe ennemie! ( lvl" + enemyTeam.getLevel() + ")");
 

@@ -49,7 +49,7 @@ public class PanelHelper {
                         // action for "attack" button
                     });
                     break;
-                case 1:
+                    case 1:
                     button.addActionListener(e -> {
                         // action for "bag" button
                         frame.setContentPane(new Bag(frame, arena, playerTeam, enemyTeam));
@@ -58,9 +58,11 @@ public class PanelHelper {
                     });
                     break;
                 case 2:
-                    button.addActionListener(e -> {
-                        // action for "change" button
-                    });
+                button.addActionListener(e -> {
+                    // action for "change" button
+                    frame.setContentPane(new ChangePokemon(frame, arena, playerTeam, enemyTeam));
+                    frame.revalidate();
+                });
                     break;
             }
             buttonPanel.add(button, buttonGbc);

@@ -47,6 +47,7 @@ public class SelectXpUI extends JPanel {
 
         backButton.addActionListener(e -> {
             ChooseTeamUI chooseTeamUI = new ChooseTeamUI(frame);
+            playerTeam.getTeam().clear();
             frame.getContentPane().removeAll();
             frame.getContentPane().add(chooseTeamUI, BorderLayout.CENTER);
             frame.revalidate();
