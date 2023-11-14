@@ -33,16 +33,8 @@ public class Bag extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        gbc.gridx = 3;
-        gbc.gridy = 0;
-        gbc.gridwidth = 5;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-        gbc.insets = new Insets(0, 0, 0, 0);
-
         List<Class<? extends Item>> teamItems = new ArrayList<>(playerTeam.getItems().keySet());
         itemsString = BagHelper.makeList(playerTeam);
-
 
         itemsString.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -119,19 +111,40 @@ public class Bag extends JPanel {
         });
         itemDescription.setFont(getFont().deriveFont(40f));
         itemsString.setOpaque(false);
+
+        // List top right
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.5;
+        gbc.weighty = 0.5;
+        gbc.insets = new Insets(40, 80, 80, 80);
+        gbc.anchor = GridBagConstraints.NORTHEAST;
         add(itemsString, gbc);
-        gbc.insets = new Insets(0, 0, 0, 0);
-        gbc.gridy = 1;
+
+        // Image bottom left
         gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(80, 80, 80, 80);
+        gbc.anchor = GridBagConstraints.SOUTHWEST;
         add(itemLabel, gbc);
-        gbc.gridx = 2;
-        gbc.gridy = 2;
+
+        // Description bottom center
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.SOUTH;
+        gbc.insets = new Insets(80, 80, 80, 40);
         add(itemDescription, gbc);
-        gbc.gridx = 4;
-        gbc.gridy = 3;
+
+        // Buttons bottom right
+        gbc.gridx = 2;
+        gbc.anchor = GridBagConstraints.SOUTHEAST;
+        gbc.insets = new Insets(60, 0, 100, 80);
         add(useButton, gbc);
-        gbc.gridy = 4;
+        gbc.insets = new Insets(30, 0, 0, 0);
         add(backButton, gbc);
+
     }
 
     @Override
