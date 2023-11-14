@@ -4,6 +4,7 @@ import Team.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class PanelHelper {
     public static JPanel createTeamPanel(App frame, Team team) {
@@ -29,44 +30,46 @@ public class PanelHelper {
 
     public static JPanel createButtonPanel(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam) {
         JPanel buttonPanel = new JPanel(new GridBagLayout());
+        buttonPanel.setPreferredSize(new Dimension(600, 96));
+        buttonPanel.setOpaque(false);
         GridBagConstraints buttonGbc = new GridBagConstraints();
-        String[] buttonNames = { "attack", "bag", "change" };
+        ImageIcon attaqueIcon = new ImageIcon("../Assets/bouton_attaque.png");
+        ImageIcon pokemonIcon = new ImageIcon("../Assets/bouton_pokemon.png");
+        ImageIcon sacIcon = new ImageIcon("../Assets/bouton_sac.png");
+        JLabel attaqueLabel = new JLabel(attaqueIcon);
+        JLabel pokemonLabel = new JLabel(pokemonIcon);
+        JLabel sacLabel = new JLabel(sacIcon);
 
-        for (int i = 0; i < buttonNames.length; i++) {
-            buttonGbc.gridx = i;
-            if (i == 0) {
-                buttonGbc.gridy = 0;
-                buttonGbc.gridwidth = 2;
-                buttonGbc.gridx = 1;
-            } else {
-                buttonGbc.gridy = 1;
-                buttonGbc.gridwidth = 1;
-            }
-            JButton button = new JButton(buttonNames[i]);
-            switch (i) {
-                case 0:
-                    button.addActionListener(e -> {
-                        // action for "attack" button
-                    });
-                    break;
-                    case 1:
-                    button.addActionListener(e -> {
-                        // action for "bag" button
-                        frame.setContentPane(new Bag(frame, arena, playerTeam, enemyTeam));
-                        frame.revalidate();
+        buttonGbc.insets = new Insets(0, 5, 0, 5);
+        buttonGbc.gridx = 0;
+        buttonGbc.gridy = 0;
+        buttonPanel.add(attaqueLabel, buttonGbc);
 
-                    });
-                    break;
-                case 2:
-                button.addActionListener(e -> {
-                    // action for "change" button
-                    frame.setContentPane(new ChangePokemon(frame, arena, playerTeam, enemyTeam));
-                    frame.revalidate();
-                });
-                    break;
+        buttonGbc.insets = new Insets(0, 5, 0, 5);
+        buttonGbc.gridx = 1;
+        buttonGbc.gridy = 0;
+        buttonPanel.add(pokemonLabel, buttonGbc);
+
+        buttonGbc.insets = new Insets(0, 5, 0, 5);
+        buttonGbc.gridx = 2;
+        buttonGbc.gridy = 0;
+        buttonPanel.add(sacLabel, buttonGbc);
+
+        sacLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.setContentPane(new Bag(frame, arena, playerTeam, enemyTeam));
+                frame.revalidate();
             }
-            buttonPanel.add(button, buttonGbc);
-        }
+        });
+
+        pokemonLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.setContentPane(new ChangePokemon(frame, arena, playerTeam, enemyTeam));
+                frame.revalidate();
+            }
+        });
         return buttonPanel;
     }
 }
