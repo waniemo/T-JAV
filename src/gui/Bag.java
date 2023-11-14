@@ -22,7 +22,7 @@ public class Bag extends JPanel {
     private JList<String> itemsString = null;
     private ImageIcon itemImage = null;
     private JLabel itemLabel = new JLabel();
-    private JLabel itemDescription = new JLabel("");
+    private TextBox itemDescription = new TextBox("");
 
     public Bag(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam) {
         try {
@@ -32,6 +32,7 @@ public class Bag extends JPanel {
         }
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        JButton useButton = new JButton("UTILISER");
 
         List<Class<? extends Item>> teamItems = new ArrayList<>(playerTeam.getItems().keySet());
         itemsString = BagHelper.makeList(playerTeam);
@@ -57,7 +58,6 @@ public class Bag extends JPanel {
             }
         });
 
-        JButton useButton = new JButton("UTILISER");
         useButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,7 +72,8 @@ public class Bag extends JPanel {
                         System.err.println("No such Item.");
                     }
                     System.out.println(item.getName());
-                    playerTeam.useItems(item, playerTeam.getActivePokemon());
+                    itemDescription.setText(playerTeam.useItems(item, playerTeam.getActivePokemon()));
+                    itemImage = new ImageIcon();
                     BagHelper.updateList(itemsString, playerTeam);
                 }
             }
@@ -109,7 +110,7 @@ public class Bag extends JPanel {
                 itemsString.setFixedCellHeight(newCellHeight);
             }
         });
-        itemDescription.setFont(getFont().deriveFont(40f));
+        // itemDescription.setFont(getFont().deriveFont(40f));
         itemsString.setOpaque(false);
 
         // List top right

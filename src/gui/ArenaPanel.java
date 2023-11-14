@@ -23,12 +23,7 @@ public class ArenaPanel extends JPanel {
         GridBagConstraints gbcLeft = LayoutHelper.createGridBagConstraints(0, 1, 0.5, 1.0);
         GridBagConstraints gbcRight = LayoutHelper.createGridBagConstraints(1, 0, 0.5, 1.0);
 
-        ImageIcon textBox = new ImageIcon("../Assets/text_box.png");
-        JLabel textBoxLabel = new JLabel(textBox);
-        Image textBoxImage = textBox.getImage();
-        Image scaledTextBox = textBoxImage.getScaledInstance(610, 96, Image.SCALE_SMOOTH);
-        textBox.setImage(scaledTextBox);
-        textBoxLabel.setIcon(textBox);
+        JLabel textBoxLabel = new TextBox("QUE DOIT FAIRE " + playerTeam.getActivePokemon().getName().toUpperCase() + " ?");
 
         JPanel playerTeamPanel = PanelHelper.createTeamPanel(frame, playerTeam);
         JPanel enemyTeamPanel = PanelHelper.createTeamPanel(frame, enemyTeam);
