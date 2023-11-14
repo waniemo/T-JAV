@@ -4,7 +4,7 @@ import Pokemon.Pokemon;
 
 public class SuperPotion extends Item{
     public SuperPotion() {
-        super("Super potion", "Soin", "Cette potion permet de soigner un pokemon de 50PV", "super_potion.png");
+        super("Super potion", "Soin", "Cette potion permet de soigner un pokemon de 50PV.", "super_potion.png");
     }
 
     @Override
