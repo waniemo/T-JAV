@@ -3,6 +3,7 @@ package gui;
 import Team.*;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -20,6 +21,8 @@ public class PanelHelper {
 
         PvBar pvBar = new PvBar(team.getActivePokemon());
         pvBar.updateBar();
+        nameLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
+        levelLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
         panel.add(nameLabel, BorderLayout.WEST);
         panel.add(levelLabel, BorderLayout.EAST);
         panel.add(pvBar, BorderLayout.SOUTH);
