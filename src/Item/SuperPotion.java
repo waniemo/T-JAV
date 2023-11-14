@@ -8,13 +8,13 @@ public class SuperPotion extends Item{
     }
 
     @Override
-    public void use(Pokemon pokemon) {
+    public String use(Pokemon pokemon) {
         if(pokemon.getPv() + 50 > pokemon.getPvMax()){
             pokemon.setPv(pokemon.getPvMax());
-            System.out.println(pokemon.getName()+" a été soigné");
+            return pokemon.getName()+" a été soigné.";
         } else{
             pokemon.setPv(pokemon.getPv() + 50);
-            System.out.println(pokemon.getName() + " a été soigné de 50PV");
+            return pokemon.getName() + " a été soigné de 50PV.";
         }
     }
 }

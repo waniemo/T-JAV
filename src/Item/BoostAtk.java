@@ -8,8 +8,8 @@ public class BoostAtk extends Item{
     }
 
     @Override
-    public void use(Pokemon pokemon) {
+    public String use(Pokemon pokemon) {
         pokemon.setAtk(pokemon.getAtk() + 10);
-        System.out.println("L'attaque de " + pokemon.getName() + " a augmenté de 10 points.");
+        return "L'attaque de " + pokemon.getName() + " a augmenté de 10 points.";
     }
 }
