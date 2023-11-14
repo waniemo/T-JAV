@@ -88,6 +88,10 @@ public abstract class Pokemon {
         return spritePng;
     }
 
+    public String getKOpng() {
+        return spritePng.split("\\.")[0]+"_ko.png";
+    }
+
     public List<Attaque> getAttaques() {
         return attaques;
     }
