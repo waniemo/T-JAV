@@ -23,7 +23,8 @@ public class ChangePokemon extends JPanel {
 
         TeamGrid playerTeamGrid = new TeamGrid(frame, playerTeam, Color.BLUE);
 
-        JLabel playerTitle = new JLabel("CHOISIS UN AUTRE POKEMON");
+        JLabel playerTitle = new JLabel("CHOISIS UN POKEMON A ENVOYER AU COMBAT");
+        playerTitle.setFont(getFont().deriveFont(35f));
 
         JButton backButton = new JButton("RETOUR");
         backButton.addActionListener(new ActionListener() {
@@ -40,11 +41,13 @@ public class ChangePokemon extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.insets = new Insets(180, 20, 20, 20);
         add(playerTeamGrid, gbc);
         gbc.gridy = 1;
-        gbc.insets = new Insets(20, 20, 20, 20);
+        gbc.insets = new Insets(120, 20, 20, 20);
         add(backButton, gbc);
-        gbc.gridy = 2;
+        gbc.gridy = 3;
+        gbc.insets = new Insets(60, 100, 100, 100);
         add(playerTitle, gbc);
     }
     @Override
