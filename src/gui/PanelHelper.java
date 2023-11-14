@@ -13,8 +13,8 @@ public class PanelHelper {
         JLabel typeLabel = new JLabel(team.getActivePokemon().getType().toString());
         panel.setBackground(Color.LIGHT_GRAY);
 
-        nameLabel.setFont(frame.getFont().deriveFont(40f));
-        levelLabel.setFont(frame.getFont().deriveFont(40f));
+        nameLabel.setFont(UIManager.getFont("Label.font").deriveFont(40f));
+        levelLabel.setFont(UIManager.getFont("Label.font").deriveFont(30f));
         typeLabel.setIcon(new ImageIcon("../Assets/feu.png"));
 
         PvBar pvBar = new PvBar(team.getActivePokemon());
