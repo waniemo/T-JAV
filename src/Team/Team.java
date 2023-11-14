@@ -82,9 +82,8 @@ public class Team {
 
     public String useItems(Item itemToUse, Pokemon pokemon){
         if(items.get(itemToUse.getClass()) > 0){
-            itemToUse.use(pokemon);
             items.put(itemToUse.getClass(), items.get(itemToUse.getClass()) - 1);
-            return "Vous avez utilisé "+itemToUse.getName();
+            return itemToUse.use(pokemon);
         } else {
             return "Vous n'avez plus de "+itemToUse.getName();
         }

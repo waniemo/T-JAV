@@ -15,7 +15,7 @@ public abstract class Item {
         this.sprite = sprite;
     }
 
-    public abstract void use(Pokemon pokemon);
+    public abstract String use(Pokemon pokemon);
 
     public String getName() {
         return name;
