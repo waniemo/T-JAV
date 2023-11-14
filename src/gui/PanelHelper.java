@@ -70,6 +70,15 @@ public class PanelHelper {
                 frame.revalidate();
             }
         });
+
+        attaqueLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                buttonPanel.removeAll();
+                buttonPanel.revalidate();
+                buttonPanel.repaint();
+            }
+        });
         return buttonPanel;
     }
 }
