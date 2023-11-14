@@ -48,7 +48,7 @@ public class Team {
         Pokemon oldActivePokemon = this.activePokemon;
         if(!deadPokemons.contains(newActivePokemon)){
             this.activePokemon = newActivePokemon;
-            return oldActivePokemon.getName()+" reviens ! "+newActivePokemon.getName()+ "GO !";
+            return oldActivePokemon.getName()+" reviens ! "+newActivePokemon.getName()+ " GO !";
         } else {
             return "Vous ne pouvez pas selectioner un pokémon KO !";
         }
