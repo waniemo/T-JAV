@@ -45,7 +45,7 @@ public class ArenaPanel extends JPanel {
         }
 
         // Top left panel
-        gbcLeft.insets = new Insets(30, 0, 0, 0);
+//        gbcLeft.insets = new Insets(30, 0, 0, 0);
         add(enemyTeamPanel, gbcLeft);
 
         // Bottom right panel
@@ -65,6 +65,7 @@ public class ArenaPanel extends JPanel {
         // Bottom left panel with 3 buttons
         gbcLeft.gridx = 0;
         gbcLeft.gridy = 5;
+        gbcLeft.weighty = 0;
         JPanel buttonPanel = PanelHelper.createButtonPanel(frame, this, playerTeam, enemyTeam);
         add(buttonPanel, gbcLeft);
 
