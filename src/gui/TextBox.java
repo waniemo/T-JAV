@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TextBox extends JLabel {
+    private String text;
     public TextBox(String text) {
         ImageIcon icon = new ImageIcon("../Assets/text_box.png");
         setOpaque(false);
@@ -15,5 +16,10 @@ public class TextBox extends JLabel {
         this.setHorizontalTextPosition(JLabel.CENTER);
         this.setVerticalTextPosition(JLabel.CENTER);
         this.setText(text);
+    }
+
+    public void update(String text) {
+        this.text = text;
+        super.setText(text);
     }
 }
