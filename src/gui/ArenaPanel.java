@@ -90,7 +90,7 @@ public class ArenaPanel extends JPanel {
         gbcRight.gridy = 2;
         add(enemySprite, gbcRight);
 
-        gameLoopTimer = new Timer(1000, new ActionListener() {
+        gameLoopTimer = new Timer(150, new ActionListener() {
             private Pokemon lastPlayerPokemon = playerTeam.getActivePokemon();
             private Pokemon lastEnemyPokemon = enemyTeam.getActivePokemon();
 
@@ -99,8 +99,6 @@ public class ArenaPanel extends JPanel {
                 System.out.println("Game updated!");
 
                 if (playerTeam.getActivePokemon() != lastPlayerPokemon) {
-                    // Update the player's sprite
-                    // Replace "playerSprite" with the actual variable for the player's sprite
                     remove(playerSprite);
                     remove(textBoxLabel);
                     remove(playerTeamPanel);
@@ -110,6 +108,11 @@ public class ArenaPanel extends JPanel {
                     playerSprite = IconHelper.createTeamIcon(playerTeam, true);
                     lastPlayerPokemon = playerTeam.getActivePokemon();
                     playerTeamPanel = PanelHelper.createTeamPanel(frame, playerTeam);
+                    for (Component component : playerTeamPanel.getComponents()) {
+                        if (component instanceof PvBar) {
+                            playerPvBar = (PvBar) component;
+                        }
+                    }
                     textBoxLabel = new TextBox(
                             "QUE DOIT FAIRE " + playerTeam.getActivePokemon().getName().toUpperCase() + " ?");
                     add(playerSprite, gbcLeft);
@@ -125,11 +128,19 @@ public class ArenaPanel extends JPanel {
                     add(playerTeamPanel, gbcRight);
                 }
                 if (enemyTeam.getActivePokemon() != lastEnemyPokemon) {
-                    // Update the enemy's sprite
-                    // Replace "enemySprite" with the actual variable for the enemy's sprite
-
-                    // Enemy pokemon
                     remove(enemySprite);
+                    remove(enemyTeamPanel);
+                    gbcLeft.gridx = 0;
+                    gbcLeft.gridy = 0;
+                    gbcLeft.weightx = 0;
+                    gbcLeft.weighty = 0;
+                    enemyTeamPanel = PanelHelper.createTeamPanel(frame, enemyTeam);
+                    for (Component component : enemyTeamPanel.getComponents()) {
+                        if (component instanceof PvBar) {
+                            enemyPvBar = (PvBar) component;
+                        }
+                    }
+                    add(enemyTeamPanel, gbcLeft);
                     gbcRight.weighty = 3;
                     gbcRight.insets = new Insets(80, 0, 0, 0); // Add 20 pixels of padding on top
                     gbcRight.gridx = 1;
@@ -137,7 +148,6 @@ public class ArenaPanel extends JPanel {
                     enemySprite = IconHelper.createTeamIcon(enemyTeam, false);
                     lastEnemyPokemon = enemyTeam.getActivePokemon();
                     add(enemySprite, gbcRight);
-                    enemyTeamPanel = PanelHelper.createTeamPanel(frame, enemyTeam);
                 }
                 getPlayerPvBar().updateBar();
                 getEnemyPvBar().updateBar();
