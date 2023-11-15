@@ -72,7 +72,7 @@ public class Bag extends JPanel {
                         System.err.println("No such Item.");
                     }
                     System.out.println(item.getName());
-                    itemDescription.setText(playerTeam.useItems(item, playerTeam.getActivePokemon()));
+                    itemDescription.updateText(playerTeam.useItems(item, playerTeam.getActivePokemon()));
                     itemImage = new ImageIcon();
                     BagHelper.updateList(itemsString, playerTeam);
                 }
