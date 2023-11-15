@@ -201,7 +201,6 @@ public abstract class Pokemon {
         if(attaques.get(3).getPp()<= 0){
             return "Vous n'avez pas assez de PP pour utiliser cette attaque !";
         } else {
-            System.out.println(this.name+" utilise "+attaques.get(3).getName()+" !");
             try {
                 if(ennemi.getType() == this.type.getDeclaredConstructor().newInstance().getStrength()){
                     ennemi.setPv((int) (ennemi.getPv() - (((2.0 * this.getLevel() / 5.0 + 2.0) * (this.getAtk() / this.getDef()) / 50.0 + 20.5))));
