@@ -22,10 +22,6 @@ public class TextBox extends JLabel {
         this.text = text;
         super.setText(text);
 
-        startTypingEffect();
-    }
-
-    private void startTypingEffect() {
         new TypeTextTask().execute();
     }
 
