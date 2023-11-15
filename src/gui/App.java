@@ -13,7 +13,7 @@ public class App extends JFrame {
     public App() {
         setTitle("Street Pokemon Fighter Phantom 2 Turbo Championship Edition EX + Alpha X");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1300, 800);
+        setSize(1300, 950);
         setLocationRelativeTo(null);
         setResizable(false);
 
