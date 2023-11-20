@@ -12,6 +12,7 @@ import Team.Team;
 
 public class ChangePokemon extends JPanel {
     private Image backgroundImage;
+
     public ChangePokemon(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam) {
         try {
             backgroundImage = ImageIO.read(new File("../Assets/change_pokemon_bg.png"));
@@ -33,7 +34,13 @@ public class ChangePokemon extends JPanel {
                 arena.getPlayerPvBar().updateBar();
                 frame.setLayout(new BorderLayout());
                 frame.getContentPane().removeAll();
-                arena.setTextBoxLabel(playerTeamGrid.getText());
+                String text = arena.getTextBoxLabel().getText();
+                if (!arena.getTextBoxLabel().getText().contains("QUE DOIT FAIRE") && !text.isEmpty()) {
+                    arena.getTextBoxLabel()
+                            .setText("QUE DOIT FAIRE " + playerTeam.getActivePokemon().getName().toUpperCase());
+                } else {
+                    arena.setTextBoxLabel(playerTeamGrid.getText());
+                }
                 frame.getContentPane().add(arena, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
@@ -51,6 +58,7 @@ public class ChangePokemon extends JPanel {
         gbc.insets = new Insets(60, 100, 100, 100);
         add(playerTitle, gbc);
     }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
