@@ -148,6 +148,24 @@ public class ArenaPanel extends JPanel {
                     lastEnemyPokemon = enemyTeam.getActivePokemon();
                     add(enemySprite, gbcRight);
                 }
+                if(enemyTeam.getActivePokemon().getPv()<=0){
+                    setTextBoxLabel(enemyTeam.getActivePokemon().getName()+" est KO !");
+                    enemyTeam.addDeadPokemon(enemyTeam.getActivePokemon());
+                    for(int i=0; i<enemyTeam.getTeam().size(); i++){
+                        if(!enemyTeam.getDeadPokemons().contains(enemyTeam.getTeam().get(i))){
+                            setTextBoxLabel("L'ennemi envoie "+enemyTeam.getActivePokemon().getName()+" !");
+                            break;
+                        }
+                    }
+                }
+                if(enemyTeam.getDeadPokemons().size() == 6){
+                    setTextBoxLabel("Vous avez gagné !");
+                    gameLoopTimer.stop();
+                }
+                if(playerTeam.getDeadPokemons().size() == 6){
+                    setTextBoxLabel("Vous avez perdu !");
+                    gameLoopTimer.stop();
+                }
                 getPlayerPvBar().updateBar();
                 getEnemyPvBar().updateBar();
                 repaint();
