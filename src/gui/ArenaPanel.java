@@ -25,7 +25,7 @@ public class ArenaPanel extends JPanel {
 
     public ArenaPanel(App frame, Team playerTeam, Team enemyTeam) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/battle_bg.png"));
+            backgroundImage = ImageIO.read(new File("../Assets/Background/battle_bg.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

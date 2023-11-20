@@ -23,7 +23,7 @@ public class ChooseTeamUI extends JPanel {
 
     public ChooseTeamUI(App frame) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/menu2.png"));
+            backgroundImage = ImageIO.read(new File("../Assets/Background/menu2.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,8 +42,8 @@ public class ChooseTeamUI extends JPanel {
         teamGrid.setPreferredSize(teamGridSize);
 
         ImageIcon greyBall = new ImageIcon("../Assets/grey_flat_pokeball.png");
-        String[] types = { "../Assets/feu.png", "../Assets/electrik.png", "../Assets/plante.png", "../Assets/eau.png",
-                "../Assets/fee.png" };
+        String[] types = { "../Assets/Type/feu.png", "../Assets/Type/electrik.png", "../Assets/Type/plante.png", "../Assets/Type/eau.png",
+                "../Assets/Type/fee.png" };
         Team enemyTeam = TeamBuilder.buildEnemyTeam(pokemons);
 
         for (int i = 0; i < 5; i++) {

@@ -77,19 +77,19 @@ public abstract class Pokemon {
     }
 
     public String getSpriteFront(){
-        return spriteFront;
+        return "Pokemon/" + spriteFront;
     }
 
     public String getSpriteBack() {
-        return spriteBack;
+        return "Pokemon/" + spriteBack;
     }
 
     public String getSpritePng() {
-        return spritePng;
+        return "Pokemon/" + spritePng;
     }
 
     public String getKoPng() {
-        return spritePng.split("\\.")[0]+"_ko.png";
+        return "Pokemon/" + spritePng.split("\\.")[0]+"_ko.png";
     }
 
     public List<Attaque> getAttaques() {

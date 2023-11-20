@@ -16,7 +16,7 @@ public class SelectXpUI extends JPanel {
 
     public SelectXpUI(App frame, Team playerTeam, Team enemyTeam) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/menu1.png"));
+            backgroundImage = ImageIO.read(new File("../Assets/Background/menu1.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

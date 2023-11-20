@@ -15,7 +15,7 @@ public class ChangePokemon extends JPanel {
 
     public ChangePokemon(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/change_pokemon_bg.png"));
+            backgroundImage = ImageIO.read(new File("../Assets/Background/change_pokemon_bg.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,7 +37,7 @@ public class ChangePokemon extends JPanel {
                 frame.setLayout(new BorderLayout());
                 frame.getContentPane().removeAll();
                 String text = arena.getTextBoxLabel().getText();
-                if (!arena.getTextBoxLabel().getText().contains("QUE DOIT FAIRE") && !text.isEmpty()) {
+                if (arena.getTextBoxLabel().getText().isEmpty() || ( !arena.getTextBoxLabel().getText().contains("QUE DOIT FAIRE") && !text.isEmpty())) {
                     arena.getTextBoxLabel()
                             .setText("QUE DOIT FAIRE " + playerTeam.getActivePokemon().getName().toUpperCase());
                 } else {
