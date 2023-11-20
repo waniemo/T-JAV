@@ -1,17 +1,29 @@
 package gui;
 
 import java.awt.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import Team.Team;
 
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 
 public class SelectXpUI extends JPanel {
+    private Image backgroundImage;
+
     public SelectXpUI(App frame, Team playerTeam, Team enemyTeam) {
+        try {
+            backgroundImage = ImageIO.read(new File("../Assets/menu1.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JPanel selector = new JPanel(new GridLayout(2, 1));
+        selector.setOpaque(false);
         Dimension selectorSize = new Dimension(1000, 150);
         selector.setPreferredSize(selectorSize);
         selector.setMaximumSize(selectorSize);
@@ -35,6 +47,8 @@ public class SelectXpUI extends JPanel {
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                PlaySound.playSound("button");
+
                 playerTeam.setTeamLevel((int) spinner1.getValue());
                 enemyTeam.setTeamLevel((int) spinner2.getValue());
                 BattleUI battleUI = new BattleUI(frame, playerTeam, enemyTeam);
@@ -46,6 +60,8 @@ public class SelectXpUI extends JPanel {
         });
 
         backButton.addActionListener(e -> {
+            PlaySound.playSound("button");
+
             ChooseTeamUI chooseTeamUI = new ChooseTeamUI(frame);
             playerTeam.getTeam().clear();
             frame.getContentPane().removeAll();
@@ -59,5 +75,12 @@ public class SelectXpUI extends JPanel {
         add(Box.createVerticalGlue());
         add(playButton);
         add(backButton);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Image scaledBackground = backgroundImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+        g.drawImage(scaledBackground, 0, 0, this);
     }
 }

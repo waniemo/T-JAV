@@ -1,12 +1,23 @@
 package gui;
 
 import Team.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class SummaryPanel extends JPanel {
-    GridBagConstraints gbc = new GridBagConstraints();
+    private GridBagConstraints gbc = new GridBagConstraints();
+    private Image backgroundImage;
+
     public SummaryPanel(App frame, Team playerTeam, Team enemyTeam) {
+        try {
+            backgroundImage = ImageIO.read(new File("../Assets/menu4.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         setLayout(new GridBagLayout());
 
         TeamGrid playerTeamGrid = new TeamGrid(frame, playerTeam, Color.BLUE);
@@ -16,18 +27,22 @@ public class SummaryPanel extends JPanel {
         JLabel enemyTitle = new JLabel("Equipe ennemie! ( lvl" + enemyTeam.getLevel() + ")");
 
         backButton.addActionListener(e -> {
-                SelectXpUI selectXpUI = new SelectXpUI(frame, playerTeam, enemyTeam);
-                frame.getContentPane().removeAll();
-                frame.getContentPane().add(selectXpUI, BorderLayout.CENTER);
-                frame.revalidate();
-                frame.repaint();
-            });
+            PlaySound.playSound("button");
+
+            SelectXpUI selectXpUI = new SelectXpUI(frame, playerTeam, enemyTeam);
+            frame.getContentPane().removeAll();
+            frame.getContentPane().add(selectXpUI, BorderLayout.CENTER);
+            frame.revalidate();
+            frame.repaint();
+        });
+        gbc.insets = new Insets(120, 0, 0, 0);
         gbc.gridx = 0;
         gbc.gridy = 0;
         add(playerTitle, gbc);
         gbc.gridy = 1;
         add(playerTeamGrid, gbc);
 
+        gbc.insets = new Insets(230, 0, 0, 0);
         gbc.gridx = 1;
         gbc.gridy = 2;
         add(enemyTeamGrid, gbc);
@@ -43,5 +58,12 @@ public class SummaryPanel extends JPanel {
 
     public GridBagConstraints getGbc() {
         return gbc;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Image scaledBackground = backgroundImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+        g.drawImage(scaledBackground, 0, 0, this);
     }
 }

@@ -13,6 +13,7 @@ public class ButtonPanel extends JPanel {
 
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                PlaySound.playSound("button");
                 frame.getContentPane().removeAll();
                 frame.getContentPane().add(new ChooseTeamUI(frame), BorderLayout.CENTER);
                 frame.revalidate();
@@ -22,7 +23,18 @@ public class ButtonPanel extends JPanel {
 
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                PlaySound.playSound("button");
+                Thread thread = new Thread() {
+                    public void run() {
+                        try {
+                            Thread.sleep(300);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.exit(0);
+                    }
+                };
+                thread.run();
             }
         });
 
