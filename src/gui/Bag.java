@@ -61,7 +61,8 @@ public class Bag extends JPanel {
         useButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Get the selected item from the list
+                PlaySound.playSound("button");
+
                 String selectedItem = itemsString.getSelectedValue();
                 if (selectedItem != null) {
                     int itemIndex = itemsString.getSelectedIndex();
@@ -82,6 +83,8 @@ public class Bag extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                PlaySound.playSound("button");
+
                 arena.getPlayerPvBar().updateBar();
                 frame.setLayout(new BorderLayout());
                 frame.getContentPane().removeAll();

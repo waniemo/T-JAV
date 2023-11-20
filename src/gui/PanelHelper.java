@@ -63,6 +63,8 @@ public class PanelHelper {
         sacLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                PlaySound.playSound("button");
+
                 frame.setContentPane(new Bag(frame, arena, playerTeam, enemyTeam));
                 frame.revalidate();
             }
@@ -71,6 +73,8 @@ public class PanelHelper {
         pokemonLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                PlaySound.playSound("button");
+
                 frame.setContentPane(new ChangePokemon(frame, arena, playerTeam, enemyTeam));
                 frame.revalidate();
             }
@@ -79,6 +83,8 @@ public class PanelHelper {
         attaqueLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                PlaySound.playSound("button");
+
                 buttonPanel.removeAll();
                 buttonPanel.revalidate();
                 buttonPanel.repaint();

@@ -31,6 +31,8 @@ public class ChangePokemon extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                PlaySound.playSound("button");
+
                 arena.getPlayerPvBar().updateBar();
                 frame.setLayout(new BorderLayout());
                 frame.getContentPane().removeAll();

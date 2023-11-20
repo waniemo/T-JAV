@@ -166,6 +166,7 @@ public class ArenaPanel extends JPanel {
                     frame.revalidate();
                 }
                 if(enemyTeam.getDeadPokemons().size() == 6){
+                    PlaySound.playSound("win");
                     setTextBoxLabel("Vous avez gagné !");
                     gameLoopTimer.stop();
                 }

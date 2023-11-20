@@ -83,6 +83,7 @@ public class AttackButtonPanel extends JPanel {
                 buttonPanel.removeAll();
                 buttonPanel.revalidate();
                 buttonPanel.repaint();
+                PlaySound.playSound("button");
                 JPanel menuButtons = PanelHelper.createButtonPanel(frame, arena, playerTeam, enemyTeam);
                 buttonPanel.add(menuButtons);
             }
@@ -91,6 +92,7 @@ public class AttackButtonPanel extends JPanel {
         attaqueLabel1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                PlaySound.playSound("button");
                 System.out.println(enemyTeam.getActivePokemon().getPv());
                 playerTeam.getActivePokemon().attaqueNormale(enemyTeam.getActivePokemon());
                 System.out.println(enemyTeam.getActivePokemon().getPv());
@@ -108,6 +110,8 @@ public class AttackButtonPanel extends JPanel {
         attaqueLabel2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                PlaySound.playSound("button");
+
                 System.out.println(enemyTeam.getActivePokemon().getPv());
                 try {
                     playerTeam.getActivePokemon().attaqueType1(enemyTeam.getActivePokemon());
@@ -129,6 +133,8 @@ public class AttackButtonPanel extends JPanel {
         attaqueLabel3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                PlaySound.playSound("button");
+
                 System.out.println(enemyTeam.getActivePokemon().getPv());
                 try {
                     playerTeam.getActivePokemon().attaqueType2(enemyTeam.getActivePokemon());
@@ -150,6 +156,8 @@ public class AttackButtonPanel extends JPanel {
         attaqueLabel4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                PlaySound.playSound("button");
+
                 System.out.println(enemyTeam.getActivePokemon().getPv());
                 arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise "
                         + playerTeam.getActivePokemon().getAttaques().get(3).getName() + " !");
@@ -176,7 +184,7 @@ public class AttackButtonPanel extends JPanel {
                 Pokemon enemyPokemon = enemyTeam.getActivePokemon();
                 Pokemon playerPokemon = playerTeam.getActivePokemon();
                 int randomAtk = (int) (Math.random() * 4);
-                int randomHeal = (int) (Math.random() * 4);
+                int randomHeal = (int) (Math.random() * 6);
                 boolean isHeal = false;
 
                 try {
