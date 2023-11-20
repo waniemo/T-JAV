@@ -201,6 +201,16 @@ public class AttackButtonPanel extends JPanel {
                         }
                         arena.setTextBoxLabel(enemyPokemon.getName() + " ennemi utilise une potion et se soigne !");
                     }
+                    if (isHeal == false && enemyPokemon.getType() == playerPokemon.getType().getDeclaredConstructor().newInstance().getStrength() && enemyPokemon.getPv() < enemyPokemon.getPvMax() / 2) {
+                        for(int i=0; i<enemyTeam.getTeam().size(); i++){
+                            if(!enemyTeam.getDeadPokemons().contains(enemyTeam.getTeam().get(i)) && enemyTeam.getTeam().get(i) != enemyPokemon){
+                                enemyTeam.setActivePokemon(enemyTeam.getTeam().get(i));
+                                arena.setTextBoxLabel("L'ennemi envoie "+enemyTeam.getActivePokemon().getName()+" !");
+                                isHeal  = true;
+                                break;
+                            }
+                        }
+                    }
                     if (isHeal == false) {
                         if (enemyPokemon.getAttaques().get(randomAtk).getPp() > 0) {
                             enemyPokemon.attaqueNormale(playerPokemon);
