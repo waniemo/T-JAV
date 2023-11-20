@@ -34,7 +34,7 @@ public class App extends JFrame {
             }
         };
 
-        ImagePanel imagePanel = new ImagePanel("../Assets/maxresdefault.jpg", 700, 400);
+        ImagePanel imagePanel = new ImagePanel("../Assets/Background/maxresdefault.jpg", 700, 400);
         for (char c = 'a'; c <= 'z'; c++) {
             imagePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(c), c);
             imagePanel.getActionMap().put(c, keyAction);

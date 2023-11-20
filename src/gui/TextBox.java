@@ -6,7 +6,7 @@ import java.awt.*;
 public class TextBox extends JLabel {
     private String text;
     public TextBox(String text) {
-        ImageIcon icon = new ImageIcon("../Assets/text_box.png");
+        ImageIcon icon = new ImageIcon("../Assets/Background/text_box.png");
         setOpaque(false);
         Image textBoxImage = icon.getImage();
         Image image = textBoxImage.getScaledInstance(610, 96, Image.SCALE_SMOOTH);

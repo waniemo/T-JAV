@@ -15,23 +15,23 @@ import java.util.ArrayList;
 public class AttackButtonPanel extends JPanel {
     public AttackButtonPanel(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam, JPanel buttonPanel,
             GridBagConstraints buttonGbc) {
-        ImageIcon retourIcon = new ImageIcon("../Assets/bouton_retour.png");
+        ImageIcon retourIcon = new ImageIcon("../Assets/Bouton/bouton_retour.png");
         JLabel retourLabel = new JLabel(retourIcon);
         retourLabel.setText("Retour");
         retourLabel.setHorizontalTextPosition(JLabel.CENTER);
         retourLabel.setVerticalTextPosition(JLabel.CENTER);
         retourLabel.setForeground(Color.white);
         retourLabel.setFont(UIManager.getFont("Label.font").deriveFont(26f));
-        ImageIcon attaque1 = new ImageIcon("../Assets/normal_attaque.png");
+        ImageIcon attaque1 = new ImageIcon("../Assets/Bouton/normal_attaque.png");
         ImageIcon attaque2 = null;
         ImageIcon attaque3 = null;
         ImageIcon attaque4 = null;
         try {
-            attaque2 = new ImageIcon("../Assets/" + playerTeam.getActivePokemon().getType().getDeclaredConstructor()
+            attaque2 = new ImageIcon("../Assets/Bouton/" + playerTeam.getActivePokemon().getType().getDeclaredConstructor()
                     .newInstance().getName().toLowerCase() + "_attaque.png");
-            attaque3 = new ImageIcon("../Assets/" + playerTeam.getActivePokemon().getType().getDeclaredConstructor()
+            attaque3 = new ImageIcon("../Assets/Bouton/" + playerTeam.getActivePokemon().getType().getDeclaredConstructor()
                     .newInstance().getName().toLowerCase() + "_attaque.png");
-            attaque4 = new ImageIcon("../Assets/" + playerTeam.getActivePokemon().getType().getDeclaredConstructor()
+            attaque4 = new ImageIcon("../Assets/Bouton/" + playerTeam.getActivePokemon().getType().getDeclaredConstructor()
                     .newInstance().getName().toLowerCase() + "_attaque.png");
         } catch (Exception exception) {
         }

@@ -14,7 +14,7 @@ public class SummaryPanel extends JPanel {
 
     public SummaryPanel(App frame, Team playerTeam, Team enemyTeam) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/menu4.png"));
+            backgroundImage = ImageIO.read(new File("../Assets/Background/menu4.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

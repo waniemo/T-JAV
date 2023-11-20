@@ -26,7 +26,7 @@ public class Bag extends JPanel {
 
     public Bag(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/bag.png"));
+            backgroundImage = ImageIO.read(new File("../Assets/Background/bag.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
