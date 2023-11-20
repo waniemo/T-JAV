@@ -33,6 +33,7 @@ public class ChangePokemon extends JPanel {
                 arena.getPlayerPvBar().updateBar();
                 frame.setLayout(new BorderLayout());
                 frame.getContentPane().removeAll();
+                arena.setTextBoxLabel(playerTeamGrid.getText());
                 frame.getContentPane().add(arena, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();

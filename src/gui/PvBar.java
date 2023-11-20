@@ -1,6 +1,8 @@
 package gui;
 
 import javax.swing.JProgressBar;
+import javax.swing.SwingWorker;
+
 import java.awt.Color;
 
 import Pokemon.Pokemon;
@@ -11,21 +13,44 @@ public class PvBar extends JProgressBar {
     public PvBar(Pokemon pokemon) {
         super(0, pokemon.getPvMax());
         this.pokemon = pokemon;
+        setValue(pokemon.getPv());
         updateBar();
         setStringPainted(true);
     }
 
+    private class UpdatePvTask extends SwingWorker<Void, Void> {
+        @Override
+        protected Void doInBackground() throws Exception {
+            if (getValue() > pokemon.getPv()) {
+                for (int i = getValue(); i >= pokemon.getPv(); i--) {
+                    setValue(i);
+                    Thread.sleep(50);
+                }
+            } else if (getValue() < pokemon.getPv()) {
+                for (int i = getValue(); i <= pokemon.getPv(); i++) {
+                    setValue(i);
+                    Thread.sleep(50);
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            super.done();
+        }
+    }
+
     public void updateBar() {
-        setValue(pokemon.getPv());
+        // setValue(pokemon.getPv());
+        new UpdatePvTask().execute();
 
         double percentage = (double) getValue() / getMaximum();
         if (percentage < 0.15) {
             setForeground(Color.RED);
-        }
-        else if (percentage < 0.3) {
+        } else if (percentage < 0.3) {
             setForeground(Color.ORANGE);
-        }
-        else {
+        } else {
             setForeground(Color.GREEN);
         }
     }

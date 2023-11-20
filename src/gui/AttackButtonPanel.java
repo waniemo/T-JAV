@@ -86,6 +86,7 @@ public class AttackButtonPanel extends JPanel {
                 System.out.println(enemyTeam.getActivePokemon().getPv());
                 playerTeam.getActivePokemon().attaqueNormale(enemyTeam.getActivePokemon());
                 System.out.println(enemyTeam.getActivePokemon().getPv());
+                arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise " + playerTeam.getActivePokemon().getAttaques().get(0).getName() + " !");
                 buttonPanel.removeAll();
                 buttonPanel.revalidate();
                 buttonPanel.repaint();
@@ -104,6 +105,7 @@ public class AttackButtonPanel extends JPanel {
                     throw new RuntimeException(ex);
                 }
                 System.out.println(enemyTeam.getActivePokemon().getPv());
+                arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise " + playerTeam.getActivePokemon().getAttaques().get(1).getName() + " !");
                 buttonPanel.removeAll();
                 buttonPanel.revalidate();
                 buttonPanel.repaint();
@@ -122,6 +124,7 @@ public class AttackButtonPanel extends JPanel {
                     throw new RuntimeException(ex);
                 }
                 System.out.println(enemyTeam.getActivePokemon().getPv());
+                arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise " + playerTeam.getActivePokemon().getAttaques().get(2).getName() + " !");
                 buttonPanel.removeAll();
                 buttonPanel.revalidate();
                 buttonPanel.repaint();
@@ -140,6 +143,7 @@ public class AttackButtonPanel extends JPanel {
                     throw new RuntimeException(ex);
                 }
                 System.out.println(enemyTeam.getActivePokemon().getPv());
+                arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise " + playerTeam.getActivePokemon().getAttaques().get(3).getName() + " !");
                 buttonPanel.removeAll();
                 buttonPanel.revalidate();
                 buttonPanel.repaint();

@@ -21,7 +21,7 @@ public class ArenaPanel extends JPanel {
     private JLabel enemySprite;
     private JPanel playerTeamPanel;
     private JPanel enemyTeamPanel;
-    JLabel textBoxLabel;
+    private TextBox textBoxLabel;
 
     public ArenaPanel(App frame, Team playerTeam, Team enemyTeam) {
         try {
@@ -90,13 +90,12 @@ public class ArenaPanel extends JPanel {
         gbcRight.gridy = 2;
         add(enemySprite, gbcRight);
 
-        gameLoopTimer = new Timer(150, new ActionListener() {
+        gameLoopTimer = new Timer(25, new ActionListener() {
             private Pokemon lastPlayerPokemon = playerTeam.getActivePokemon();
             private Pokemon lastEnemyPokemon = enemyTeam.getActivePokemon();
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Game updated!");
 
                 if (playerTeam.getActivePokemon() != lastPlayerPokemon) {
                     remove(playerSprite);
@@ -170,5 +169,13 @@ public class ArenaPanel extends JPanel {
 
     public PvBar getEnemyPvBar() {
         return enemyPvBar;
+    }
+
+    public JLabel getTextBoxLabel() {
+        return textBoxLabel;
+    }
+
+    public void setTextBoxLabel(String textBoxLabel) {
+        this.textBoxLabel.updateText(textBoxLabel);;
     }
 }

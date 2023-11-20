@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class TeamGrid extends JPanel {
+    private String text;
     public TeamGrid(App frame, Team team, Color borderColor) {
         super(new GridLayout(1, 6));
         buildTeamGrid(frame, team, borderColor);
@@ -37,7 +38,7 @@ public class TeamGrid extends JPanel {
             label.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    System.out.println(team.setActivePokemon(team.getTeam().get(index)));
+                    text = team.setActivePokemon(team.getTeam().get(index));
                     removeAll(); // Remove all components from the panel
                     buildTeamGrid(frame, team, borderColor); // Rebuild the panel's components
                     revalidate(); // Inform the system that the panel's layout has changed
@@ -46,5 +47,9 @@ public class TeamGrid extends JPanel {
             });
             add(pokemonPanel);
         }
+    }
+
+    public String getText() {
+        return text;
     }
 }

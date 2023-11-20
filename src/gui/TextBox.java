@@ -18,8 +18,27 @@ public class TextBox extends JLabel {
         this.setText(text);
     }
 
-    public void update(String text) {
+    public void updateText(String text) {
         this.text = text;
         super.setText(text);
+
+        new TypeTextTask().execute();
+    }
+
+    private class TypeTextTask extends SwingWorker<Void, Void> {
+        @Override
+        protected Void doInBackground() throws Exception {
+            for (int i = 0; i <= text.length(); i++) {
+                final String partialText = text.substring(0, i);
+                setText(partialText);
+                Thread.sleep(35);
+            }
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            super.done();
+        }
     }
 }
