@@ -150,9 +150,11 @@ public class ArenaPanel extends JPanel {
                 }
                 if(enemyTeam.getActivePokemon().getPv()<=0){
                     setTextBoxLabel(enemyTeam.getActivePokemon().getName()+" est KO !");
+                    System.out.println("test dead :"+enemyTeam.getDeadPokemons().size());
                     enemyTeam.addDeadPokemon(enemyTeam.getActivePokemon());
                     for(int i=0; i<enemyTeam.getTeam().size(); i++){
                         if(!enemyTeam.getDeadPokemons().contains(enemyTeam.getTeam().get(i))){
+                            enemyTeam.setActivePokemon(enemyTeam.getTeam().get(i));
                             setTextBoxLabel("L'ennemi envoie "+enemyTeam.getActivePokemon().getName()+" !");
                             break;
                         }
