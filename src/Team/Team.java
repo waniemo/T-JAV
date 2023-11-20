@@ -14,9 +14,7 @@ public class Team {
     private HashMap<Class<? extends Item>, Integer> items = new HashMap<>();
 
     public Team(List<Pokemon> team){
-        if(team.size() == 0){
-            System.out.println("Vous ne pouvez pas avoir une équipe vide !");
-        } else{
+        if(team.size() != 0){
             this.team = team;
             this.activePokemon = team.get(0);
             items.put(BoostAtk.class, 5);
