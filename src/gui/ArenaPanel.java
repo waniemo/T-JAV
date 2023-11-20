@@ -90,7 +90,7 @@ public class ArenaPanel extends JPanel {
         gbcRight.gridy = 2;
         add(enemySprite, gbcRight);
 
-        gameLoopTimer = new Timer(25, new ActionListener() {
+        gameLoopTimer = new Timer(16, new ActionListener() {
             private Pokemon lastPlayerPokemon = playerTeam.getActivePokemon();
             private Pokemon lastEnemyPokemon = enemyTeam.getActivePokemon();
 
