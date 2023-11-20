@@ -23,24 +23,12 @@ public class AttackButtonPanel extends JPanel {
         retourLabel.setForeground(Color.white);
         retourLabel.setFont(UIManager.getFont("Label.font").deriveFont(26f));
         ImageIcon attaque1 = new ImageIcon("../Assets/Bouton/normal_attaque.png");
-        ImageIcon attaque2 = null;
-        ImageIcon attaque3 = null;
-        ImageIcon attaque4 = null;
-        try {
-            attaque2 = new ImageIcon("../Assets/Bouton/" + playerTeam.getActivePokemon().getType().getDeclaredConstructor()
-                    .newInstance().getName().toLowerCase() + "_attaque.png");
-            attaque3 = new ImageIcon("../Assets/Bouton/" + playerTeam.getActivePokemon().getType().getDeclaredConstructor()
-                    .newInstance().getName().toLowerCase() + "_attaque.png");
-            attaque4 = new ImageIcon("../Assets/Bouton/" + playerTeam.getActivePokemon().getType().getDeclaredConstructor()
-                    .newInstance().getName().toLowerCase() + "_attaque.png");
-        } catch (Exception exception) {
-        }
 
         ArrayList<JLabel> attaqueLabels = new ArrayList<>();
         JLabel attaqueLabel1 = new JLabel(attaque1);
-        JLabel attaqueLabel2 = new JLabel(attaque2);
-        JLabel attaqueLabel3 = new JLabel(attaque3);
-        JLabel attaqueLabel4 = new JLabel(attaque4);
+        JLabel attaqueLabel2 = attackButton(playerTeam, 1);
+        JLabel attaqueLabel3 = attackButton(playerTeam, 2);
+        JLabel attaqueLabel4 = attackButton(playerTeam, 3);
         attaqueLabels.add(attaqueLabel1);
         attaqueLabels.add(attaqueLabel2);
         attaqueLabels.add(attaqueLabel3);
@@ -53,7 +41,12 @@ public class AttackButtonPanel extends JPanel {
             attaqueLabels.get(i).setText(PP);
             attaqueLabels.get(i).setHorizontalTextPosition(JLabel.CENTER);
             attaqueLabels.get(i).setVerticalTextPosition(JLabel.CENTER);
-            attaqueLabels.get(i).setForeground(Color.white);
+            if (playerTeam.getActivePokemon().getAttaques().get(i).getPp() != 0) {
+                attaqueLabels.get(i).setForeground(Color.white);
+            } else {
+                attaqueLabels.get(i).setForeground(Color.gray);
+
+            }
             attaqueLabels.get(i).setFont(UIManager.getFont("Label.font").deriveFont(26f));
         }
 
@@ -89,92 +82,100 @@ public class AttackButtonPanel extends JPanel {
             }
         });
 
-        attaqueLabel1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                PlaySound.playSound("button");
-                System.out.println(enemyTeam.getActivePokemon().getPv());
-                playerTeam.getActivePokemon().attaqueNormale(enemyTeam.getActivePokemon());
-                System.out.println(enemyTeam.getActivePokemon().getPv());
-                arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise "
-                        + playerTeam.getActivePokemon().getAttaques().get(0).getName() + " !");
-                enemyAttack(arena, playerTeam, enemyTeam);
-                buttonPanel.removeAll();
-                buttonPanel.revalidate();
-                buttonPanel.repaint();
-                JPanel menuButtons = PanelHelper.createButtonPanel(frame, arena, playerTeam, enemyTeam);
-                buttonPanel.add(menuButtons);
-            }
-        });
-
-        attaqueLabel2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                PlaySound.playSound("button");
-
-                System.out.println(enemyTeam.getActivePokemon().getPv());
-                try {
-                    playerTeam.getActivePokemon().attaqueType1(enemyTeam.getActivePokemon());
-                } catch (NoSuchMethodException ex) {
-                    throw new RuntimeException(ex);
+        if (playerTeam.getActivePokemon().getAttaques().get(0).getPp() != 0) {
+            attaqueLabel1.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    PlaySound.playSound("button");
+                    System.out.println(enemyTeam.getActivePokemon().getPv());
+                    playerTeam.getActivePokemon().attaqueNormale(enemyTeam.getActivePokemon());
+                    System.out.println(enemyTeam.getActivePokemon().getPv());
+                    arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise "
+                            + playerTeam.getActivePokemon().getAttaques().get(0).getName() + " !");
+                    enemyAttack(arena, playerTeam, enemyTeam);
+                    buttonPanel.removeAll();
+                    buttonPanel.revalidate();
+                    buttonPanel.repaint();
+                    JPanel menuButtons = PanelHelper.createButtonPanel(frame, arena, playerTeam, enemyTeam);
+                    buttonPanel.add(menuButtons);
                 }
-                System.out.println(enemyTeam.getActivePokemon().getPv());
-                arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise "
-                        + playerTeam.getActivePokemon().getAttaques().get(1).getName() + " !");
-                enemyAttack(arena, playerTeam, enemyTeam);
-                buttonPanel.removeAll();
-                buttonPanel.revalidate();
-                buttonPanel.repaint();
-                JPanel menuButtons = PanelHelper.createButtonPanel(frame, arena, playerTeam, enemyTeam);
-                buttonPanel.add(menuButtons);
-            }
-        });
+            });
+        }
 
-        attaqueLabel3.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                PlaySound.playSound("button");
+        if (playerTeam.getActivePokemon().getAttaques().get(1).getPp() != 0) {
+            attaqueLabel2.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    PlaySound.playSound("button");
 
-                System.out.println(enemyTeam.getActivePokemon().getPv());
-                try {
-                    playerTeam.getActivePokemon().attaqueType2(enemyTeam.getActivePokemon());
-                } catch (NoSuchMethodException ex) {
-                    throw new RuntimeException(ex);
+                    System.out.println(enemyTeam.getActivePokemon().getPv());
+                    try {
+                        playerTeam.getActivePokemon().attaqueType1(enemyTeam.getActivePokemon());
+                    } catch (NoSuchMethodException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    System.out.println(enemyTeam.getActivePokemon().getPv());
+                    arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise "
+                            + playerTeam.getActivePokemon().getAttaques().get(1).getName() + " !");
+                    enemyAttack(arena, playerTeam, enemyTeam);
+                    buttonPanel.removeAll();
+                    buttonPanel.revalidate();
+                    buttonPanel.repaint();
+                    JPanel menuButtons = PanelHelper.createButtonPanel(frame, arena, playerTeam, enemyTeam);
+                    buttonPanel.add(menuButtons);
                 }
-                System.out.println(enemyTeam.getActivePokemon().getPv());
-                arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise "
-                        + playerTeam.getActivePokemon().getAttaques().get(2).getName() + " !");
-                enemyAttack(arena, playerTeam, enemyTeam);
-                buttonPanel.removeAll();
-                buttonPanel.revalidate();
-                buttonPanel.repaint();
-                JPanel menuButtons = PanelHelper.createButtonPanel(frame, arena, playerTeam, enemyTeam);
-                buttonPanel.add(menuButtons);
-            }
-        });
+            });
+        }
 
-        attaqueLabel4.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                PlaySound.playSound("button");
+        if (playerTeam.getActivePokemon().getAttaques().get(2).getPp() != 0) {
+            attaqueLabel3.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    PlaySound.playSound("button");
 
-                System.out.println(enemyTeam.getActivePokemon().getPv());
-                arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise "
-                        + playerTeam.getActivePokemon().getAttaques().get(3).getName() + " !");
-                try {
-                    playerTeam.getActivePokemon().attaqueType3(enemyTeam.getActivePokemon());
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
+                    System.out.println(enemyTeam.getActivePokemon().getPv());
+                    try {
+                        playerTeam.getActivePokemon().attaqueType2(enemyTeam.getActivePokemon());
+                    } catch (NoSuchMethodException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    System.out.println(enemyTeam.getActivePokemon().getPv());
+                    arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise "
+                            + playerTeam.getActivePokemon().getAttaques().get(2).getName() + " !");
+                    enemyAttack(arena, playerTeam, enemyTeam);
+                    buttonPanel.removeAll();
+                    buttonPanel.revalidate();
+                    buttonPanel.repaint();
+                    JPanel menuButtons = PanelHelper.createButtonPanel(frame, arena, playerTeam, enemyTeam);
+                    buttonPanel.add(menuButtons);
                 }
-                System.out.println(enemyTeam.getActivePokemon().getPv());
-                enemyAttack(arena, playerTeam, enemyTeam);
-                buttonPanel.removeAll();
-                buttonPanel.revalidate();
-                buttonPanel.repaint();
-                JPanel menuButtons = PanelHelper.createButtonPanel(frame, arena, playerTeam, enemyTeam);
-                buttonPanel.add(menuButtons);
-            }
-        });
+            });
+        }
+
+        if (playerTeam.getActivePokemon().getAttaques().get(3).getPp() != 0) {
+            attaqueLabel4.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    PlaySound.playSound("button");
+
+                    System.out.println(enemyTeam.getActivePokemon().getPv());
+                    arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise "
+                            + playerTeam.getActivePokemon().getAttaques().get(3).getName() + " !");
+                    try {
+                        playerTeam.getActivePokemon().attaqueType3(enemyTeam.getActivePokemon());
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    System.out.println(enemyTeam.getActivePokemon().getPv());
+                    enemyAttack(arena, playerTeam, enemyTeam);
+                    buttonPanel.removeAll();
+                    buttonPanel.revalidate();
+                    buttonPanel.repaint();
+                    JPanel menuButtons = PanelHelper.createButtonPanel(frame, arena, playerTeam, enemyTeam);
+                    buttonPanel.add(menuButtons);
+                }
+            });
+        }
     }
 
     private void enemyAttack(ArenaPanel arena, Team playerTeam, Team enemyTeam) {
@@ -201,12 +202,15 @@ public class AttackButtonPanel extends JPanel {
                         }
                         arena.setTextBoxLabel(enemyPokemon.getName() + " ennemi utilise une potion et se soigne !");
                     }
-                    if (isHeal == false && enemyPokemon.getType() == playerPokemon.getType().getDeclaredConstructor().newInstance().getStrength() && enemyPokemon.getPv() < enemyPokemon.getPvMax() / 2) {
-                        for(int i=0; i<enemyTeam.getTeam().size(); i++){
-                            if(!enemyTeam.getDeadPokemons().contains(enemyTeam.getTeam().get(i)) && enemyTeam.getTeam().get(i) != enemyPokemon){
+                    if (isHeal == false && enemyPokemon.getType() == playerPokemon.getType().getDeclaredConstructor()
+                            .newInstance().getStrength() && enemyPokemon.getPv() < enemyPokemon.getPvMax() / 2) {
+                        for (int i = 0; i < enemyTeam.getTeam().size(); i++) {
+                            if (!enemyTeam.getDeadPokemons().contains(enemyTeam.getTeam().get(i))
+                                    && enemyTeam.getTeam().get(i) != enemyPokemon) {
                                 enemyTeam.setActivePokemon(enemyTeam.getTeam().get(i));
-                                arena.setTextBoxLabel("L'ennemi envoie "+enemyTeam.getActivePokemon().getName()+" !");
-                                isHeal  = true;
+                                arena.setTextBoxLabel(
+                                        "L'ennemi envoie " + enemyTeam.getActivePokemon().getName() + " !");
+                                isHeal = true;
                                 break;
                             }
                         }
@@ -225,5 +229,23 @@ public class AttackButtonPanel extends JPanel {
             }
         };
         worker.execute();
+    }
+
+    private JLabel attackButton(Team playerTeam, int index) {
+        ImageIcon attaque = null;
+        JLabel attaqueLabel = new JLabel();
+        try {
+            if (playerTeam.getActivePokemon().getAttaques().get(index).getPp() > 0) {
+                attaque = new ImageIcon(
+                        "../Assets/Bouton/" + playerTeam.getActivePokemon().getType().getDeclaredConstructor()
+                                .newInstance().getName().toLowerCase() + "_attaque.png");
+            } else {
+                attaque = new ImageIcon(
+                        "../Assets/Bouton/noPP_attaque.png");
+            }
+        } catch (Exception exception) {
+        }
+        attaqueLabel.setIcon(attaque);
+        return new JLabel(attaque);
     }
 }
