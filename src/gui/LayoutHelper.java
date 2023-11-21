@@ -23,7 +23,6 @@ public class LayoutHelper {
         gbc.gridheight = gridheight;
         gbc.weightx = weightx;
         gbc.weighty = weighty;
-        gbc.fill = GridBagConstraints.BOTH;
         return gbc;
     }
 
