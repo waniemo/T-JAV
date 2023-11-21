@@ -25,7 +25,7 @@ public class ArenaPanel extends JPanel {
 
     public ArenaPanel(App frame, Team playerTeam, Team enemyTeam) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/battle_bg.png"));
+            backgroundImage = ImageIO.read(new File("../Assets/Background/battle_bg.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,11 +33,7 @@ public class ArenaPanel extends JPanel {
         playerSprite = IconHelper.createTeamIcon(playerTeam, true);
         enemySprite = IconHelper.createTeamIcon(enemyTeam, false);
 
-        GridBagConstraints gbcLeft = LayoutHelper.createGridBagConstraints(0, 1, 0.5, 1.0);
-        GridBagConstraints gbcRight = LayoutHelper.createGridBagConstraints(1, 0, 0.5, 1.0);
-
-        textBoxLabel = new TextBox(
-                "QUE DOIT FAIRE " + playerTeam.getActivePokemon().getName().toUpperCase() + " ?");
+        textBoxLabel = new TextBox("QUE DOIT FAIRE " + playerTeam.getActivePokemon().getName().toUpperCase() + " ?");
 
         playerTeamPanel = PanelHelper.createTeamPanel(frame, playerTeam);
         enemyTeamPanel = PanelHelper.createTeamPanel(frame, enemyTeam);
@@ -53,57 +49,48 @@ public class ArenaPanel extends JPanel {
             }
         }
 
-        // Top left panel
-        add(enemyTeamPanel, gbcLeft);
+        GridBagConstraints gbc = LayoutHelper.createGridBagConstraints(0, 0, 0.5, 1.0);
 
-        // Bottom right panel
-        gbcRight.gridx = 1;
-        gbcRight.gridy = 4;
-        gbcRight.weightx = 0;
-        gbcRight.weighty = 0;
-        add(playerTeamPanel, gbcRight);
+        add(enemyTeamPanel, gbc);
 
-        // Text box
-        gbcRight.gridx = 1;
-        gbcRight.gridy = 5;
-        gbcRight.weighty = 0;
-        gbcRight.weightx = 0;
-        add(textBoxLabel, gbcRight);
+        LayoutHelper.modifyGridBagConstraints(gbc, 1, 2, 0, 3);
+        add(enemySprite, gbc);
 
-        // Bottom left panel with 3 buttons
-        gbcLeft.gridx = 0;
-        gbcLeft.gridy = 5;
-        gbcLeft.weighty = 0;
+        LayoutHelper.modifyGridBagConstraints(gbc, 0, 3, 0, 3);
+        add(playerSprite, gbc);
+
+        LayoutHelper.modifyGridBagConstraints(gbc, 1, 4, 0, 0);
+        add(playerTeamPanel, gbc);
+
+        LayoutHelper.modifyGridBagConstraints(gbc, 1, 5, 0, 0);
+        add(textBoxLabel, gbc);
+
+        LayoutHelper.modifyGridBagConstraints(gbc, 0, 5, 0, 0);
         JPanel buttonPanel = PanelHelper.createButtonPanel(frame, this, playerTeam, enemyTeam);
-        add(buttonPanel, gbcLeft);
+        add(buttonPanel, gbc);
 
-        // Player Pokemon
-        gbcLeft.weighty = 3.5;
-        gbcLeft.gridx = 0;
-        gbcLeft.gridy = 3;
-        add(playerSprite, gbcLeft);
-
-        // Enemy pokemon
-        gbcRight.weighty = 3;
-        gbcRight.insets = new Insets(80, 0, 0, 0); // Add 20 pixels of padding on top
-        gbcRight.gridx = 1;
-        gbcRight.gridy = 2;
-        add(enemySprite, gbcRight);
-
-        gameLoopTimer = new Timer(25, new ActionListener() {
+        gameLoopTimer = new Timer(16, new ActionListener() {
             private Pokemon lastPlayerPokemon = playerTeam.getActivePokemon();
             private Pokemon lastEnemyPokemon = enemyTeam.getActivePokemon();
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                updatePokemon(playerTeam, lastPlayerPokemon, gbc, true);
+                updatePokemon(enemyTeam, lastEnemyPokemon, gbc, false);
 
+                checkPokemonKO(playerTeam, frame, true);
+                checkPokemonKO(enemyTeam, frame, false);
+
+                getPlayerPvBar().updateBar(frame.isAnimated()); // animation
+                getEnemyPvBar().updateBar(frame.isAnimated()); // animation
+                repaint();
+            }
+
+            private void updatePokemon(Team team, Pokemon lastPokemon, GridBagConstraints gbc, boolean isPlayer) {
                 if (playerTeam.getActivePokemon() != lastPlayerPokemon) {
                     remove(playerSprite);
                     remove(textBoxLabel);
                     remove(playerTeamPanel);
-                    gbcLeft.weighty = 3.5;
-                    gbcLeft.gridx = 0;
-                    gbcLeft.gridy = 3;
                     playerSprite = IconHelper.createTeamIcon(playerTeam, true);
                     lastPlayerPokemon = playerTeam.getActivePokemon();
                     playerTeamPanel = PanelHelper.createTeamPanel(frame, playerTeam);
@@ -113,44 +100,67 @@ public class ArenaPanel extends JPanel {
                         }
                     }
                     textBoxLabel = new TextBox(
-                            "QUE DOIT FAIRE " + playerTeam.getActivePokemon().getName().toUpperCase() + " ?");
-                    add(playerSprite, gbcLeft);
-                    gbcRight.gridx = 1;
-                    gbcRight.gridy = 5;
-                    gbcRight.weighty = 0;
-                    gbcRight.weightx = 0;
-                    add(textBoxLabel, gbcRight);
-                    gbcRight.gridx = 1;
-                    gbcRight.gridy = 4;
-                    gbcRight.weightx = 0;
-                    gbcRight.weighty = 0;
-                    add(playerTeamPanel, gbcRight);
+                            "QUE DOIT FAIRE " + playerTeam.getActivePokemon().getName().toUpperCase() + "?");
+                    LayoutHelper.modifyGridBagConstraints(gbc, 0, 3, 0, 3);
+                    add(playerSprite, gbc);
+
+                    LayoutHelper.modifyGridBagConstraints(gbc, 1, 5, 0, 0);
+                    add(textBoxLabel, gbc);
+
+                    LayoutHelper.modifyGridBagConstraints(gbc, 1, 4, 0, 0);
+                    add(playerTeamPanel, gbc);
                 }
                 if (enemyTeam.getActivePokemon() != lastEnemyPokemon) {
                     remove(enemySprite);
                     remove(enemyTeamPanel);
-                    gbcLeft.gridx = 0;
-                    gbcLeft.gridy = 0;
-                    gbcLeft.weightx = 0;
-                    gbcLeft.weighty = 0;
                     enemyTeamPanel = PanelHelper.createTeamPanel(frame, enemyTeam);
                     for (Component component : enemyTeamPanel.getComponents()) {
                         if (component instanceof PvBar) {
                             enemyPvBar = (PvBar) component;
                         }
                     }
-                    add(enemyTeamPanel, gbcLeft);
-                    gbcRight.weighty = 3;
-                    gbcRight.insets = new Insets(80, 0, 0, 0); // Add 20 pixels of padding on top
-                    gbcRight.gridx = 1;
-                    gbcRight.gridy = 2;
                     enemySprite = IconHelper.createTeamIcon(enemyTeam, false);
                     lastEnemyPokemon = enemyTeam.getActivePokemon();
-                    add(enemySprite, gbcRight);
+                    LayoutHelper.modifyGridBagConstraints(gbc, 0, 0, 0.5, 1.0);
+                    add(enemyTeamPanel, gbc);
+
+                    LayoutHelper.modifyGridBagConstraints(gbc, 1, 2, 0, 3);
+                    add(enemySprite, gbc);
                 }
-                getPlayerPvBar().updateBar();
-                getEnemyPvBar().updateBar();
-                repaint();
+            }
+
+            private void checkPokemonKO(Team team, App frame, boolean isPlayer) {
+                if (team.getActivePokemon().getPv() <= 0 && !team.getDeadPokemons().contains(team.getActivePokemon())) {
+                    setTextBoxLabel(team.getActivePokemon().getName() + " est KO !");
+                    team.addDeadPokemon(team.getActivePokemon());
+
+                    if (team.getDeadPokemons().size() < 6) {
+                        if (isPlayer) {
+                            frame.getContentPane().removeAll();
+                            frame.getContentPane()
+                                    .add(new ChangePokemon((App) frame, ArenaPanel.this, playerTeam, enemyTeam));
+                            frame.revalidate();
+                            frame.repaint();
+                        } else {
+                            setTextBoxLabel(team.getActivePokemon().getName() + " est KO !");
+                            team.addDeadPokemon(team.getActivePokemon());
+                            for (int i = 0; i < team.getTeam().size(); i++) {
+                                if (!team.getDeadPokemons().contains(team.getTeam().get(i))) {
+                                    team.setActivePokemon(team.getTeam().get(i));
+                                    setTextBoxLabel("L'ennemi envoie " + team.getActivePokemon().getName() + "!");
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        if (isPlayer) {
+                            setTextBoxLabel("Vous avez perdu !");
+                        } else {
+                            setTextBoxLabel("Vous avez gagné !");
+                        }
+                        gameLoopTimer.stop();
+                    }
+                }
             }
         });
         gameLoopTimer.start();
@@ -176,6 +186,6 @@ public class ArenaPanel extends JPanel {
     }
 
     public void setTextBoxLabel(String textBoxLabel) {
-        this.textBoxLabel.updateText(textBoxLabel);;
+        this.textBoxLabel.updateText(textBoxLabel, false);
     }
 }

@@ -19,10 +19,10 @@ public class PanelHelper {
 
         nameLabel.setFont(UIManager.getFont("Label.font").deriveFont(40f));
         levelLabel.setFont(UIManager.getFont("Label.font").deriveFont(30f));
-        typeLabel.setIcon(new ImageIcon("../Assets/feu.png"));
+        typeLabel.setIcon(new ImageIcon("../Assets/Type/feu.png"));
 
         PvBar pvBar = new PvBar(team.getActivePokemon());
-        pvBar.updateBar();
+        pvBar.updateBar(false); //animation
         nameLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
         levelLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
         panel.add(nameLabel, BorderLayout.WEST);
@@ -38,9 +38,9 @@ public class PanelHelper {
         buttonPanel.setPreferredSize(new Dimension(600, 96));
         buttonPanel.setOpaque(false);
         GridBagConstraints buttonGbc = new GridBagConstraints();
-        ImageIcon attaqueIcon = new ImageIcon("../Assets/bouton_attaque.png");
-        ImageIcon pokemonIcon = new ImageIcon("../Assets/bouton_pokemon.png");
-        ImageIcon sacIcon = new ImageIcon("../Assets/bouton_sac.png");
+        ImageIcon attaqueIcon = new ImageIcon("../Assets/Bouton/bouton_attaque.png");
+        ImageIcon pokemonIcon = new ImageIcon("../Assets/Bouton/bouton_pokemon.png");
+        ImageIcon sacIcon = new ImageIcon("../Assets/Bouton/bouton_sac.png");
         JLabel attaqueLabel = new JLabel(attaqueIcon);
         JLabel pokemonLabel = new JLabel(pokemonIcon);
         JLabel sacLabel = new JLabel(sacIcon);
@@ -63,6 +63,8 @@ public class PanelHelper {
         sacLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                PlaySound.playSound("button", frame.hasSound());
+
                 frame.setContentPane(new Bag(frame, arena, playerTeam, enemyTeam));
                 frame.revalidate();
             }
@@ -71,6 +73,8 @@ public class PanelHelper {
         pokemonLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                PlaySound.playSound("button", frame.hasSound());
+
                 frame.setContentPane(new ChangePokemon(frame, arena, playerTeam, enemyTeam));
                 frame.revalidate();
             }
@@ -79,6 +83,8 @@ public class PanelHelper {
         attaqueLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                PlaySound.playSound("button", frame.hasSound());
+
                 buttonPanel.removeAll();
                 buttonPanel.revalidate();
                 buttonPanel.repaint();

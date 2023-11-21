@@ -5,8 +5,11 @@ import java.awt.*;
 
 public class TextBox extends JLabel {
     private String text;
+    private Object lock = new Object();
+    private TypeTextTask currentTask = null;
+
     public TextBox(String text) {
-        ImageIcon icon = new ImageIcon("../Assets/text_box.png");
+        ImageIcon icon = new ImageIcon("../Assets/Background/text_box.png");
         setOpaque(false);
         Image textBoxImage = icon.getImage();
         Image image = textBoxImage.getScaledInstance(610, 96, Image.SCALE_SMOOTH);
@@ -18,11 +21,21 @@ public class TextBox extends JLabel {
         this.setText(text);
     }
 
-    public void updateText(String text) {
-        this.text = text;
-        super.setText(text);
+    public void updateText(String text, boolean animation) {
 
-        new TypeTextTask().execute();
+        synchronized (lock) {
+            this.text = text;
+            if (!animation) {
+                super.setText(text);
+            } else {
+                if (currentTask != null) {
+                    currentTask.cancel(true);
+                }
+                currentTask = new TypeTextTask();
+                currentTask.execute();
+            }
+            System.out.println(text);
+        }
     }
 
     private class TypeTextTask extends SwingWorker<Void, Void> {
@@ -32,6 +45,7 @@ public class TextBox extends JLabel {
                 final String partialText = text.substring(0, i);
                 setText(partialText);
                 Thread.sleep(35);
+                System.out.println(partialText);
             }
             return null;
         }

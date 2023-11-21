@@ -26,13 +26,19 @@ public class Bag extends JPanel {
 
     public Bag(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/bag.png"));
+            backgroundImage = ImageIO.read(new File("../Assets/Background/bag.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
         JButton useButton = new JButton("UTILISER");
+        ImageIcon retourIcon = new ImageIcon("../Assets/Bouton/bouton_retour.png");
+        JLabel retourLabel = new JLabel(retourIcon);
+        retourLabel.setText("Retour");
+        retourLabel.setHorizontalTextPosition(JLabel.CENTER);
+        retourLabel.setVerticalTextPosition(JLabel.CENTER);
+        retourLabel.setForeground(Color.white);
+        retourLabel.setFont(UIManager.getFont("Label.font").deriveFont(26f));
 
         List<Class<? extends Item>> teamItems = new ArrayList<>(playerTeam.getItems().keySet());
         itemsString = BagHelper.makeList(playerTeam);
@@ -61,7 +67,8 @@ public class Bag extends JPanel {
         useButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Get the selected item from the list
+                PlaySound.playSound("button", frame.hasSound());
+
                 String selectedItem = itemsString.getSelectedValue();
                 if (selectedItem != null) {
                     int itemIndex = itemsString.getSelectedIndex();
@@ -72,17 +79,18 @@ public class Bag extends JPanel {
                         System.err.println("No such Item.");
                     }
                     System.out.println(item.getName());
-                    itemDescription.updateText(playerTeam.useItems(item, playerTeam.getActivePokemon()));
+                    itemDescription.updateText(playerTeam.useItems(item, playerTeam.getActivePokemon()), true);
                     itemImage = new ImageIcon();
                     BagHelper.updateList(itemsString, playerTeam);
                 }
             }
         });
-        JButton backButton = new JButton("RETOUR");
-        backButton.addActionListener(new ActionListener() {
+        retourLabel.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                arena.getPlayerPvBar().updateBar();
+            public void mouseClicked(MouseEvent e) {
+                PlaySound.playSound("button", frame.hasSound());
+
+                arena.getPlayerPvBar().updateBar(false); // animation
                 frame.setLayout(new BorderLayout());
                 frame.getContentPane().removeAll();
                 frame.getContentPane().add(arena, BorderLayout.CENTER);
@@ -114,26 +122,19 @@ public class Bag extends JPanel {
         itemsString.setOpaque(false);
 
         // List top right
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 0.5;
-        gbc.weighty = 0.5;
-        gbc.insets = new Insets(40, 80, 80, 80);
+        GridBagConstraints gbc = LayoutHelper.createGridBagConstraints(1, 0, 0.5, 0.5, 1, 1);
+        gbc.insets = new Insets(40, 80, 80, 0);
         gbc.anchor = GridBagConstraints.NORTHEAST;
         add(itemsString, gbc);
 
         // Image bottom left
-        gbc.gridx = 0;
-        gbc.gridy = 1;
+        LayoutHelper.modifyGridBagConstraints(gbc, 0, 1, gbc.weightx, gbc.weighty);
         gbc.insets = new Insets(80, 80, 80, 80);
         gbc.anchor = GridBagConstraints.SOUTHWEST;
         add(itemLabel, gbc);
 
         // Description bottom center
-        gbc.gridx = 1;
-        gbc.gridy = 1;
+        LayoutHelper.modifyGridBagConstraints(gbc, 1, 1, gbc.weightx, gbc.weighty);
         gbc.anchor = GridBagConstraints.SOUTH;
         gbc.insets = new Insets(80, 80, 80, 40);
         add(itemDescription, gbc);
@@ -144,7 +145,7 @@ public class Bag extends JPanel {
         gbc.insets = new Insets(60, 0, 100, 80);
         add(useButton, gbc);
         gbc.insets = new Insets(30, 0, 0, 0);
-        add(backButton, gbc);
+        add(retourLabel, gbc);
 
     }
 

@@ -30,6 +30,6 @@ public abstract class Item {
     }
 
     public String getSprite() {
-        return sprite;
+        return "Item/" + sprite;
     }
 }
