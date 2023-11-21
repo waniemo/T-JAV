@@ -23,7 +23,7 @@ public class EnemyAI {
                     e.printStackTrace();
                 }
                 if (enemyPokemon.getPv() > 0) {
-                    if (enemyPokemon.getPv() < enemyPokemon.getPvMax() / 2 && randomHeal == 1) {
+                    if (enemyPokemon.getPv() < enemyPokemon.getPvMax() / 2 && randomHeal == 1 && enemyTeam.getLevel()>30) {
                         Integer quantity = enemyTeam.getItems().get(Potion.class);
                         if (quantity != null && quantity > 0) {
                             enemyTeam.useItems(Potion.class.getDeclaredConstructor().newInstance(), enemyPokemon);
@@ -32,7 +32,7 @@ public class EnemyAI {
                         arena.setTextBoxLabel(enemyPokemon.getName() + " ennemi utilise une potion et se soigne !");
                     }
                     if (isHeal == false && enemyPokemon.getType() == playerPokemon.getType().getDeclaredConstructor()
-                            .newInstance().getStrength() && enemyPokemon.getPv() < enemyPokemon.getPvMax() / 2) {
+                            .newInstance().getStrength() && enemyPokemon.getPv() < enemyPokemon.getPvMax() / 2 && enemyTeam.getLevel()>60) {
                         for (int i = 0; i < enemyTeam.getTeam().size(); i++) {
                             if (!enemyTeam.getDeadPokemons().contains(enemyTeam.getTeam().get(i))
                                     && enemyTeam.getTeam().get(i) != enemyPokemon) {
