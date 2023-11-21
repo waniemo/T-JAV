@@ -13,7 +13,7 @@ public class ButtonPanel extends JPanel {
 
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                PlaySound.playSound("button");
+                PlaySound.playSound("button", frame.hasSound());
                 frame.getContentPane().removeAll();
                 frame.getContentPane().add(new ChooseTeamUI(frame), BorderLayout.CENTER);
                 frame.revalidate();
@@ -23,7 +23,7 @@ public class ButtonPanel extends JPanel {
 
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                PlaySound.playSound("button");
+                PlaySound.playSound("button", frame.hasSound());
                 Thread thread = new Thread() {
                     public void run() {
                         try {

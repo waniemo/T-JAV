@@ -22,7 +22,7 @@ public class PanelHelper {
         typeLabel.setIcon(new ImageIcon("../Assets/Type/feu.png"));
 
         PvBar pvBar = new PvBar(team.getActivePokemon());
-        pvBar.updateBar();
+        pvBar.updateBar(false); //animation
         nameLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
         levelLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
         panel.add(nameLabel, BorderLayout.WEST);
@@ -63,7 +63,7 @@ public class PanelHelper {
         sacLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                PlaySound.playSound("button");
+                PlaySound.playSound("button", frame.hasSound());
 
                 frame.setContentPane(new Bag(frame, arena, playerTeam, enemyTeam));
                 frame.revalidate();
@@ -73,7 +73,7 @@ public class PanelHelper {
         pokemonLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                PlaySound.playSound("button");
+                PlaySound.playSound("button", frame.hasSound());
 
                 frame.setContentPane(new ChangePokemon(frame, arena, playerTeam, enemyTeam));
                 frame.revalidate();
@@ -83,7 +83,7 @@ public class PanelHelper {
         attaqueLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                PlaySound.playSound("button");
+                PlaySound.playSound("button", frame.hasSound());
 
                 buttonPanel.removeAll();
                 buttonPanel.revalidate();

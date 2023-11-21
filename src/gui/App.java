@@ -9,6 +9,8 @@ import Pokemon.*;
 public class App extends JFrame {
     private StringBuilder typedText = new StringBuilder();
     private boolean isKirby = false;
+    private boolean isAnimated = true;
+    private boolean hasSound = false;
 
     public App() {
         setTitle("Street Pokemon Fighter Phantom 2 Turbo Championship Edition EX + Alpha X");
@@ -42,8 +44,19 @@ public class App extends JFrame {
         ButtonPanel buttonPanel = new ButtonPanel(this);
         buttonPanel.setPreferredSize(new Dimension(buttonPanel.getPreferredSize().width, 100));
         Container contentPane = getContentPane();
+        JToggleButton soundToggleButton = new JToggleButton("Sound");
+        JToggleButton animationToggleButton = new JToggleButton("Animation");
+
+        soundToggleButton.setSelected(false);
+        animationToggleButton.setSelected(true);
+        soundToggleButton.addActionListener(e -> hasSound = soundToggleButton.isSelected());
+        animationToggleButton.addActionListener(e -> isAnimated = animationToggleButton.isSelected());
+
         contentPane.setLayout(new BorderLayout());
+
         contentPane.add(imagePanel, BorderLayout.CENTER);
+        buttonPanel.add(soundToggleButton);
+        buttonPanel.add(animationToggleButton);
         contentPane.add(buttonPanel, BorderLayout.SOUTH);
     }
 
@@ -56,5 +69,13 @@ public class App extends JFrame {
             }
         }
         return isKirby && !containsKirby ? PokemonList.getPokemonsWithKirby() : PokemonList.getPokemons();
+    }
+
+    public boolean hasSound() {
+        return hasSound;
+    }
+
+    public boolean isAnimated() {
+        return isAnimated;
     }
 }
