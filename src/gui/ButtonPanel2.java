@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ButtonPanel2 extends JPanel {
     private static JButton button1 = new JButton("CONTINUER");
+    private static PlaySound sound = new PlaySound();
 
     public ButtonPanel2(App frame, List<Pokemon> team, Team enemyTeam) {
         button1.setEnabled(false);
@@ -18,7 +19,7 @@ public class ButtonPanel2 extends JPanel {
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Team playerTeam = new Team(team);
-                PlaySound.playSound("button", frame.hasSound());
+                sound.playSound("button", frame.hasSound());
                 if (playerTeam.getTeam() != null) {
                     if (playerTeam.getTeam().size() < 6 || enemyTeam.getTeam().size() < 6) {
                         System.err.println("Not enough Pokemons in the teams");
@@ -36,7 +37,7 @@ public class ButtonPanel2 extends JPanel {
         JButton button2 = new JButton("QUITTER");
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                PlaySound.playSound("button", frame.hasSound());
+                sound.playSound("button", frame.hasSound());
                 Thread thread = new Thread() {
                     public void run() {
                         try {
