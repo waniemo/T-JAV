@@ -10,6 +10,8 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class PanelHelper {
+    private static PlaySound sound = new PlaySound();
+
     public static JPanel createTeamPanel(App frame, Team team) {
         JPanel panel = new JPanel(new BorderLayout());
         JLabel nameLabel = new JLabel(team.getActivePokemon().getName());
@@ -63,7 +65,7 @@ public class PanelHelper {
         sacLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                PlaySound.playSound("button", frame.hasSound());
+                sound.playSound("button", frame.hasSound());
 
                 frame.setContentPane(new Bag(frame, arena, playerTeam, enemyTeam));
                 frame.revalidate();
@@ -73,7 +75,7 @@ public class PanelHelper {
         pokemonLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                PlaySound.playSound("button", frame.hasSound());
+                sound.playSound("button", frame.hasSound());
 
                 frame.setContentPane(new ChangePokemon(frame, arena, playerTeam, enemyTeam));
                 frame.revalidate();
@@ -83,7 +85,7 @@ public class PanelHelper {
         attaqueLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                PlaySound.playSound("button", frame.hasSound());
+                sound.playSound("button", frame.hasSound());
 
                 buttonPanel.removeAll();
                 buttonPanel.revalidate();
@@ -93,4 +95,26 @@ public class PanelHelper {
         });
         return buttonPanel;
     }
+
+    public static JPanel createPokeballPanel(App frame, Team team) {
+        ImageIcon grey = new ImageIcon("../Assets/grey_ball.png");
+        ImageIcon red = new ImageIcon("../Assets/red_ball.png");
+
+        JPanel panel = new JPanel(new GridLayout(1, 6));
+        for (int i = 0; i < 6 - team.getDeadPokemons().size(); i++) {
+            JLabel label = new JLabel("");
+            label.setPreferredSize(new Dimension(32,32));
+            label.setIcon(red);
+            panel.add(label);
+        }
+        for (int i = 0; i < team.getDeadPokemons().size(); i++) {
+            JLabel label = new JLabel("");
+            label.setPreferredSize(new Dimension(32,32));
+            label.setIcon(grey);
+            panel.add(label);
+        }
+        panel.setPreferredSize(new Dimension(192, 32));
+        return panel;
+    }
+
 }

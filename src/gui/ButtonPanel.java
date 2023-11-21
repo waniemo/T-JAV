@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ButtonPanel extends JPanel {
+    private static PlaySound sound = new PlaySound();
 
     public ButtonPanel(App frame) {
         setLayout(new GridLayout(1, 4));
@@ -13,7 +14,7 @@ public class ButtonPanel extends JPanel {
 
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                PlaySound.playSound("button", frame.hasSound());
+                sound.playSound("button", frame.hasSound());
                 frame.getContentPane().removeAll();
                 frame.getContentPane().add(new ChooseTeamUI(frame), BorderLayout.CENTER);
                 frame.revalidate();
@@ -23,7 +24,7 @@ public class ButtonPanel extends JPanel {
 
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                PlaySound.playSound("button", frame.hasSound());
+                sound.playSound("button", frame.hasSound());
                 Thread thread = new Thread() {
                     public void run() {
                         try {

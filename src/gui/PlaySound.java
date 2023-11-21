@@ -4,13 +4,13 @@ import javax.sound.sampled.*;
 import java.io.File;
 
 public class PlaySound {
-    private static Clip clip;
+    private Clip clip;
 
-    public static void playSound(String file, boolean enableSound) {
+    public void playSound(String file, boolean enableSound) {
         if (enableSound) {
             try {
-                while (isPlaying()) {
-                    Thread.sleep(100);
+                if (isPlaying()) {
+                    stopSound();
                 }
                 AudioInputStream audioInputStream = AudioSystem
                         .getAudioInputStream(new File("../Assets/Sound/" + file + ".wav"));
@@ -24,11 +24,11 @@ public class PlaySound {
         }
     }
 
-    public static void loopSound(String file, boolean enableSound) {
+    public void loopSound(String file, boolean enableSound) {
         if (enableSound) {
             try {
-                while (isPlaying()) {
-                    Thread.sleep(100);
+                if (isPlaying()) {
+                    stopSound();
                 }
                 Clip clip = AudioSystem.getClip();
                 AudioInputStream audioInputStream = AudioSystem
@@ -42,7 +42,13 @@ public class PlaySound {
         }
     }
 
-    public static boolean isPlaying() {
+    public void stopSound() {
+        if (clip != null) {
+            clip.stop();
+        }
+    }
+
+    public boolean isPlaying() {
         return clip != null && clip.isRunning();
     }
 }

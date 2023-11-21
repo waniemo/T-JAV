@@ -11,6 +11,7 @@ import java.io.IOException;
 public class SummaryPanel extends JPanel {
     private GridBagConstraints gbc = new GridBagConstraints();
     private Image backgroundImage;
+    private static PlaySound sound = new PlaySound();
 
     public SummaryPanel(App frame, Team playerTeam, Team enemyTeam) {
         try {
@@ -27,7 +28,7 @@ public class SummaryPanel extends JPanel {
         JLabel enemyTitle = new JLabel("Equipe ennemie! ( lvl" + enemyTeam.getLevel() + ")");
 
         backButton.addActionListener(e -> {
-            PlaySound.playSound("button", frame.hasSound());
+            sound.playSound("button", frame.hasSound());
 
             SelectXpUI selectXpUI = new SelectXpUI(frame, playerTeam, enemyTeam);
             frame.getContentPane().removeAll();
