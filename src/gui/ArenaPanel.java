@@ -5,6 +5,7 @@ import Team.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import Pokemon.Kirby;
 import Pokemon.Pokemon;
 
 import java.awt.*;
@@ -22,8 +23,12 @@ public class ArenaPanel extends JPanel {
     private JPanel playerTeamPanel;
     private JPanel enemyTeamPanel;
     private TextBox textBoxLabel;
+    private JPanel playerPokemonLeft;
+    private JPanel enemyPokemonLeft;
+    private JPanel enemyPanel;
+    private JPanel playerPanel;
 
-    public ArenaPanel(App frame, Team playerTeam, Team enemyTeam) {
+    public ArenaPanel(App frame, Team playerTeam, Team enemyTeam, PlaySound sound) {
         try {
             backgroundImage = ImageIO.read(new File("../Assets/Background/battle_bg.png"));
         } catch (IOException e) {
@@ -35,8 +40,16 @@ public class ArenaPanel extends JPanel {
 
         textBoxLabel = new TextBox("QUE DOIT FAIRE " + playerTeam.getActivePokemon().getName().toUpperCase() + " ?");
 
+        enemyPanel = new JPanel(new GridLayout(2, 1));
+        playerPanel = new JPanel(new GridLayout(2, 1));
         playerTeamPanel = PanelHelper.createTeamPanel(frame, playerTeam);
         enemyTeamPanel = PanelHelper.createTeamPanel(frame, enemyTeam);
+        playerPokemonLeft = PanelHelper.createPokeballPanel(frame, playerTeam);
+        enemyPokemonLeft = PanelHelper.createPokeballPanel(frame, enemyTeam);
+        enemyPanel.setOpaque(false);
+        playerPanel.setOpaque(false);
+        playerPokemonLeft.setOpaque(false);
+        enemyPokemonLeft.setOpaque(false);
 
         for (Component component : playerTeamPanel.getComponents()) {
             if (component instanceof PvBar) {
@@ -51,7 +64,9 @@ public class ArenaPanel extends JPanel {
 
         GridBagConstraints gbc = LayoutHelper.createGridBagConstraints(0, 0, 0.5, 1.0);
 
-        add(enemyTeamPanel, gbc);
+        enemyPanel.add(enemyTeamPanel);
+        enemyPanel.add(enemyPokemonLeft, gbc);
+        add(enemyPanel, gbc);
 
         LayoutHelper.modifyGridBagConstraints(gbc, 1, 2, 0, 3);
         add(enemySprite, gbc);
@@ -60,7 +75,9 @@ public class ArenaPanel extends JPanel {
         add(playerSprite, gbc);
 
         LayoutHelper.modifyGridBagConstraints(gbc, 1, 4, 0, 0);
-        add(playerTeamPanel, gbc);
+        playerPanel.add(playerPokemonLeft);
+        playerPanel.add(playerTeamPanel);
+        add(playerPanel, gbc);
 
         LayoutHelper.modifyGridBagConstraints(gbc, 1, 5, 0, 0);
         add(textBoxLabel, gbc);
@@ -90,7 +107,8 @@ public class ArenaPanel extends JPanel {
                 if (playerTeam.getActivePokemon() != lastPlayerPokemon) {
                     remove(playerSprite);
                     remove(textBoxLabel);
-                    remove(playerTeamPanel);
+                    playerPanel.removeAll();
+                    remove(playerPanel);
                     playerSprite = IconHelper.createTeamIcon(playerTeam, true);
                     lastPlayerPokemon = playerTeam.getActivePokemon();
                     playerTeamPanel = PanelHelper.createTeamPanel(frame, playerTeam);
@@ -108,11 +126,14 @@ public class ArenaPanel extends JPanel {
                     add(textBoxLabel, gbc);
 
                     LayoutHelper.modifyGridBagConstraints(gbc, 1, 4, 0, 0);
-                    add(playerTeamPanel, gbc);
+                    playerPanel.add(playerPokemonLeft);
+                    playerPanel.add(playerTeamPanel);
+                    add(playerPanel, gbc);
                 }
                 if (enemyTeam.getActivePokemon() != lastEnemyPokemon) {
                     remove(enemySprite);
-                    remove(enemyTeamPanel);
+                    enemyPanel.removeAll();
+                    remove(enemyPanel);
                     enemyTeamPanel = PanelHelper.createTeamPanel(frame, enemyTeam);
                     for (Component component : enemyTeamPanel.getComponents()) {
                         if (component instanceof PvBar) {
@@ -122,20 +143,24 @@ public class ArenaPanel extends JPanel {
                     enemySprite = IconHelper.createTeamIcon(enemyTeam, false);
                     lastEnemyPokemon = enemyTeam.getActivePokemon();
                     LayoutHelper.modifyGridBagConstraints(gbc, 0, 0, 0.5, 1.0);
-                    add(enemyTeamPanel, gbc);
+                    enemyPanel.add(enemyTeamPanel);
+                    enemyPanel.add(enemyPokemonLeft);
+                    add(enemyPanel, gbc);
 
                     LayoutHelper.modifyGridBagConstraints(gbc, 1, 2, 0, 3);
                     add(enemySprite, gbc);
+                    revalidate();
+                    repaint();
                 }
             }
 
             private void checkPokemonKO(Team team, App frame, boolean isPlayer) {
                 if (team.getActivePokemon().getPv() <= 0 && !team.getDeadPokemons().contains(team.getActivePokemon())) {
-                    setTextBoxLabel(team.getActivePokemon().getName() + " est KO !");
-                    team.addDeadPokemon(team.getActivePokemon());
-
-                    if (team.getDeadPokemons().size() < 6) {
+                    if (team.getDeadPokemons().size() < 5) {
                         if (isPlayer) {
+                            team.addDeadPokemon(team.getActivePokemon());
+                            playerPokemonLeft = PanelHelper.createPokeballPanel(frame, team);
+                            playerPokemonLeft.setOpaque(false);
                             frame.getContentPane().removeAll();
                             frame.getContentPane()
                                     .add(new ChangePokemon((App) frame, ArenaPanel.this, playerTeam, enemyTeam));
@@ -144,6 +169,8 @@ public class ArenaPanel extends JPanel {
                         } else {
                             setTextBoxLabel(team.getActivePokemon().getName() + " est KO !");
                             team.addDeadPokemon(team.getActivePokemon());
+                            enemyPokemonLeft = PanelHelper.createPokeballPanel(frame, team);
+                            enemyPokemonLeft.setOpaque(false);
                             for (int i = 0; i < team.getTeam().size(); i++) {
                                 if (!team.getDeadPokemons().contains(team.getTeam().get(i))) {
                                     team.setActivePokemon(team.getTeam().get(i));
@@ -154,11 +181,23 @@ public class ArenaPanel extends JPanel {
                         }
                     } else {
                         if (isPlayer) {
-                            setTextBoxLabel("Vous avez perdu !");
+                            sound.stopSound();
+                            team.addDeadPokemon(team.getActivePokemon());
+                            frame.getContentPane().removeAll();
+                            frame.getContentPane()
+                                    .add(new EndOfGame((App) frame, false));
+                            frame.revalidate();
+                            frame.repaint();
                         } else {
-                            setTextBoxLabel("Vous avez gagné !");
+                            sound.stopSound();
+                            team.addDeadPokemon(team.getActivePokemon());
+                            frame.getContentPane().removeAll();
+                            frame.getContentPane()
+                                    .add(new EndOfGame((App) frame, true));
+                            frame.revalidate();
+                            frame.repaint();
                         }
-                        gameLoopTimer.stop();
+                        // gameLoopTimer.stop(); // todo
                     }
                 }
             }
