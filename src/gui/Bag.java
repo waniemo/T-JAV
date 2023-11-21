@@ -23,6 +23,7 @@ public class Bag extends JPanel {
     private ImageIcon itemImage = null;
     private JLabel itemLabel = new JLabel();
     private TextBox itemDescription = new TextBox("");
+    private static PlaySound sound = new PlaySound();
 
     public Bag(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam) {
         try {
@@ -67,7 +68,7 @@ public class Bag extends JPanel {
         useButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PlaySound.playSound("button", frame.hasSound());
+                sound.playSound("button", frame.hasSound());
 
                 String selectedItem = itemsString.getSelectedValue();
                 if (selectedItem != null) {
@@ -88,7 +89,7 @@ public class Bag extends JPanel {
         retourLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                PlaySound.playSound("button", frame.hasSound());
+                sound.playSound("button", frame.hasSound());
 
                 arena.getPlayerPvBar().updateBar(false); // animation
                 frame.setLayout(new BorderLayout());

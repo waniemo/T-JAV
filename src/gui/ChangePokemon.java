@@ -12,6 +12,7 @@ import Team.Team;
 
 public class ChangePokemon extends JPanel {
     private Image backgroundImage;
+    private static PlaySound sound = new PlaySound();
 
     public ChangePokemon(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam) {
         try {
@@ -31,7 +32,7 @@ public class ChangePokemon extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PlaySound.playSound("button", frame.hasSound());
+                sound.playSound("button", frame.hasSound());
 
                 arena.getPlayerPvBar().updateBar(false); // animation
                 frame.setLayout(new BorderLayout());

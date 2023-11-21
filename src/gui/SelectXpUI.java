@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class SelectXpUI extends JPanel {
     private Image backgroundImage;
+    private static PlaySound sound = new PlaySound();
 
     public SelectXpUI(App frame, Team playerTeam, Team enemyTeam) {
         try {
@@ -47,7 +48,7 @@ public class SelectXpUI extends JPanel {
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                PlaySound.playSound("button", frame.hasSound());
+                sound.playSound("button", frame.hasSound());
 
                 playerTeam.setTeamLevel((int) spinner1.getValue());
                 enemyTeam.setTeamLevel((int) spinner2.getValue());
@@ -60,7 +61,7 @@ public class SelectXpUI extends JPanel {
         });
 
         backButton.addActionListener(e -> {
-            PlaySound.playSound("button", frame.hasSound());
+            sound.playSound("button", frame.hasSound());
 
             ChooseTeamUI chooseTeamUI = new ChooseTeamUI(frame);
             playerTeam.getTeam().clear();

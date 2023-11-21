@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class AttackButtonPanel extends JPanel {
+    private static PlaySound sound = new PlaySound();
     public AttackButtonPanel(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam, JPanel buttonPanel, GridBagConstraints buttonGbc) {
         ImageIcon retourIcon = new ImageIcon("../Assets/Bouton/bouton_retour.png");
         JLabel retourLabel = new JLabel(retourIcon);
@@ -70,7 +71,7 @@ public class AttackButtonPanel extends JPanel {
                 buttonPanel.removeAll();
                 buttonPanel.revalidate();
                 buttonPanel.repaint();
-                PlaySound.playSound("button", frame.hasSound());
+                sound.playSound("button", frame.hasSound());
                 JPanel menuButtons = PanelHelper.createButtonPanel(frame, arena, playerTeam, enemyTeam);
                 buttonPanel.add(menuButtons);
             }
@@ -80,7 +81,7 @@ public class AttackButtonPanel extends JPanel {
             attaqueLabel1.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    PlaySound.playSound("button", frame.hasSound());
+                    sound.playSound("button", frame.hasSound());
                     System.out.println(enemyTeam.getActivePokemon().getPv());
                     playerTeam.getActivePokemon().attaqueNormale(enemyTeam.getActivePokemon());
                     System.out.println(enemyTeam.getActivePokemon().getPv());
@@ -100,7 +101,7 @@ public class AttackButtonPanel extends JPanel {
             attaqueLabel2.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    PlaySound.playSound("button", frame.hasSound());
+                    sound.playSound("button", frame.hasSound());
 
                     System.out.println(enemyTeam.getActivePokemon().getPv());
                     try {
@@ -125,7 +126,7 @@ public class AttackButtonPanel extends JPanel {
             attaqueLabel3.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    PlaySound.playSound("button", frame.hasSound());
+                    sound.playSound("button", frame.hasSound());
 
                     System.out.println(enemyTeam.getActivePokemon().getPv());
                     try {
@@ -150,7 +151,7 @@ public class AttackButtonPanel extends JPanel {
             attaqueLabel4.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    PlaySound.playSound("button", frame.hasSound());
+                    sound.playSound("button", frame.hasSound());
 
                     System.out.println(enemyTeam.getActivePokemon().getPv());
                     arena.setTextBoxLabel(playerTeam.getActivePokemon().getName() + " utilise "
