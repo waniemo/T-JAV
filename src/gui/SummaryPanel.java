@@ -27,7 +27,7 @@ public class SummaryPanel extends JPanel {
         JLabel enemyTitle = new JLabel("Equipe ennemie! ( lvl" + enemyTeam.getLevel() + ")");
 
         backButton.addActionListener(e -> {
-            PlaySound.playSound("button");
+            PlaySound.playSound("button", frame.hasSound());
 
             SelectXpUI selectXpUI = new SelectXpUI(frame, playerTeam, enemyTeam);
             frame.getContentPane().removeAll();

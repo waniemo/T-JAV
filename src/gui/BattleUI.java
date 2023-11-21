@@ -17,9 +17,9 @@ public class BattleUI extends JPanel {
 
         JButton playButton = new JButton("C'EST PARTI!");
         playButton.addActionListener(e -> {
-            PlaySound.playSound("button");
-            PlaySound.playSound("start_battle");
-            PlaySound.loopSound("battle");
+            PlaySound.playSound("button", frame.hasSound());
+            PlaySound.playSound("start_battle", frame.hasSound());
+            PlaySound.loopSound("battle", frame.hasSound());
 
             remove(summaryPanel);
 

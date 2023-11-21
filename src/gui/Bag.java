@@ -61,7 +61,7 @@ public class Bag extends JPanel {
         useButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PlaySound.playSound("button");
+                PlaySound.playSound("button", frame.hasSound());
 
                 String selectedItem = itemsString.getSelectedValue();
                 if (selectedItem != null) {
@@ -73,7 +73,7 @@ public class Bag extends JPanel {
                         System.err.println("No such Item.");
                     }
                     System.out.println(item.getName());
-                    itemDescription.updateText(playerTeam.useItems(item, playerTeam.getActivePokemon()));
+                    itemDescription.updateText(playerTeam.useItems(item, playerTeam.getActivePokemon()), true);
                     itemImage = new ImageIcon();
                     BagHelper.updateList(itemsString, playerTeam);
                 }
@@ -83,9 +83,9 @@ public class Bag extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PlaySound.playSound("button");
+                PlaySound.playSound("button", frame.hasSound());
 
-                arena.getPlayerPvBar().updateBar();
+                arena.getPlayerPvBar().updateBar(false); // animation
                 frame.setLayout(new BorderLayout());
                 frame.getContentPane().removeAll();
                 frame.getContentPane().add(arena, BorderLayout.CENTER);

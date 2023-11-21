@@ -14,7 +14,7 @@ public class PvBar extends JProgressBar {
         super(0, pokemon.getPvMax());
         this.pokemon = pokemon;
         setValue(pokemon.getPv());
-        updateBar();
+        updateBar(false);
         setStringPainted(true);
     }
 
@@ -41,9 +41,12 @@ public class PvBar extends JProgressBar {
         }
     }
 
-    public void updateBar() {
-        // setValue(pokemon.getPv());
-        new UpdatePvTask().execute();
+    public void updateBar(boolean animation) {
+        if (animation) {
+            new UpdatePvTask().execute();
+        } else {
+            setValue(pokemon.getPv());
+        }
 
         double percentage = (double) getValue() / getMaximum();
         if (percentage < 0.15) {
