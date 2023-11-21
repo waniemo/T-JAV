@@ -144,7 +144,7 @@ public abstract class Pokemon {
         if(attaques.get(0).getPp() <= 0){
             return "Vous n'avez pas assez de PP pour utiliser cette attaque !";
         } else{
-            ennemi.setPv((int) (ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 5))));
+            ennemi.setPv((int) Math.round(ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 5))));
             attaques.get(0).setPp(attaques.get(0).getPp() - 1);
             return this.name+" utilise "+attaques.get(0).getName()+" !";
         }
@@ -155,16 +155,16 @@ public abstract class Pokemon {
         } else {
             try {
                 if(ennemi.getType() == this.type.getDeclaredConstructor().newInstance().getStrength()){
-                    ennemi.setPv((int) (ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 5.5))));
+                    ennemi.setPv((int) Math.round(ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 5.5))));
                     attaques.get(1).setPp(attaques.get(1).getPp() - 1);
                     return this.name+" utilise" +attaques.get(1).getName()+"!\n Cette attaque était très efficace !";
                 } else if(ennemi.getType() == this.type.getConstructor().newInstance().getWeakness()){
-                    ennemi.setPv((int) (ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 1.5))));
+                    ennemi.setPv((int) Math.round(ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 1.5))));
                     attaques.get(1).setPp(attaques.get(1).getPp() - 1);
                     return this.name+" utilise" +attaques.get(1).getName()+"!\n Cette n'était pas très efficace...";
                 }
                 else{
-                    ennemi.setPv((int) (ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 3))));
+                    ennemi.setPv((int) Math.round(ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 3))));
                     attaques.get(1).setPp(attaques.get(1).getPp() - 1);
                     return this.name+" utilise "+attaques.get(1).getName()+" !";
                 }
@@ -179,16 +179,16 @@ public abstract class Pokemon {
         } else {
             try {
                 if(ennemi.getType() == this.type.getDeclaredConstructor().newInstance().getStrength()){
-                    ennemi.setPv((int) (ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 10))));
+                    ennemi.setPv((int) Math.round(ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 10))));
                     attaques.get(2).setPp(attaques.get(2).getPp() - 1);
                     return this.name+" utilise" +attaques.get(1).getName()+"!\n Cette attaque était très efficace !";
                 } else if(ennemi.getType() == this.type.getConstructor().newInstance().getWeakness()){
-                    ennemi.setPv((int) (ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 3))));
+                    ennemi.setPv((int) Math.round(ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 3))));
                     attaques.get(2).setPp(attaques.get(2).getPp() - 1);
                     return this.name+" utilise" +attaques.get(1).getName()+"!\n Cette n'était pas très efficace...";
                 }
                 else{
-                    ennemi.setPv((int) (ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 6))));
+                    ennemi.setPv((int) Math.round(ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 6))));
                     attaques.get(2).setPp(attaques.get(2).getPp() - 1);
                     return this.name+" utilise "+attaques.get(1).getName()+" !";
                 }
@@ -203,16 +203,16 @@ public abstract class Pokemon {
         } else {
             try {
                 if(ennemi.getType() == this.type.getDeclaredConstructor().newInstance().getStrength()){
-                    ennemi.setPv((int) (ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 20.5))));
+                    ennemi.setPv((int) Math.round(ennemi.getPv() - (((6 * this.getLevel() ) * (this.getAtk() / ennemi.getDef()) / 50.0 + 20.5))));
                     attaques.get(3).setPp(attaques.get(3).getPp() - 1);
                     return this.name+" utilise" +attaques.get(1).getName()+"!\n Cette attaque était très efficace !";
                 } else if(ennemi.getType() == this.type.getConstructor().newInstance().getWeakness()){
-                    ennemi.setPv((int) (ennemi.getPv() - (((6 * this.getLevel()) * (this.getAtk() / ennemi.getDef()) / 50.0 + 6))));
+                    ennemi.setPv((int) Math.round(ennemi.getPv() - (((6 * this.getLevel()) * (this.getAtk() / ennemi.getDef()) / 50.0 + 6))));
                     attaques.get(3).setPp(attaques.get(3).getPp() - 1);
                     return this.name+" utilise" +attaques.get(1).getName()+"!\n Cette n'était pas très efficace...";
                 }
                 else{
-                    ennemi.setPv((int) (ennemi.getPv() - (((6 * this.getLevel()) * (this.getAtk() / ennemi.getDef()) / 50.0 + 8))));
+                    ennemi.setPv((int) Math.round(ennemi.getPv() - (((6 * this.getLevel()) * (this.getAtk() / ennemi.getDef()) / 50.0 + 8))));
                     attaques.get(3).setPp(attaques.get(3).getPp() - 1);
                     return this.name+" utilise "+attaques.get(1).getName()+" !";
                 }
