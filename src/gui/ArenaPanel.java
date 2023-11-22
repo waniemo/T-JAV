@@ -73,6 +73,12 @@ public class ArenaPanel extends JPanel {
         playerPanel.add(playerTeamPanel);
         add(playerPanel, gbc);
 
+        LayoutHelper.modifyGridBagConstraints(gbc, 0, 3, 0, 3);
+        add(Box.createVerticalGlue(), gbc);
+
+        LayoutHelper.modifyGridBagConstraints(gbc, 1, 2, 0, 3);
+        add(Box.createVerticalGlue(), gbc);
+
         LayoutHelper.modifyGridBagConstraints(gbc, 1, 5, 0, 0);
         add(textBoxLabel, gbc);
 
