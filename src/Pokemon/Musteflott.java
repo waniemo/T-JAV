@@ -10,6 +10,6 @@ import java.util.Arrays;
 
 public class Musteflott extends Pokemon{
     public Musteflott() {
-        super("Musteflott", Eau.class, 1, 95, 85, 85, 115, "musteflott.png", "musteflott_f.gif", "musteflott_b.gif", Arrays.asList(new ComboGriffes(), new AquaJet(), new BulledO(), new Hydrocanon()));
+        super("Musteflott", Eau.class, 1, 95, 85, 85, 115, "musteflott.png", "musteflott_f.png", "musteflott_b.png", 82, 95, 95, 17, Arrays.asList(new ComboGriffes(), new AquaJet(), new BulledO(), new Hydrocanon()));
     }
 }

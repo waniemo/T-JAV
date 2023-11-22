@@ -11,6 +11,7 @@ public class App extends JFrame {
     private boolean isKirby = false;
     private boolean isAnimated = true;
     private boolean hasSound = false;
+    private boolean containsKirby = false;
 
     public App() {
         setTitle("Street Pokemon Fighter Phantom 2 Turbo Championship Edition EX + Alpha X");
@@ -23,7 +24,7 @@ public class App extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("k")) {
-                    typedText = new StringBuilder();
+                    typedText.setLength(0);
                     typedText.append("k");
                 } else {
                     typedText.append(e.getActionCommand());
@@ -61,11 +62,12 @@ public class App extends JFrame {
     }
 
     public Pokemon[] getPokemons() {
-        boolean containsKirby = false;
-        for (Pokemon pokemon : PokemonList.getPokemons()) {
-            if (pokemon.getName().equals("Kirby")) {
-                containsKirby = true;
-                break;
+        if (containsKirby == false) {
+            for (Pokemon pokemon : PokemonList.getPokemons()) {
+                if (pokemon.getName().equals("Kirby")) {
+                    containsKirby = true;
+                    break;
+                }
             }
         }
         return isKirby && !containsKirby ? PokemonList.getPokemonsWithKirby() : PokemonList.getPokemons();

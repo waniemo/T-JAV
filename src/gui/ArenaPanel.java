@@ -5,11 +5,11 @@ import Team.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import Pokemon.Kirby;
-import Pokemon.Pokemon;
+import Pokemon.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -18,8 +18,6 @@ public class ArenaPanel extends JPanel {
     private PvBar playerPvBar;
     private PvBar enemyPvBar;
     private Timer gameLoopTimer;
-    private JLabel playerSprite;
-    private JLabel enemySprite;
     private JPanel playerTeamPanel;
     private JPanel enemyTeamPanel;
     private TextBox textBoxLabel;
@@ -27,6 +25,11 @@ public class ArenaPanel extends JPanel {
     private JPanel enemyPokemonLeft;
     private JPanel enemyPanel;
     private JPanel playerPanel;
+    private PlaySprite playerPlaySprite;
+    private PlaySprite enemyPlaySprite;
+
+    private BufferedImage playerCurrentSprite;
+    private BufferedImage enemyCurrentSprite;
 
     public ArenaPanel(App frame, Team playerTeam, Team enemyTeam, PlaySound sound) {
         try {
@@ -35,8 +38,6 @@ public class ArenaPanel extends JPanel {
             e.printStackTrace();
         }
         setLayout(new GridBagLayout());
-        playerSprite = IconHelper.createTeamIcon(playerTeam, true);
-        enemySprite = IconHelper.createTeamIcon(enemyTeam, false);
 
         textBoxLabel = new TextBox("QUE DOIT FAIRE " + playerTeam.getActivePokemon().getName().toUpperCase() + " ?");
 
@@ -67,13 +68,6 @@ public class ArenaPanel extends JPanel {
         enemyPanel.add(enemyTeamPanel);
         enemyPanel.add(enemyPokemonLeft, gbc);
         add(enemyPanel, gbc);
-
-        LayoutHelper.modifyGridBagConstraints(gbc, 1, 2, 0, 3);
-        add(enemySprite, gbc);
-
-        LayoutHelper.modifyGridBagConstraints(gbc, 0, 3, 0, 3);
-        add(playerSprite, gbc);
-
         LayoutHelper.modifyGridBagConstraints(gbc, 1, 4, 0, 0);
         playerPanel.add(playerPokemonLeft);
         playerPanel.add(playerTeamPanel);
@@ -86,7 +80,15 @@ public class ArenaPanel extends JPanel {
         JPanel buttonPanel = PanelHelper.createButtonPanel(frame, this, playerTeam, enemyTeam);
         add(buttonPanel, gbc);
 
-        gameLoopTimer = new Timer(16, new ActionListener() {
+
+        enemyPlaySprite = new PlaySprite("../Assets/AnimatedSprites/bulbizare_f.png", 40, 38, 11);
+        // enemyPlaySprite = new PlaySprite(enemyTeam.getActivePokemon().getSpriteFront(), enemyTeam.getActivePokemon().getSpriteFrontWidth(), enemyTeam.getActivePokemon().getSpriteFrontHeight(), enemyTeam.getActivePokemon().getSpriteFrontCount());
+        enemyCurrentSprite = enemyPlaySprite.getNextSprite();
+        playerPlaySprite = new PlaySprite("../Assets/AnimatedSprites/kirby_b.png", 36.5, 31, 16);
+        // playerPlaySprite = new PlaySprite(playerTeam.getActivePokemon().getSpriteBack(), playerTeam.getActivePokemon().getSpriteBackWidth(), playerTeam.getActivePokemon().getSpriteBackHeight(), playerTeam.getActivePokemon().getSpriteBackCount());
+        playerCurrentSprite = enemyPlaySprite.getNextSprite();
+
+        gameLoopTimer = new Timer(50, new ActionListener() {
             private Pokemon lastPlayerPokemon = playerTeam.getActivePokemon();
             private Pokemon lastEnemyPokemon = enemyTeam.getActivePokemon();
 
@@ -100,16 +102,18 @@ public class ArenaPanel extends JPanel {
 
                 getPlayerPvBar().updateBar(frame.isAnimated()); // animation
                 getEnemyPvBar().updateBar(frame.isAnimated()); // animation
+                enemyCurrentSprite = enemyPlaySprite.getNextSprite();
+                playerCurrentSprite = playerPlaySprite.getNextSprite();
                 repaint();
             }
 
             private void updatePokemon(Team team, Pokemon lastPokemon, GridBagConstraints gbc, boolean isPlayer) {
                 if (playerTeam.getActivePokemon() != lastPlayerPokemon) {
-                    remove(playerSprite);
                     remove(textBoxLabel);
                     playerPanel.removeAll();
                     remove(playerPanel);
-                    playerSprite = IconHelper.createTeamIcon(playerTeam, true);
+                    playerPlaySprite = new PlaySprite("../Assets/AnimatedSprites/kirby_b.png", 36.5, 31, 16);
+                    // playerPlaySprite = new PlaySprite(playerTeam.getActivePokemon().getSpriteBack(), playerTeam.getActivePokemon().getSpriteBackWidth(), playerTeam.getActivePokemon().getSpriteBackHeight(), playerTeam.getActivePokemon().getSpriteBackCount());
                     lastPlayerPokemon = playerTeam.getActivePokemon();
                     playerTeamPanel = PanelHelper.createTeamPanel(frame, playerTeam);
                     for (Component component : playerTeamPanel.getComponents()) {
@@ -119,8 +123,6 @@ public class ArenaPanel extends JPanel {
                     }
                     textBoxLabel = new TextBox(
                             "QUE DOIT FAIRE " + playerTeam.getActivePokemon().getName().toUpperCase() + "?");
-                    LayoutHelper.modifyGridBagConstraints(gbc, 0, 3, 0, 3);
-                    add(playerSprite, gbc);
 
                     LayoutHelper.modifyGridBagConstraints(gbc, 1, 5, 0, 0);
                     add(textBoxLabel, gbc);
@@ -131,7 +133,6 @@ public class ArenaPanel extends JPanel {
                     add(playerPanel, gbc);
                 }
                 if (enemyTeam.getActivePokemon() != lastEnemyPokemon) {
-                    remove(enemySprite);
                     enemyPanel.removeAll();
                     remove(enemyPanel);
                     enemyTeamPanel = PanelHelper.createTeamPanel(frame, enemyTeam);
@@ -140,15 +141,15 @@ public class ArenaPanel extends JPanel {
                             enemyPvBar = (PvBar) component;
                         }
                     }
-                    enemySprite = IconHelper.createTeamIcon(enemyTeam, false);
+                    enemyPlaySprite = new PlaySprite("../Assets/AnimatedSprites/bulbizare_f.png", 39, 45, 21);
+                    // enemyPlaySprite = new PlaySprite(enemyTeam.getActivePokemon().getSpriteFront(), enemyTeam.getActivePokemon().getSpriteFrontWidth(), enemyTeam.getActivePokemon().getSpriteFrontHeight(), enemyTeam.getActivePokemon().getSpriteFrontCount());
+                    enemyCurrentSprite = enemyPlaySprite.getNextSprite();
                     lastEnemyPokemon = enemyTeam.getActivePokemon();
                     LayoutHelper.modifyGridBagConstraints(gbc, 0, 0, 0.5, 1.0);
                     enemyPanel.add(enemyTeamPanel);
                     enemyPanel.add(enemyPokemonLeft);
                     add(enemyPanel, gbc);
 
-                    LayoutHelper.modifyGridBagConstraints(gbc, 1, 2, 0, 3);
-                    add(enemySprite, gbc);
                     revalidate();
                     repaint();
                 }
@@ -197,7 +198,7 @@ public class ArenaPanel extends JPanel {
                             frame.revalidate();
                             frame.repaint();
                         }
-                        // gameLoopTimer.stop(); // todo
+                        gameLoopTimer.stop(); // todo
                     }
                 }
             }
@@ -209,7 +210,11 @@ public class ArenaPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Image scaledBackground = backgroundImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+        Image sPlayerSprite = playerCurrentSprite.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        Image sEnemySprite = enemyCurrentSprite.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
         g.drawImage(scaledBackground, 0, 0, this);
+        g.drawImage(sEnemySprite, 800, 300, this);
+        g.drawImage(sPlayerSprite, 250, 550, this);
     }
 
     public PvBar getPlayerPvBar() {
