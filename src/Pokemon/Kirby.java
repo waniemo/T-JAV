@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class Kirby extends Pokemon{
     public Kirby() {
-        super("Kirby", Fee.class, 1, 555, 555, 100, 100, "kirby.png", "kirby_f.gif", "kirby_b.gif", Arrays.asList(new ComboGriffes(), new Calinerie(), new VentFeerique(), new EclatMagique()));
+        super("Kirby", Fee.class, 1, 555, 555, 100, 100, "kirby.png", "kirby_f.png", "kirby_b.png", 31, 35, 35,16, Arrays.asList(new ComboGriffes(), new Calinerie(), new VentFeerique(), new EclatMagique()));
     }
 
 }

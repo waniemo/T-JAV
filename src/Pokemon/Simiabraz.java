@@ -10,6 +10,6 @@ import java.util.Arrays;
 
 public class Simiabraz extends Pokemon{
     public Simiabraz() {
-        super("Simiabraz", Feu.class , 1, 76, 104, 71, 108, "simiabraz.png", "simiabraz_f.gif", "simiabraz_b.gif", Arrays.asList(new ComboGriffes(), new TacleFeu(), new RafaleFeu(), new FeuDenfer()));
+        super("Simiabraz", Feu.class , 1, 76, 104, 71, 108, "simiabraz.png", "simiabraz_f.png", "simiabraz_b.png", 82, 97.1, 97.1, 10, Arrays.asList(new ComboGriffes(), new TacleFeu(), new RafaleFeu(), new FeuDenfer()));
     }
 }
