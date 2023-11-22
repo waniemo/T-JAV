@@ -10,6 +10,6 @@ import java.util.Arrays;
 
 public class Dialga extends Pokemon{
     public Dialga() {
-        super("Dialga", Eau.class, 1, 100, 120, 120, 90, "dialga.png", "dialga_f.gif", "dialga_b.gif", Arrays.asList(new ComboGriffes(), new AquaJet(), new BulledO(), new Hydrocanon()));
+        super("Dialga", Eau.class, 1, 100, 120, 120, 90, "dialga.png", "dialga_f.png", "dialga_b.png",95, 97, 98, 8, Arrays.asList(new ComboGriffes(), new AquaJet(), new BulledO(), new Hydrocanon()));
     }
 }

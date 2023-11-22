@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class Blizzaroi extends Pokemon{
     public Blizzaroi() {
-        super("Blizzaroi", Plante.class, 1, 90, 92, 75, 60, "blizzaroi.png", "blizzaroi_f.gif", "blizzaroi_b.gif", Arrays.asList(new ComboGriffes(), new Tranchherbe(), new TempeteVerte(), new Phytomixeur()));
+        super("Blizzaroi", Plante.class, 1, 90, 92, 75, 60, "blizzaroi.png", "blizzaroi_f.gif", "blizzaroi_b.gif",84, 97.8,97.8, 6, Arrays.asList(new ComboGriffes(), new Tranchherbe(), new TempeteVerte(), new Phytomixeur()));
     }
 
 }
