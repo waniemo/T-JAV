@@ -86,15 +86,30 @@ public abstract class Pokemon {
     }
 
     public String getSpriteFront(){
-        return "Pokemon/" + spriteFront;
+        return "AnimatedSprites/" + spriteFront;
     }
 
     public String getSpriteBack() {
-        return "Pokemon/" + spriteBack;
+        return "AnimatedSprites/" + spriteBack;
     }
 
     public String getSpritePng() {
-        return "Pokemon/" + spritePng;
+        return "AnimatedSprites/" + spritePng;
+    }
+
+    public double getSpriteHeight() {
+        return spriteHeight;
+    }
+
+    public double getSpriteWidthFront() {
+        return spriteWidthFront;
+    }
+
+    public double getSpriteWidthBack() {
+        return spriteWidthBack;
+    }
+    public int getSpriteCount() {
+        return spriteCount;
     }
 
     public String getKoPng() {
