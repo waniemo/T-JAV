@@ -25,7 +25,12 @@ public abstract class Pokemon {
     protected String spriteFront;
     protected String spriteBack;
 
-    public Pokemon(String name, Class<? extends Type> type, int level, int pv, int atk, int def, int speed, String spritePng, String spriteFront, String spriteBack, List<Attaque> attaques){
+    protected double spriteHeight;
+    protected double spriteWidthFront;
+    protected double spriteWidthBack;
+    protected int spriteCount;
+
+    public Pokemon(String name, Class<? extends Type> type, int level, int pv, int atk, int def, int speed, String spritePng, String spriteFront, String spriteBack, double spriteHeight, double spriteWidthFront, double spriteWidthBack, int spriteCount, List<Attaque> attaques){
         this.name = name;
         this.level = level;
         this.type = type;
@@ -36,6 +41,10 @@ public abstract class Pokemon {
         this.spritePng = spritePng;
         this.spriteFront = spriteFront;
         this.spriteBack = spriteBack;
+        this.spriteHeight = spriteHeight;
+        this.spriteWidthFront = spriteWidthFront;
+        this.spriteWidthBack = spriteWidthBack;
+        this.spriteCount = spriteCount;
         this.pvMax = pv;
         this.basePv = pv;
         this.baseAtk = atk;
