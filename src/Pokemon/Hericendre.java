@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class Hericendre extends Pokemon {
 
     public Hericendre() {
-        super("Héricendre", Feu.class, 1, 39, 52, 43, 65, "hericendre.png", "hericendre_f.png", "hericendre_b.png",37, 45.3,49.3,13, Arrays.asList(new ComboGriffes(), new TacleFeu(), new RafaleFeu(), new FeuDenfer()));
+        super("Héricendre", Feu.class, 1, 39, 52, 43, 65, "hericendre.png", "hericendre_f.png", "hericendre_b.png",37, 47.5,47.5,12, Arrays.asList(new ComboGriffes(), new TacleFeu(), new RafaleFeu(), new FeuDenfer()));
     }
 
 }

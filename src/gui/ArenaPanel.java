@@ -81,11 +81,11 @@ public class ArenaPanel extends JPanel {
         add(buttonPanel, gbc);
 
 
-        enemyPlaySprite = new PlaySprite("../Assets/AnimatedSprites/bulbizare_f.png", 40, 38, 11);
-        // enemyPlaySprite = new PlaySprite(enemyTeam.getActivePokemon().getSpriteFront(), enemyTeam.getActivePokemon().getSpriteFrontWidth(), enemyTeam.getActivePokemon().getSpriteFrontHeight(), enemyTeam.getActivePokemon().getSpriteFrontCount());
+        // enemyPlaySprite = new PlaySprite("../Assets/AnimatedSprites/bulbizare_f.png", 40, 38, 11);
+        enemyPlaySprite = new PlaySprite("../Assets/" + enemyTeam.getActivePokemon().getSpriteFront(), enemyTeam.getActivePokemon().getSpriteWidthFront(), enemyTeam.getActivePokemon().getSpriteHeight(), enemyTeam.getActivePokemon().getSpriteCount());
         enemyCurrentSprite = enemyPlaySprite.getNextSprite();
-        playerPlaySprite = new PlaySprite("../Assets/AnimatedSprites/kirby_b.png", 36.5, 31, 16);
-        // playerPlaySprite = new PlaySprite(playerTeam.getActivePokemon().getSpriteBack(), playerTeam.getActivePokemon().getSpriteBackWidth(), playerTeam.getActivePokemon().getSpriteBackHeight(), playerTeam.getActivePokemon().getSpriteBackCount());
+        // playerPlaySprite = new PlaySprite("../Assets/AnimatedSprites/kirby_b.png", 35, 31, 16);
+        playerPlaySprite = new PlaySprite("../Assets/" + playerTeam.getActivePokemon().getSpriteBack(), playerTeam.getActivePokemon().getSpriteWidthBack(), playerTeam.getActivePokemon().getSpriteHeight(), playerTeam.getActivePokemon().getSpriteCount());
         playerCurrentSprite = enemyPlaySprite.getNextSprite();
 
         gameLoopTimer = new Timer(50, new ActionListener() {
@@ -112,8 +112,8 @@ public class ArenaPanel extends JPanel {
                     remove(textBoxLabel);
                     playerPanel.removeAll();
                     remove(playerPanel);
-                    playerPlaySprite = new PlaySprite("../Assets/AnimatedSprites/kirby_b.png", 36.5, 31, 16);
-                    // playerPlaySprite = new PlaySprite(playerTeam.getActivePokemon().getSpriteBack(), playerTeam.getActivePokemon().getSpriteBackWidth(), playerTeam.getActivePokemon().getSpriteBackHeight(), playerTeam.getActivePokemon().getSpriteBackCount());
+                    // playerPlaySprite = new PlaySprite("../Assets/AnimatedSprites/kirby_b.png", 36.3, 31, 16);
+                    playerPlaySprite = new PlaySprite("../Assets/" + playerTeam.getActivePokemon().getSpriteBack(), playerTeam.getActivePokemon().getSpriteWidthBack(), playerTeam.getActivePokemon().getSpriteHeight(), playerTeam.getActivePokemon().getSpriteCount());
                     lastPlayerPokemon = playerTeam.getActivePokemon();
                     playerTeamPanel = PanelHelper.createTeamPanel(frame, playerTeam);
                     for (Component component : playerTeamPanel.getComponents()) {
@@ -141,8 +141,8 @@ public class ArenaPanel extends JPanel {
                             enemyPvBar = (PvBar) component;
                         }
                     }
-                    enemyPlaySprite = new PlaySprite("../Assets/AnimatedSprites/bulbizare_f.png", 39, 45, 21);
-                    // enemyPlaySprite = new PlaySprite(enemyTeam.getActivePokemon().getSpriteFront(), enemyTeam.getActivePokemon().getSpriteFrontWidth(), enemyTeam.getActivePokemon().getSpriteFrontHeight(), enemyTeam.getActivePokemon().getSpriteFrontCount());
+                    // enemyPlaySprite = new PlaySprite("../Assets/AnimatedSprites/bulbizare_f.png", 39, 45, 21);
+                    enemyPlaySprite = new PlaySprite("../Assets/" + enemyTeam.getActivePokemon().getSpriteFront(), enemyTeam.getActivePokemon().getSpriteWidthFront(), enemyTeam.getActivePokemon().getSpriteHeight(), enemyTeam.getActivePokemon().getSpriteCount());
                     enemyCurrentSprite = enemyPlaySprite.getNextSprite();
                     lastEnemyPokemon = enemyTeam.getActivePokemon();
                     LayoutHelper.modifyGridBagConstraints(gbc, 0, 0, 0.5, 1.0);
@@ -210,7 +210,7 @@ public class ArenaPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Image scaledBackground = backgroundImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
-        Image sPlayerSprite = playerCurrentSprite.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        Image sPlayerSprite = playerCurrentSprite.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
         Image sEnemySprite = enemyCurrentSprite.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
         g.drawImage(scaledBackground, 0, 0, this);
         g.drawImage(sEnemySprite, 800, 300, this);

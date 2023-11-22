@@ -94,7 +94,7 @@ public abstract class Pokemon {
     }
 
     public String getSpritePng() {
-        return "AnimatedSprites/" + spritePng;
+        return "Pokemon/" + spritePng;
     }
 
     public double getSpriteHeight() {

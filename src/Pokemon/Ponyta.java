@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class Ponyta extends Pokemon{
     public Ponyta() {
-        super("Ponyta", Feu.class, 1, 50, 85, 55, 90, "ponyta.png", "ponyta_f.png", "ponyta_b.png", 60, 59.5, 59.5 , 10,  Arrays.asList(new ComboGriffes(), new TacleFeu(), new RafaleFeu(), new FeuDenfer()));
+        super("Ponyta", Feu.class, 1, 50, 85, 55, 90, "ponyta.png", "ponyta_f.png", "ponyta_b.png", 60, 59.9, 59.9 , 10,  Arrays.asList(new ComboGriffes(), new TacleFeu(), new RafaleFeu(), new FeuDenfer()));
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class Lugulabre extends Pokemon{
     public Lugulabre() {
-        super("Lugulabre", Feu.class, 1, 60, 55, 90, 80, "lugulabre.png", "lugulabre_f.png", "lugulabre_b.png",81,100,100, 8, Arrays.asList(new ComboGriffes(), new TacleFeu(), new RafaleFeu(), new FeuDenfer()));
+        super("Lugulabre", Feu.class, 1, 60, 55, 90, 80, "lugulabre.png", "lugulabre_f.png", "lugulabre_b.png",81,114,114, 8, Arrays.asList(new ComboGriffes(), new TacleFeu(), new RafaleFeu(), new FeuDenfer()));
     }
 
 }

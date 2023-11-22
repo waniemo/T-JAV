@@ -10,7 +10,7 @@ public class PlaySprite {
     private BufferedImage[] sprites;
     private int frame = 0;
 
-    public PlaySprite(String spriteSheetPath, double spriteWidth, int spriteHeight, int spriteCount) { // 40 45 21
+    public PlaySprite(String spriteSheetPath, double spriteWidth, double spriteHeight, int spriteCount) { // 40 45 21
         try {
             spriteSheet = ImageIO.read(new File(spriteSheetPath));
         } catch (IOException e) {
@@ -20,7 +20,7 @@ public class PlaySprite {
         sprites = new BufferedImage[spriteCount];
 
         for (int i = 0; i < spriteCount; i++) {
-            sprites[i] = spriteSheet.getSubimage((int) (i * spriteWidth), 0, (int) spriteWidth, spriteHeight);
+            sprites[i] = spriteSheet.getSubimage((int) (i * spriteWidth), 0, (int) spriteWidth, (int) spriteHeight);
         }
     }
 
