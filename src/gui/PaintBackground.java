@@ -5,13 +5,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class PaintBackground extends JPanel {
     private Image backgroundImage;
 
     public PaintBackground(String imagePath) {
         try {
-            backgroundImage = ImageIO.read(new File(imagePath));
+            InputStream imageStream = ArenaPanel.class.getClassLoader().getResourceAsStream(imagePath);
+            backgroundImage = ImageIO.read(imageStream);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -11,6 +11,9 @@ import java.util.ArrayList;
 
 public class PanelHelper {
     private static PlaySound sound = new PlaySound();
+    private static ImageIcon attaqueIcon = null;
+    private static ImageIcon pokemonIcon = null;
+    private static ImageIcon sacIcon = null;
 
     public static JPanel createTeamPanel(App frame, Team team) {
         JPanel panel = new JPanel(new BorderLayout());
@@ -21,10 +24,10 @@ public class PanelHelper {
 
         nameLabel.setFont(UIManager.getFont("Label.font").deriveFont(40f));
         levelLabel.setFont(UIManager.getFont("Label.font").deriveFont(30f));
-        typeLabel.setIcon(new ImageIcon("../Assets/Type/feu.png"));
+        typeLabel.setIcon(new ImageIcon("Assets/Type/feu.png"));
 
         PvBar pvBar = new PvBar(team.getActivePokemon());
-        pvBar.updateBar(false); //animation
+        pvBar.updateBar(false); // animation
         nameLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
         levelLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
         panel.add(nameLabel, BorderLayout.WEST);
@@ -40,9 +43,35 @@ public class PanelHelper {
         buttonPanel.setPreferredSize(new Dimension(600, 96));
         buttonPanel.setOpaque(false);
         GridBagConstraints buttonGbc = new GridBagConstraints();
-        ImageIcon attaqueIcon = new ImageIcon("../Assets/Bouton/bouton_attaque.png");
-        ImageIcon pokemonIcon = new ImageIcon("../Assets/Bouton/bouton_pokemon.png");
-        ImageIcon sacIcon = new ImageIcon("../Assets/Bouton/bouton_sac.png");
+
+        java.net.URL attaqueURL = ChooseTeamUI.class.getClassLoader().getResource("Assets/Bouton/bouton_attaque.png");
+        java.net.URL pokemonURL = ChooseTeamUI.class.getClassLoader().getResource("Assets/Bouton/bouton_pokemon.png");
+        java.net.URL sacURL = ChooseTeamUI.class.getClassLoader().getResource("Assets/Bouton/bouton_sac.png");
+
+        if (attaqueURL != null && pokemonURL != null && sacURL != null) {
+            // Create ImageIcon from InputStream
+            try (java.io.InputStream stream = attaqueURL.openStream()) {
+                attaqueIcon = new ImageIcon(javax.imageio.ImageIO.read(stream));
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+            try (java.io.InputStream stream = pokemonURL.openStream()) {
+                pokemonIcon = new ImageIcon(javax.imageio.ImageIO.read(stream));
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+            try (java.io.InputStream stream = sacURL.openStream()) {
+                sacIcon = new ImageIcon(javax.imageio.ImageIO.read(stream));
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("Image not found: button");
+        }
+
+        // attaqueIcon = new ImageIcon("Assets/Bouton/bouton_attaque.png");
+        // ImageIcon pokemonIcon = new ImageIcon("Assets/Bouton/bouton_pokemon.png");
+        // ImageIcon sacIcon = new ImageIcon("Assets/Bouton/bouton_sac.png");
         JLabel attaqueLabel = new JLabel(attaqueIcon);
         JLabel pokemonLabel = new JLabel(pokemonIcon);
         JLabel sacLabel = new JLabel(sacIcon);
@@ -90,26 +119,52 @@ public class PanelHelper {
                 buttonPanel.removeAll();
                 buttonPanel.revalidate();
                 buttonPanel.repaint();
-                JPanel attackButtons = new AttackButtonPanel(frame, arena, playerTeam, enemyTeam, buttonPanel, buttonGbc);
+                JPanel attackButtons = new AttackButtonPanel(frame, arena, playerTeam, enemyTeam, buttonPanel,
+                        buttonGbc);
             }
         });
         return buttonPanel;
     }
 
     public static JPanel createPokeballPanel(App frame, Team team) {
-        ImageIcon grey = new ImageIcon("../Assets/grey_ball.png");
-        ImageIcon red = new ImageIcon("../Assets/red_ball.png");
+        ImageIcon grey = new ImageIcon("Assets/grey_ball.png");
+        ImageIcon red = new ImageIcon("Assets/red_ball.png");
+
+        java.net.URL greyURL = ChooseTeamUI.class.getClassLoader().getResource("Assets/grey_ball.png");
+        java.net.URL redURL = ChooseTeamUI.class.getClassLoader().getResource("Assets/red_ball.png");
+
+        if (greyURL != null) {
+            // Create ImageIcon from InputStream
+            try (java.io.InputStream stream = greyURL.openStream()) {
+                grey = new ImageIcon(javax.imageio.ImageIO.read(stream));
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("Image not found: text_box.png");
+        }
+
+        if (redURL != null) {
+            // Create ImageIcon from InputStream
+            try (java.io.InputStream stream = redURL.openStream()) {
+                red = new ImageIcon(javax.imageio.ImageIO.read(stream));
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("Image not found: text_box.png");
+        }
 
         JPanel panel = new JPanel(new GridLayout(1, 6));
         for (int i = 0; i < 6 - team.getDeadPokemons().size(); i++) {
             JLabel label = new JLabel("");
-            label.setPreferredSize(new Dimension(32,32));
+            label.setPreferredSize(new Dimension(32, 32));
             label.setIcon(red);
             panel.add(label);
         }
         for (int i = 0; i < team.getDeadPokemons().size(); i++) {
             JLabel label = new JLabel("");
-            label.setPreferredSize(new Dimension(32,32));
+            label.setPreferredSize(new Dimension(32, 32));
             label.setIcon(grey);
             panel.add(label);
         }

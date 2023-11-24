@@ -13,6 +13,7 @@ import java.util.List;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class ChooseTeamUI extends JPanel {
     private final List<JLabel> teamLabels = new ArrayList<>();
@@ -20,10 +21,13 @@ public class ChooseTeamUI extends JPanel {
     private List<Pokemon> team = new ArrayList<>();
     App app;
     private Image backgroundImage;
+    private ImageIcon greyBall = new ImageIcon();
 
     public ChooseTeamUI(App frame) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/Background/menu2.png"));
+            InputStream imageStream = ArenaPanel.class.getClassLoader()
+                    .getResourceAsStream("Assets/Background/menu2.png");
+            backgroundImage = ImageIO.read(imageStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,19 +45,44 @@ public class ChooseTeamUI extends JPanel {
         typeGrid.setOpaque(false);
         teamGrid.setPreferredSize(teamGridSize);
 
-        ImageIcon greyBall = new ImageIcon("../Assets/grey_flat_pokeball.png");
-        String[] types = { "../Assets/Type/feu.png", "../Assets/Type/electrik.png", "../Assets/Type/plante.png", "../Assets/Type/eau.png",
-                "../Assets/Type/fee.png" };
+        ImageIcon greyBall = new ImageIcon("Assets/grey_flat_pokeball.png");
+        String[] types = { "Assets/Type/feu.png", "Assets/Type/electrik.png", "Assets/Type/plante.png",
+                "Assets/Type/eau.png",
+                "Assets/Type/fee.png" };
         Team enemyTeam = TeamBuilder.buildEnemyTeam(pokemons);
 
         for (int i = 0; i < 5; i++) {
-            ImageIcon icon = new ImageIcon(types[i]);
-            JLabel label = new JLabel(icon);
-            label.setPreferredSize(new Dimension(100, 100));
-            typeGrid.add(label);
+            java.net.URL imageURL = ChooseTeamUI.class.getClassLoader().getResource(types[i]);
+
+            if (imageURL != null) {
+                // Create ImageIcon from InputStream
+                try (java.io.InputStream stream = imageURL.openStream()) {
+                    ImageIcon icon = new ImageIcon(javax.imageio.ImageIO.read(stream));
+                    JLabel label = new JLabel(icon);
+                    label.setPreferredSize(new Dimension(100, 100));
+                    typeGrid.add(label);
+                } catch (java.io.IOException e) {
+                    e.printStackTrace(); // Handle the exception appropriately
+                }
+                // ImageIcon icon = new ImageIcon(types[i]);
+            } else {
+                System.err.println("Image not found: " + types[i]);
+            }
         }
 
+        java.net.URL imageURL = ChooseTeamUI.class.getClassLoader().getResource("Assets/grey_flat_pokeball.png");
+        if (imageURL != null) {
+            // Create ImageIcon from InputStream
+            try (java.io.InputStream stream = imageURL.openStream()) {
+                greyBall = new ImageIcon(javax.imageio.ImageIO.read(stream));
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("Image not found: grey_flat_pokeball");
+        }
         for (int i = 0; i < 6; i++) {
+
             JLabel label = new JLabel("");
             label.setIcon(greyBall);
             teamLabels.add(label);

@@ -7,6 +7,7 @@ import java.awt.event.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class EndOfGame extends JPanel {
     private Image backgroundImage;
@@ -15,7 +16,8 @@ public class EndOfGame extends JPanel {
 
     public EndOfGame(App frame, boolean win) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/Background/menu2.png"));
+            InputStream imageStream = ArenaPanel.class.getClassLoader().getResourceAsStream("Assets/Background/menu2.png");
+            backgroundImage = ImageIO.read(imageStream);
         } catch (IOException e) {
             e.printStackTrace();
         }

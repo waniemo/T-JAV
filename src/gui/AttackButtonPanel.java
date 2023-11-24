@@ -14,15 +14,40 @@ import java.util.ArrayList;
 
 public class AttackButtonPanel extends JPanel {
     private static PlaySound sound = new PlaySound();
+    private ImageIcon attaque1 = null;
+    private ImageIcon retourIcon = null;
+
     public AttackButtonPanel(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam, JPanel buttonPanel, GridBagConstraints buttonGbc) {
-        ImageIcon retourIcon = new ImageIcon("../Assets/Bouton/bouton_retour.png");
+        java.net.URL retourURL = ChooseTeamUI.class.getClassLoader().getResource("Assets/Bouton/bouton_retour.png");
+
+        if (retourURL != null) {
+            try (java.io.InputStream stream = retourURL.openStream()) {
+                retourIcon = new ImageIcon(javax.imageio.ImageIO.read(stream));
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("Image not found: bouton_retour.png");
+        }
+
         JLabel retourLabel = new JLabel(retourIcon);
         retourLabel.setText("Retour");
         retourLabel.setHorizontalTextPosition(JLabel.CENTER);
         retourLabel.setVerticalTextPosition(JLabel.CENTER);
         retourLabel.setForeground(Color.white);
         retourLabel.setFont(UIManager.getFont("Label.font").deriveFont(26f));
-        ImageIcon attaque1 = new ImageIcon("../Assets/Bouton/normal_attaque.png");
+
+        java.net.URL imageURL = ChooseTeamUI.class.getClassLoader().getResource("Assets/Bouton/normal_attaque.png");
+
+        if (imageURL != null) {
+            try (java.io.InputStream stream = imageURL.openStream()) {
+                attaque1 = new ImageIcon(javax.imageio.ImageIO.read(stream));
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("Image not found: text_box.png");
+        }
 
         ArrayList<JLabel> attaqueLabels = new ArrayList<>();
         JLabel attaqueLabel1 = new JLabel(attaque1);

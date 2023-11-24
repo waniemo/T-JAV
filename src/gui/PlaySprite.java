@@ -3,6 +3,8 @@ package gui;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+
 import javax.imageio.ImageIO;
 
 public class PlaySprite {
@@ -12,7 +14,8 @@ public class PlaySprite {
 
     public PlaySprite(String spriteSheetPath, double spriteWidth, double spriteHeight, int spriteCount) { // 40 45 21
         try {
-            spriteSheet = ImageIO.read(new File(spriteSheetPath));
+            InputStream imageStream = ArenaPanel.class.getClassLoader().getResourceAsStream(spriteSheetPath);
+            spriteSheet = ImageIO.read(imageStream);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,7 +17,8 @@ public class ChangePokemon extends JPanel {
 
     public ChangePokemon(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/Background/change_pokemon_bg.png"));
+            InputStream imageStream = ArenaPanel.class.getClassLoader().getResourceAsStream("Assets/Background/change_pokemon_bg.png");
+            backgroundImage = ImageIO.read(imageStream);
         } catch (IOException e) {
             e.printStackTrace();
         }

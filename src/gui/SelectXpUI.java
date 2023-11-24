@@ -10,6 +10,7 @@ import Team.Team;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class SelectXpUI extends JPanel {
     private Image backgroundImage;
@@ -17,7 +18,8 @@ public class SelectXpUI extends JPanel {
 
     public SelectXpUI(App frame, Team playerTeam, Team enemyTeam) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/Background/menu1.png"));
+            InputStream imageStream = ArenaPanel.class.getClassLoader().getResourceAsStream("Assets/Background/menu1.png");
+            backgroundImage = ImageIO.read(imageStream);
         } catch (IOException e) {
             e.printStackTrace();
         }

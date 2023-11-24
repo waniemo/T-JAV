@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class SummaryPanel extends JPanel {
     private GridBagConstraints gbc = new GridBagConstraints();
@@ -15,7 +16,8 @@ public class SummaryPanel extends JPanel {
 
     public SummaryPanel(App frame, Team playerTeam, Team enemyTeam) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/Background/menu4.png"));
+            InputStream imageStream = ArenaPanel.class.getClassLoader().getResourceAsStream("Assets/Background/menu4.png");
+            backgroundImage = ImageIO.read(imageStream);
         } catch (IOException e) {
             e.printStackTrace();
         }

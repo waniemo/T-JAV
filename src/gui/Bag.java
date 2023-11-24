@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,16 +25,29 @@ public class Bag extends JPanel {
     private JLabel itemLabel = new JLabel();
     private TextBox itemDescription = new TextBox("");
     private static PlaySound sound = new PlaySound();
+    private ImageIcon retourIcon = null;
 
     public Bag(App frame, ArenaPanel arena, Team playerTeam, Team enemyTeam) {
         try {
-            backgroundImage = ImageIO.read(new File("../Assets/Background/bag.png"));
+            InputStream imageStream = ArenaPanel.class.getClassLoader()
+                    .getResourceAsStream("Assets/Background/bag.png");
+            backgroundImage = ImageIO.read(imageStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
         setLayout(new GridBagLayout());
         JButton useButton = new JButton("UTILISER");
-        ImageIcon retourIcon = new ImageIcon("../Assets/Bouton/bouton_retour.png");
+        java.net.URL retourURL = ChooseTeamUI.class.getClassLoader().getResource("Assets/Bouton/bouton_retour.png");
+
+        if (retourURL != null) {
+            try (java.io.InputStream stream = retourURL.openStream()) {
+                retourIcon = new ImageIcon(javax.imageio.ImageIO.read(stream));
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("Image not found: bouton_retour.png");
+        }
         JLabel retourLabel = new JLabel(retourIcon);
         retourLabel.setText("Retour");
         retourLabel.setHorizontalTextPosition(JLabel.CENTER);
@@ -57,8 +71,22 @@ public class Bag extends JPanel {
                     if (item != null) {
                         System.out.println(item.getDescription());
                         // Update itemImage based on the item name
+
+                        java.net.URL imageURL = ChooseTeamUI.class.getClassLoader()
+                                .getResource("Assets/" + item.getSprite());
+
+                        if (imageURL != null) {
+                            // Create ImageIcon from InputStream
+                            try (java.io.InputStream stream = imageURL.openStream()) {
+                                itemImage = new ImageIcon(javax.imageio.ImageIO.read(stream));
+                            } catch (java.io.IOException ex) {
+                                ex.printStackTrace();
+                            }
+                        } else {
+                            System.err.println("Image not found: text_box.png");
+                        }
+
                         itemDescription.setText(item.getDescription());
-                        itemImage = new ImageIcon("../Assets/" + item.getSprite());
                         itemLabel.setIcon(itemImage);
                     }
                 }
@@ -81,7 +109,19 @@ public class Bag extends JPanel {
                     }
                     System.out.println(item.getName());
                     itemDescription.updateText(playerTeam.useItems(item, playerTeam.getActivePokemon()), true);
-                    itemImage = new ImageIcon();
+                    java.net.URL imageURL = ChooseTeamUI.class.getClassLoader()
+                            .getResource("Assets/" + item.getSprite());
+
+                    if (imageURL != null) {
+                        // Create ImageIcon from InputStream
+                        try (java.io.InputStream stream = imageURL.openStream()) {
+                            itemImage = new ImageIcon(javax.imageio.ImageIO.read(stream));
+                        } catch (java.io.IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        System.err.println("Image not found: text_box.png");
+                    }
                     BagHelper.updateList(itemsString, playerTeam);
                 }
             }

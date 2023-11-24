@@ -8,6 +8,8 @@ import java.awt.event.*;
 
 public class TeamGrid extends JPanel {
     private String text;
+    private static ImageIcon icon = null;
+
     public TeamGrid(App frame, Team team, Color borderColor) {
         super(new GridLayout(1, 6));
         buildTeamGrid(frame, team, borderColor);
@@ -17,13 +19,37 @@ public class TeamGrid extends JPanel {
         for (int i = 0; i < 6; i++) {
             JPanel pokemonPanel = new JPanel(new BorderLayout());
             JLabel label = new JLabel("");
-            ImageIcon icon = null;
             PvBar pvBar = new PvBar(team.getTeam().get(i));
             int index = i;
             if (team.getDeadPokemons().contains(team.getTeam().get(i))) {
-                icon = new ImageIcon("../Assets/" + team.getTeam().get(i).getKoPng());
+
+                java.net.URL imageURL = ChooseTeamUI.class.getClassLoader()
+                        .getResource("Assets/" + team.getTeam().get(i).getKoPng());
+
+                if (imageURL != null) {
+                    // Create ImageIcon from InputStream
+                    try (java.io.InputStream stream = imageURL.openStream()) {
+                        icon = new ImageIcon(javax.imageio.ImageIO.read(stream));
+                    } catch (java.io.IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.err.println("Image not found: text_box.png");
+                }
             } else {
-                icon = new ImageIcon("../Assets/" + team.getTeam().get(i).getSpritePng());
+                java.net.URL imageURL = ChooseTeamUI.class.getClassLoader()
+                        .getResource("Assets/" + team.getTeam().get(i).getSpritePng());
+
+                if (imageURL != null) {
+                    // Create ImageIcon from InputStream
+                    try (java.io.InputStream stream = imageURL.openStream()) {
+                        icon = new ImageIcon(javax.imageio.ImageIO.read(stream));
+                    } catch (java.io.IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.err.println("Image not found: text_box.png");
+                }
             }
             label.setIcon(icon);
             if (team.getTeam().get(i) == team.getActivePokemon()) {
