@@ -221,8 +221,8 @@ public class ArenaPanel extends JPanel {
         Image sPlayerSprite = playerCurrentSprite.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
         Image sEnemySprite = enemyCurrentSprite.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
         g.drawImage(scaledBackground, 0, 0, this);
-        g.drawImage(sEnemySprite, 800, 300, this);
-        g.drawImage(sPlayerSprite, 250, 550, this);
+        g.drawImage(sEnemySprite, 800, 250, this);
+        g.drawImage(sPlayerSprite, 250, 400, this);
     }
 
     public PvBar getPlayerPvBar() {
